@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://0ufxslyo5jt6"]
+
+[ext_resource type="Script" uid="uid://x31km1f1j4cl" path="res://main.gd" id="1_glv2v"]
+
+[node name="Main" type="Control" unique_id=1499730684]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_glv2v")
+
+[node name="PieceLabel" type="Label" parent="." unique_id=64258341]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CleanButton" type="Button" parent="." unique_id=1867449640]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 383.0
+offset_right = 503.0
+offset_bottom = 429.0
+
+[node name="BuyGeneratorButton" type="Button" parent="." unique_id=1962690374]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 366.0
+offset_right = 129.0
+offset_bottom = 418.0
+
+[node name="FinishButton" type="Button" parent="." unique_id=1848769527]
+layout_mode = 0
+offset_left = 199.0
+offset_top = 350.0
+offset_right = 331.0
+offset_bottom = 435.0
+
+[node name="DisplayDropdown" type="OptionButton" parent="." unique_id=1695633939]
+layout_mode = 0
+offset_left = 635.0
+offset_top = 48.0
+offset_right = 675.0
+offset_bottom = 68.0

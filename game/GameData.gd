@@ -3,9 +3,9 @@ extends Node
 static func data() -> Array:
 	return [
 		{
-			"starting_funds" = 25,
-			"starting_rep" = 0,
-			"total_artifacts" = 6
+			"starting_funds" : 25,
+			"starting_rep" : 0,
+			"total_artifacts" : 6
 		},
 		{
 			"id" : 0,
@@ -26,130 +26,108 @@ static func data() -> Array:
 			"attempt_duration" : 10,
 			"success_chance" : 0.35,
 			"failure_reward" : 5,
-			"artifact_ids" : [0,1,2],
 			"artifacts" : [
 				{
 					"id" : 0,
 					"name" : "Zone 1 art 1",
-					"area_id" : 0,
 					"total_fragments" : 4,
-					"required_tool" : [false, false],
+					"required_tool" : [],
 					"rep_reward" : 10,
 					"uncleaned_fragment_funds" : 5,
-					"cleaned_framgent_funds" : 15,
+					"cleaned_fragment_funds" : 15,
 					"completed_funds" : 100,
-					"multiplier" : 1
 				},
 				{
 					"id" : 1,
 					"name" : "Zone 1 art 2",
-					"area_id" : 0,
 					"total_fragments" : 4,
-					"required_tool" : [false, false],
+					"required_tool" : [],
 					"rep_reward" : 25,
 					"uncleaned_fragment_funds" : 20,
-					"cleaned_framgent_funds" : 50,
+					"cleaned_fragment_funds" : 50,
 					"completed_funds" : 1000,
-					"multiplier" : 0.8
 				},
 				{
 					"id" : 2,
 					"name" : "Zone 1 art 3",
-					"area_id" : 0,
 					"total_fragments" : 4,
-					"required_tool" : [true, false],
+					"required_tool" : [0],
 					"rep_reward" : 100,
 					"uncleaned_fragment_funds" : 50,
-					"cleaned_framgent_funds" : 100,
+					"cleaned_fragment_funds" : 100,
 					"completed_funds" : 5000,
-					"multiplier" : 0.5
 				},
 			],
-			"upgrades" : [
+			"speed_upgrade" : [
 				{
-					"speed" : [
-						{
-							"name" : "speed",
-							"max_level" : 10,
-							"time_dec_per_level" : 2,
-							"base_cost" : 10,
-						}
-					],
-					"chance" : [
-						{
-							"name" : "chance",
-							"max_level" : 10,
-							"chance_inc_per_level" : 0.05,
-							"base_cost" : 10,
-						}
-					]
+					"name" : "speed",
+					"max_level" : 10,
+					"time_dec_per_level" : 2,
+					"base_cost" : 10,
+				}
+			],
+			"chance_upgrade" : [
+				{
+					"name" : "chance",
+					"max_level" : 10,
+					"chance_inc_per_level" : 0.05,
+					"base_cost" : 10,
 				}
 			]
 		},
 		{
-			"id" : 0,
+			"id" : 1,
 			"name" : "Zone 2",
 			"unlock_required_rep" : 35,
 			"attempt_duration" : 20,
 			"success_chance" : 0.15,
 			"failure_reward" : 20,
-			"artifact_ids" : [3,4,5],
 			"artifacts" : [
 				{
 					"id" : 3,
 					"name" : "Zone 2 art 1",
-					"area_id" : 1,
 					"total_fragments" : 4,
-					"required_tool" : [false, false],
+					"required_tool" : [],
 					"rep_reward" : 40,
 					"uncleaned_fragment_funds" : 35,
-					"cleaned_framgent_funds" : 70,
+					"cleaned_fragment_funds" : 70,
 					"completed_funds" : 2500,
-					"multiplier" : 1
 				},
 				{
 					"id" : 4,
 					"name" : "Zone 2 art 2",
-					"area_id" : 1,
 					"total_fragments" : 4,
-					"required_tool" : [true, false],
+					"required_tool" : [0],
 					"rep_reward" : 150,
 					"uncleaned_fragment_funds" : 20,
-					"cleaned_framgent_funds" : 50,
+					"cleaned_fragment_funds" : 50,
 					"completed_funds" : 1000,
-					"multiplier" : 0.8
 				},
 				{
 					"id" : 5,
 					"name" : "Zone 2 art 3",
-					"area_id" : 1,
 					"total_fragments" : 4,
-					"required_tool" : [true, true],
+					"required_tool" : [1],
 					"rep_reward" : 300,
 					"uncleaned_fragment_funds" : 150,
-					"cleaned_framgent_funds" : 300,
+					"cleaned_fragment_funds" : 300,
 					"completed_funds" : 10000,
-					"multiplier" : 0.5
 				},
 			],
-			"upgrades" : [
+			"speed_upgrade" : [
 				{
-					"speed" : [
-						{
-							"name" : "speed",
-							"max_level" : 10,
-							"time_dec_per_level" : 2,
-							"base_cost" : 10,
-						}
-					],
-					"chance" : [
-						{
-							"name" : "chance",
-							"max_level" : 10,
-							"chance_inc_per_level" : 0.05,
-							"base_cost" : 10,
-						}
-					]
+					"name" : "speed",
+					"max_level" : 10,
+					"time_dec_per_level" : 2,
+					"base_cost" : 10,
+				}
+			],
+			"chance_upgrade" : [
+				{
+					"name" : "chance",
+					"max_level" : 10,
+					"chance_inc_per_level" : 0.05,
+					"base_cost" : 10,
 				}
 			]
 		},

@@ -8,7 +8,7 @@ var zones: Array = []
 
 
 func _ready() -> void:
-	zones = GameData.build_zones()
+	zones = GameData.data()
 
 func _process(delta: float) -> void:
 	for zone in zones:

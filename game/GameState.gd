@@ -6,6 +6,9 @@ var rep : int
 var tools : Array
 var areas : Array
 var artifact_progress : Array[Dictionary] = []
+var active_area_id : int = -1
+var active_artifact_id : int = -1
+var time_remaining : float = -1
 
 
 
@@ -18,20 +21,7 @@ func _ready() -> void:
 	tools = game_data["tools"]
 	areas = game_data["areas"]
 	
-	for area in areas:
-		for artifact in area["artifacts"]:
-			var progress_entry : Dictionary = {
-				"artifact_id" : artifact["id"],
-				"total_fragments" : artifact["total_fragments"],
-				"fragments_found" : 0,
-				"fragments_cleaned" : 0,
-				"is_assembled" : false,
-				"rep_reward" : artifact["rep_reward"]
-			}
-			
-			artifact_progress.append(progress_entry)
-			
-			
+	set_artifact_progress()
 	print(artifact_progress[0])
 	add_fragment(get_artifact_progres(0))
 	clean_fragment(get_artifact_progres(0))
@@ -61,6 +51,20 @@ func _ready() -> void:
 		#for art in zone.artifacts:
 			#if art.on_display:
 				#money += art.income * delta
+
+func set_artifact_progress() -> void:
+	for area in areas:
+		for artifact in area["artifacts"]:
+			var progress_entry : Dictionary = {
+				"artifact_id" : artifact["id"],
+				"total_fragments" : artifact["total_fragments"],
+				"fragments_found" : 0,
+				"fragments_cleaned" : 0,
+				"is_assembled" : false,
+				"rep_reward" : artifact["rep_reward"]
+			}
+			
+			artifact_progress.append(progress_entry)
 
 func get_artifact_progres(artifact_id: int) -> Dictionary:
 	var artifact = {}
@@ -100,34 +104,5 @@ func assemble_artifact(artifact: Dictionary) -> void:
 		rep += artifact["rep_reward"]
 	return
 
-#func _first_open_artifact(zone: Dictionary):
-	#for art in zone.artifacts:
-		#if art.filled_pieces < art.total_pieces:
-			#return art
-	#return null
-#
-#func clean_piece(zone_index: int, art_index: int) -> void:
-	#var art = zones[zone_index].artifacts[art_index]
-	#if art.cleaned_pieces >= art.filled_pieces:
-		#return
-	#art.cleaned_pieces += 1
-#
-#func buy_generator(zone_index: int) -> void:
-	#var zone = zones[zone_index]
-	#if money < zone.generator_cost:
-		#return
-	#money -= zone.generator_cost
-	#zone.generator_rate += 1.0
-#
-#func finish_artifact(zone_index: int, art_index: int) -> void:
-	#var art = zones[zone_index].artifacts[art_index]
-	#if art.cleaned_pieces < art.total_pieces:
-		#return
-	#art.finished = true
-	#rep += 1
-#
-#func set_display_artifact(zone_index: int, art_index: int, displayed: bool) -> void:
-	#var art = zones[zone_index].artifacts[art_index]
-	#if displayed and not art.finished:
-		#return
-	#art.on_display = displayed
+func select_excavation_target(area_id, artifact_id) -> void:
+	

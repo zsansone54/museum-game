@@ -26,54 +26,29 @@ func _ready() -> void:
 				"fragments_found" : 0,
 				"fragments_cleaned" : 0,
 				"is_assembled" : false,
-				"is_displayed" : false
+				"rep_reward" : artifact["rep_reward"]
 			}
 			
 			artifact_progress.append(progress_entry)
 			
-	print(artifact_progress[0])
-	clean_fragment(0)
-	print(artifact_progress[0])
-	add_fragment(0)
-	print(artifact_progress[0])
-	clean_fragment(0)
-	print(artifact_progress[0])
-	clean_fragment(0)
+			
+	print(rep)
 	print(artifact_progress[0])
 	add_fragment(0)
-	print(artifact_progress[0])
-	clean_fragment(0)
-	print(artifact_progress[0])
 	add_fragment(0)
-	print(artifact_progress[0])
 	add_fragment(0)
-	print(artifact_progress[0])
 	add_fragment(0)
+	assemble_artifact(0)
 	print(artifact_progress[0])
 	clean_fragment(0)
-	print(artifact_progress[0])
+	clean_fragment(0)
+	clean_fragment(0)
 	clean_fragment(0)
 	print(artifact_progress[0])
-	clean_fragment(0)
+	assemble_artifact(0)
 	print(artifact_progress[0])
-
-#Increments found fragments by 1 for a given artifact id
-func add_fragment(artifact_id: int) -> void:
-	for progress_entry in artifact_progress:
-		if progress_entry["artifact_id"] == artifact_id:
-			if progress_entry["fragments_found"] < progress_entry["total_fragments"]:
-				progress_entry["fragments_found"] += 1
-				return
-
-#Increments cleaned fragments by 1 for a given artifact id
-#if there is an uncleaned found fragment
-func clean_fragment(artifact_id: int) -> void:
-	for progress_entry in artifact_progress:
-		if progress_entry["artifact_id"] == artifact_id:
-			if progress_entry["fragments_found"] > 0 \
-			&& progress_entry["fragments_found"] > progress_entry["fragments_cleaned"]:
-				progress_entry["fragments_cleaned"] += 1
-				return
+	print(rep)
+	
 
 #func _process(delta: float) -> void:
 	#for zone in zones:
@@ -90,6 +65,33 @@ func clean_fragment(artifact_id: int) -> void:
 			#if art.on_display:
 				#money += art.income * delta
 #
+
+#Increments found fragments by 1 for a given artifact id
+func add_fragment(artifact_id: int) -> void:
+	for progress_entry in artifact_progress:
+		if progress_entry["artifact_id"] == artifact_id:
+			if progress_entry["fragments_found"] < progress_entry["total_fragments"]:
+				progress_entry["fragments_found"] += 1
+			return
+
+#Increments cleaned fragments by 1 for a given artifact id
+#if there is an uncleaned found fragment
+func clean_fragment(artifact_id: int) -> void:
+	for progress_entry in artifact_progress:
+		if progress_entry["artifact_id"] == artifact_id:
+			if progress_entry["fragments_found"] > 0 \
+			&& progress_entry["fragments_found"] > progress_entry["fragments_cleaned"]:
+				progress_entry["fragments_cleaned"] += 1
+			return
+
+func assemble_artifact(artifact_id: int) -> void:
+	for progress_entry in artifact_progress:
+		if progress_entry["artifact_id"] == artifact_id:
+			if !progress_entry["is_assembled"] \
+			&& progress_entry["total_fragments"] == progress_entry["fragments_cleaned"]:
+				progress_entry["is_assembled"] = true
+				rep += progress_entry["rep_reward"]
+
 #func _first_open_artifact(zone: Dictionary):
 	#for art in zone.artifacts:
 		#if art.filled_pieces < art.total_pieces:

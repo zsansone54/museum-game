@@ -3,8 +3,8 @@ extends Node
 var game_data : Dictionary
 var funds : float
 var rep : int
-var tools : Array[Dictionary]
-var areas : Array[Dictionary]
+var tools : Array
+var areas : Array
 var artifact_progress : Array[Dictionary] = []
 
 
@@ -31,7 +31,16 @@ func _ready() -> void:
 			artifact_progress.append(progress_entry)
 			
 	print(artifact_progress)
+	add_fragment(0)
+	print(artifact_progress)
 
+
+func add_fragment(artifact_id: int) -> void:
+	for progress_entry in artifact_progress:
+		if progress_entry["artifact_id"] == artifact_id:
+			progress_entry["fragments_found"] += 1
+			return
+			
 #func _process(delta: float) -> void:
 	#for zone in zones:
 		#zone.piece_bank += zone.generator_rate * delta

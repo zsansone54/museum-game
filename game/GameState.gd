@@ -2,9 +2,10 @@ extends Node
 
 var game_data : Dictionary
 var funds : float
-var starting_rep : int
+var rep : int
 var tools : Array[Dictionary]
 var areas : Array[Dictionary]
+var artifact_progress : Array[Dictionary] = []
 
 
 
@@ -13,9 +14,23 @@ var areas : Array[Dictionary]
 func _ready() -> void:
 	game_data = GameData.data()
 	funds = game_data["initial values"]["starting_funds"]
-	starting_rep = game_data["initial values"]["starting_rep"]
+	rep = game_data["initial values"]["starting_rep"]
 	tools = game_data["tools"]
 	areas = game_data["areas"]
+	
+	for area in areas:
+		for artifact in area["artifacts"]:
+			var progress_entry : Dictionary = {
+				"artifact_id" : artifact["id"],
+				"framgents_found" : 0,
+				"fragments_cleaned" : 0,
+				"is_assembled" : false,
+				"is_displayed" : false
+			}
+			
+			artifact_progress.append(progress_entry)
+			
+	print(artifact_progress)
 
 #func _process(delta: float) -> void:
 	#for zone in zones:

@@ -23,7 +23,7 @@ static func data() -> Dictionary:
 			},
 		],
 		
-		"Areas" : [
+		"areas" : [
 			{
 				"id" : 0,
 				"name" : "Zone 1",

@@ -22,7 +22,8 @@ func _ready() -> void:
 		for artifact in area["artifacts"]:
 			var progress_entry : Dictionary = {
 				"artifact_id" : artifact["id"],
-				"framgents_found" : 0,
+				"total_fragments" : artifact["total_fragments"],
+				"fragments_found" : 0,
 				"fragments_cleaned" : 0,
 				"is_assembled" : false,
 				"is_displayed" : false
@@ -30,17 +31,50 @@ func _ready() -> void:
 			
 			artifact_progress.append(progress_entry)
 			
-	print(artifact_progress)
+	print(artifact_progress[0])
+	clean_fragment(0)
+	print(artifact_progress[0])
 	add_fragment(0)
-	print(artifact_progress)
+	print(artifact_progress[0])
+	clean_fragment(0)
+	print(artifact_progress[0])
+	clean_fragment(0)
+	print(artifact_progress[0])
+	add_fragment(0)
+	print(artifact_progress[0])
+	clean_fragment(0)
+	print(artifact_progress[0])
+	add_fragment(0)
+	print(artifact_progress[0])
+	add_fragment(0)
+	print(artifact_progress[0])
+	add_fragment(0)
+	print(artifact_progress[0])
+	clean_fragment(0)
+	print(artifact_progress[0])
+	clean_fragment(0)
+	print(artifact_progress[0])
+	clean_fragment(0)
+	print(artifact_progress[0])
 
-
+#Increments found fragments by 1 for a given artifact id
 func add_fragment(artifact_id: int) -> void:
 	for progress_entry in artifact_progress:
 		if progress_entry["artifact_id"] == artifact_id:
-			progress_entry["fragments_found"] += 1
-			return
-			
+			if progress_entry["fragments_found"] < progress_entry["total_fragments"]:
+				progress_entry["fragments_found"] += 1
+				return
+
+#Increments cleaned fragments by 1 for a given artifact id
+#if there is an uncleaned found fragment
+func clean_fragment(artifact_id: int) -> void:
+	for progress_entry in artifact_progress:
+		if progress_entry["artifact_id"] == artifact_id:
+			if progress_entry["fragments_found"] > 0 \
+			&& progress_entry["fragments_found"] > progress_entry["fragments_cleaned"]:
+				progress_entry["fragments_cleaned"] += 1
+				return
+
 #func _process(delta: float) -> void:
 	#for zone in zones:
 		#zone.piece_bank += zone.generator_rate * delta

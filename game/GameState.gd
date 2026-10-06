@@ -10,10 +10,6 @@ var active_area_id : int = -1
 var active_artifact_id : int = -1
 var excavation_countdown : float = -1
 
-
-
-
-
 func _ready() -> void:
 	game_data = GameData.data()
 	funds = game_data["initial values"]["starting_funds"]
@@ -21,27 +17,14 @@ func _ready() -> void:
 	tools = game_data["tools"]
 	areas = game_data["areas"]
 	
-	print(get_artifact_data(0))
-	print(excavation_countdown)
-	print(active_area_id)
-	print(active_artifact_id)
-	select_excavation_target(get_artifact_data(0))
-	print(excavation_countdown)
-	print(active_area_id)
-	print(active_artifact_id)
-	select_excavation_target(get_artifact_data(5))
-	print(excavation_countdown)
-	print(active_area_id)
-	print(active_artifact_id)
 	
 func _process(delta: float) -> void:
-	while(excavation_countdown != 0):
-		excavation_countdown -= 1
-		# TODO Resolve attempt
-		if (excavation_countdown == 0):
-			excavation_countdown = get_artifact_data(active_area_id)["attempt_duration"]
-			
-	print(excavation_countdown)
+	if (excavation_countdown != -1):
+		excavation_countdown -= delta
+		if (excavation_countdown <= 0):
+			#TODO resolve excavation attempt
+			excavation_countdown = get_artifact_data(active_artifact_id)["attempt_duration"]
+	
 
 func set_artifact_progress() -> void:
 	for area in areas:

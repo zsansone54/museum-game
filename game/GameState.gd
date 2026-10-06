@@ -8,7 +8,7 @@ var areas : Array
 var artifact_progress : Array[Dictionary] = []
 var active_area_id : int = -1
 var active_artifact_id : int = -1
-var excavation_countdown : int = -1
+var excavation_countdown : float = -1
 
 
 
@@ -21,23 +21,27 @@ func _ready() -> void:
 	tools = game_data["tools"]
 	areas = game_data["areas"]
 	
-	set_artifact_progress()
-	print(artifact_progress[0])
-	add_fragment(get_artifact_progres(0))
-	clean_fragment(get_artifact_progres(0))
-	add_fragment(get_artifact_progres(0))
-	clean_fragment(get_artifact_progres(0))
-	add_fragment(get_artifact_progres(0))
-	clean_fragment(get_artifact_progres(0))
-	add_fragment(get_artifact_progres(0))
-	clean_fragment(get_artifact_progres(0))
-	assemble_artifact(get_artifact_progres(0))
-	print(artifact_progress[0])
-	print(rep)
 	print(get_artifact_data(0))
+	print(excavation_countdown)
+	print(active_area_id)
+	print(active_artifact_id)
+	select_excavation_target(get_artifact_data(0))
+	print(excavation_countdown)
+	print(active_area_id)
+	print(active_artifact_id)
+	select_excavation_target(get_artifact_data(5))
+	print(excavation_countdown)
+	print(active_area_id)
+	print(active_artifact_id)
 	
-#func _process(delta: float) -> void:
-	
+func _process(delta: float) -> void:
+	while(excavation_countdown != 0):
+		excavation_countdown -= 1
+		# TODO Resolve attempt
+		if (excavation_countdown == 0):
+			excavation_countdown = get_artifact_data(active_area_id)["attempt_duration"]
+			
+	print(excavation_countdown)
 
 func set_artifact_progress() -> void:
 	for area in areas:
@@ -53,7 +57,7 @@ func set_artifact_progress() -> void:
 			
 			artifact_progress.append(progress_entry)
 
-func get_artifact_progres(artifact_id: int) -> Dictionary:
+func get_artifact_progress(artifact_id: int) -> Dictionary:
 	var artifact = {}
 	for progress_entry in artifact_progress:
 		if progress_entry["artifact_id"] == artifact_id:
@@ -91,8 +95,8 @@ func assemble_artifact(artifact: Dictionary) -> void:
 		rep += artifact["rep_reward"]
 	return
 
-func select_excavation_target(area_id, artifact_id) -> void:
-	active_area_id = area_id
-	active_artifact_id = artifact_id
-	var duration = GameData(artifact_id)[3]
-	excavation_countdown = duration
+func select_excavation_target(artifact : Dictionary) -> void:
+	#TODO reject invalid artifacts
+	active_area_id = artifact["area"]
+	active_artifact_id = artifact["id"]
+	excavation_countdown = artifact["attempt_duration"]

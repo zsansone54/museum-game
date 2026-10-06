@@ -33,6 +33,7 @@ static func data() -> Dictionary:
 				"artifacts" : [
 					{
 						"id" : 0,
+						"area" : 0,
 						"name" : "Zone 1 art 1",
 						"total_fragments" : 4,
 						"attempt_duration" : 10,
@@ -44,6 +45,7 @@ static func data() -> Dictionary:
 					},
 					{
 						"id" : 1,
+						"area" : 0,
 						"name" : "Zone 1 art 2",
 						"total_fragments" : 4,
 						"attempt_duration" : 20,
@@ -55,6 +57,7 @@ static func data() -> Dictionary:
 					},
 					{
 						"id" : 2,
+						"area" : 0,
 						"name" : "Zone 1 art 3",
 						"total_fragments" : 4,
 						"attempt_duration" : 40,
@@ -91,6 +94,7 @@ static func data() -> Dictionary:
 				"artifacts" : [
 					{
 						"id" : 3,
+						"area" : 1,
 						"name" : "Zone 2 art 1",
 						"total_fragments" : 4,
 						"attempt_duration" : 20,
@@ -102,6 +106,7 @@ static func data() -> Dictionary:
 					},
 					{
 						"id" : 4,
+						"area" : 1,
 						"name" : "Zone 2 art 2",
 						"total_fragments" : 4,
 						"attempt_duration" : 45,
@@ -113,6 +118,7 @@ static func data() -> Dictionary:
 					},
 					{
 						"id" : 5,
+						"area" : 1,
 						"name" : "Zone 2 art 3",
 						"total_fragments" : 4,
 						"attempt_duration" : 80,

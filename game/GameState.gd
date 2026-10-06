@@ -8,7 +8,7 @@ var areas : Array
 var artifact_progress : Array[Dictionary] = []
 var active_area_id : int = -1
 var active_artifact_id : int = -1
-var time_remaining : float = -1
+var excavation_countdown : int = -1
 
 
 
@@ -36,21 +36,8 @@ func _ready() -> void:
 	print(rep)
 	print(get_artifact_data(0))
 	
-
 #func _process(delta: float) -> void:
-	#for zone in zones:
-		#zone.piece_bank += zone.generator_rate * delta
-#
-		#var target = _first_open_artifact(zone)
-		#while target != null and zone.piece_bank >= 1.0:
-			#zone.piece_bank -= 1.0
-			#target.filled_pieces += 1
-			#if target.filled_pieces >= target.total_pieces:
-				#target = _first_open_artifact(zone)
-#
-		#for art in zone.artifacts:
-			#if art.on_display:
-				#money += art.income * delta
+	
 
 func set_artifact_progress() -> void:
 	for area in areas:
@@ -105,4 +92,7 @@ func assemble_artifact(artifact: Dictionary) -> void:
 	return
 
 func select_excavation_target(area_id, artifact_id) -> void:
-	
+	active_area_id = area_id
+	active_artifact_id = artifact_id
+	var duration = GameData(artifact_id)[3]
+	excavation_countdown = duration

@@ -19,7 +19,6 @@ func _ready() -> void:
 	areas = game_data["areas"]
 	set_artifact_progress()
 	rng.randomize()
-	select_excavation_target(get_artifact_data(0))
 	
 	
 	
@@ -78,15 +77,15 @@ func clean_fragment(artifact: Dictionary) -> void:
 
 func assemble_artifact(artifact: Dictionary) -> void:
 	if !artifact["is_assembled"] \
-	&& artifact["total_fragments"] == artifact["fragments_cleaned"]:
+	&& artifact["total_fragments"] >= artifact["fragments_cleaned"]:
 		artifact["is_assembled"] = true
 		rep += artifact["rep_reward"]
 	return
 
 func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
-	if progress["fragments_found"] == progress["total_fragments"] \
-	or progress["is_assembled"]:
+	if progress["fragments_found"] >= progress["total_fragments"] \
+	|| progress["is_assembled"]:
 		return
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]
@@ -98,7 +97,7 @@ func excavation_attempt_result() -> void:
 		if rand > (100 - get_artifact_data(active_artifact_id)["success_chance"]):
 			add_fragment(get_artifact_progress(active_artifact_id))
 			if get_artifact_progress(active_artifact_id)["fragments_found"] \
-			== get_artifact_progress(active_artifact_id)["total_fragments"]:
+			>= get_artifact_progress(active_artifact_id)["total_fragments"]:
 				active_area_id = -1
 				active_artifact_id = -1
 				excavation_countdown = -1

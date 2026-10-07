@@ -36,7 +36,7 @@ static func data() -> Dictionary:
 						"area" : 0,
 						"name" : "Zone 1 art 1",
 						"total_fragments" : 4,
-						"attempt_duration" : 2,
+						"attempt_duration" : 10,
 						"required_tool" : [],
 						"rep_reward" : 10,
 						"uncleaned_fragment_funds" : 5,

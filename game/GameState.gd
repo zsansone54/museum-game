@@ -27,24 +27,27 @@ func _process(delta: float) -> void:
 		excavation_countdown -= delta
 		if excavation_countdown <= 0:
 			excavation_attempt_result()
+	clean_fragment(get_artifact_progress(0))
 	assemble_artifact(get_artifact_progress(0))
 	update_donation_income(delta)
 	
 
 func update_donation_income(delta: float) -> void:
+	var add : float = 0
 	for area in areas:
 		for artifact in area["artifacts"]:
 			var progress = get_artifact_progress(artifact["id"])
 			if !progress["is_assembled"]:
-				funds += (progress["fragments_found"] - progress["fragments_cleaned"]) \
+				add += (progress["fragments_found"] - progress["fragments_cleaned"]) \
 				* artifact["uncleaned_fragment_funds_ps"] * delta
-				funds += progress["fragments_cleaned"] * \
+				add += progress["fragments_cleaned"] * \
 				artifact["cleaned_fragment_funds_ps"] * delta
 				print("yaya")
 			else:
 				print("hi")
-				funds += artifact["completed_funds"] * delta
-	print(funds)
+				add += artifact["completed_funds"] * delta
+	funds += add
+	print(add)
 func set_artifact_progress() -> void:
 	for area in areas:
 		for artifact in area["artifacts"]:

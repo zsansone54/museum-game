@@ -20,15 +20,28 @@ func _ready() -> void:
 	set_artifact_progress()
 	rng.randomize()
 	
-	
+	select_excavation_target(get_artifact_data(0))
 	
 func _process(delta: float) -> void:
 	if excavation_countdown != -1:
 		excavation_countdown -= delta
 		if excavation_countdown <= 0:
 			excavation_attempt_result()
-			
+	update_donation_income(delta)
+	
 
+func update_donation_income(delta: float) -> void:
+	for area in areas:
+		for artifact in area["artifacts"]:
+			var progress = get_artifact_progress(artifact["id"])
+			if !progress["is_assembled"]:
+				funds += progress["fragments_found"] - progress["fragments_cleaned"] \
+				* artifact["uncleaned_fragment_funds_ps"] * delta
+				funds += progress["fragments_cleaned"] * \
+				artifact["cleaned_fragment_funds_ps"] * delta
+			else:
+				funds += artifact["completed_funds"] * delta
+	print(funds)
 func set_artifact_progress() -> void:
 	for area in areas:
 		for artifact in area["artifacts"]:
@@ -40,7 +53,6 @@ func set_artifact_progress() -> void:
 				"is_assembled" : false,
 				"rep_reward" : artifact["rep_reward"]
 			}
-			
 			artifact_progress.append(progress_entry)
 
 
@@ -49,7 +61,6 @@ func get_artifact_progress(artifact_id: int) -> Dictionary:
 	for progress_entry in artifact_progress:
 		if progress_entry["artifact_id"] == artifact_id:
 			artifact = progress_entry
-			
 	return artifact
 
 func get_artifact_data(artifact_id: int) -> Dictionary:
@@ -74,7 +85,6 @@ func clean_fragment(artifact: Dictionary) -> void:
 		artifact["fragments_cleaned"] += 1
 	return
 
-
 func assemble_artifact(artifact: Dictionary) -> void:
 	if !artifact["is_assembled"] \
 	&& artifact["total_fragments"] >= artifact["fragments_cleaned"]:
@@ -84,7 +94,7 @@ func assemble_artifact(artifact: Dictionary) -> void:
 
 func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
-	if progress["fragments_found"] >= progress["total_fragments"] \
+	if progress["fragments_found"] <= progress["total_fragments"] \
 	|| progress["is_assembled"]:
 		return
 	active_area_id = artifact["area"]

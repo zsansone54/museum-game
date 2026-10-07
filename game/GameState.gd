@@ -67,6 +67,7 @@ func add_fragment(artifact: Dictionary) -> void:
 	else:
 		active_area_id = -1
 		active_artifact_id = -1
+		excavation_countdown = -1
 	return
 
 #Increments cleaned fragments by 1 for a given artifact id

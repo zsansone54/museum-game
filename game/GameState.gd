@@ -20,17 +20,34 @@ func _ready() -> void:
 	set_artifact_progress()
 	rng.randomize()
 	
-	select_excavation_target(get_artifact_data(0))
+	print(tools)
+	funds = 10000
+	print(funds)
+	print (rep)
+	buy_tool(0)
+	print(tools)
+	print(funds)
+	print (rep)
+	rep = 10000
+	buy_tool(0)
+	print(tools)
+	print(funds)
+	print (rep)
+	buy_tool(1)
+	print(tools)
+	print(funds)
+	print (rep)
+	buy_tool(30)
+	print(tools)
+	print(funds)
+	print (rep)
 	
+
 func _process(delta: float) -> void:
 	if excavation_countdown != -1:
 		excavation_countdown -= delta
 		if excavation_countdown <= 0:
 			excavation_attempt_result()
-	clean_fragment(get_artifact_progress(0))
-	assemble_artifact(get_artifact_progress(0))
-	update_donation_income(delta)
-	
 
 func update_donation_income(delta: float) -> void:
 	var add : float = 0
@@ -42,12 +59,10 @@ func update_donation_income(delta: float) -> void:
 				* artifact["uncleaned_fragment_funds_ps"] * delta
 				add += progress["fragments_cleaned"] * \
 				artifact["cleaned_fragment_funds_ps"] * delta
-				print("yaya")
 			else:
-				print("hi")
 				add += artifact["completed_funds"] * delta
 	funds += add
-	print(add)
+
 func set_artifact_progress() -> void:
 	for area in areas:
 		for artifact in area["artifacts"]:
@@ -108,7 +123,8 @@ func select_excavation_target(artifact : Dictionary) -> void:
 	excavation_countdown = artifact["attempt_duration"]
 
 func excavation_attempt_result() -> void:
-	if active_artifact_id != -1:
+	if active_artifact_id != -1 \
+	&& has_required_tools(get_artifact_data(active_artifact_id)):
 		var rand = rng.randi_range(1, 100)
 		if rand > (100 - get_artifact_data(active_artifact_id)["success_chance"]):
 			add_fragment(get_artifact_progress(active_artifact_id))
@@ -121,3 +137,18 @@ func excavation_attempt_result() -> void:
 		else:
 			funds += get_artifact_data(active_artifact_id)["failure_reward"]
 		excavation_countdown = get_artifact_data(active_artifact_id)["attempt_duration"]
+
+func buy_tool(tool_id : int) -> void:
+	if tool_id <= tools.size() \
+	&& !tools[tool_id]["is_purchased"] \
+	&& rep >= tools[tool_id]["unlock_required_rep"] \
+	&& funds >= tools[tool_id]["cost"]:
+		funds -= tools[tool_id]["cost"]
+		tools[tool_id]["is_purchased"] = true
+
+func has_required_tools(artifact : Dictionary) -> bool:
+	var tools_owned : bool = true
+	for tool : int in artifact["required_tool"]:
+		if !tools[tool]:
+			tools_owned = false
+	return tools_owned

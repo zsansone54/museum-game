@@ -13,13 +13,15 @@ static func data() -> Dictionary:
 				"id" : 0,
 				"name" : "Tool 1",
 				"cost" : 300,
-				"unlock_required_rep" : 75
+				"unlock_required_rep" : 75,
+				"is_purchased" : false
 			},
 					{
 				"id" : 1,
 				"name" : "Tool 2",
-				"cost" : 300,
-				"unlock_required_rep" : 325
+				"cost" : 2000,
+				"unlock_required_rep" : 325,
+				"is_purchased" : false
 			},
 		],
 		
@@ -36,13 +38,13 @@ static func data() -> Dictionary:
 						"area" : 0,
 						"name" : "Zone 1 art 1",
 						"total_fragments" : 4,
-						"attempt_duration" : 1,
+						"attempt_duration" : 10,
 						"required_tool" : [],
 						"rep_reward" : 10,
 						"uncleaned_fragment_funds_ps" : 5,
 						"cleaned_fragment_funds_ps" : 15,
 						"completed_funds" : 100,
-						"success_chance" : 100,
+						"success_chance" : 40,
 						"failure_reward" : 5,
 					},
 					{

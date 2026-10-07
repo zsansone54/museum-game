@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 		excavation_countdown -= delta
 		if excavation_countdown <= 0:
 			excavation_attempt_result()
+	assemble_artifact(get_artifact_progress(0))
 	update_donation_income(delta)
 	
 
@@ -35,11 +36,13 @@ func update_donation_income(delta: float) -> void:
 		for artifact in area["artifacts"]:
 			var progress = get_artifact_progress(artifact["id"])
 			if !progress["is_assembled"]:
-				funds += progress["fragments_found"] - progress["fragments_cleaned"] \
+				funds += (progress["fragments_found"] - progress["fragments_cleaned"]) \
 				* artifact["uncleaned_fragment_funds_ps"] * delta
 				funds += progress["fragments_cleaned"] * \
 				artifact["cleaned_fragment_funds_ps"] * delta
+				print("yaya")
 			else:
+				print("hi")
 				funds += artifact["completed_funds"] * delta
 	print(funds)
 func set_artifact_progress() -> void:
@@ -87,14 +90,14 @@ func clean_fragment(artifact: Dictionary) -> void:
 
 func assemble_artifact(artifact: Dictionary) -> void:
 	if !artifact["is_assembled"] \
-	&& artifact["total_fragments"] >= artifact["fragments_cleaned"]:
+	&& artifact["total_fragments"] <= artifact["fragments_cleaned"]:
 		artifact["is_assembled"] = true
 		rep += artifact["rep_reward"]
 	return
 
 func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
-	if progress["fragments_found"] <= progress["total_fragments"] \
+	if progress["fragments_found"] >= progress["total_fragments"] \
 	|| progress["is_assembled"]:
 		return
 	active_area_id = artifact["area"]

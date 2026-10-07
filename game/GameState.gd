@@ -9,6 +9,7 @@ var artifact_progress : Array[Dictionary] = []
 var active_area_id : int = -1
 var active_artifact_id : int = -1
 var excavation_countdown : float = -1
+var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	game_data = GameData.data()
@@ -16,14 +17,16 @@ func _ready() -> void:
 	rep = game_data["initial values"]["starting_rep"]
 	tools = game_data["tools"]
 	areas = game_data["areas"]
+	rng.randomize()
+	select_excavation_target(get_artifact_data(0))
 	
 	
 func _process(delta: float) -> void:
 	if (excavation_countdown != -1):
 		excavation_countdown -= delta
 		if (excavation_countdown <= 0):
-			#TODO resolve excavation attempt
-			excavation_countdown = get_artifact_data(active_artifact_id)["attempt_duration"]
+			excavation_attempt_result()
+			
 	
 
 func set_artifact_progress() -> void:
@@ -83,3 +86,17 @@ func select_excavation_target(artifact : Dictionary) -> void:
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]
 	excavation_countdown = artifact["attempt_duration"]
+
+func excavation_attempt_result() -> void:
+	var rand = rng.randi_range(0, 100)
+	if rand > (100 - get_artifact_data(active_artifact_id)["success_chance"]):
+		add_fragment(get_artifact_data(active_artifact_id))
+		print("fragment found")
+	else:
+		funds += get_artifact_data(active_area_id)["failure_reward"]
+		print("attempt failed")
+	excavation_countdown = get_artifact_data(active_artifact_id)["attempt_duration"]
+	print(funds)
+	print(rand)
+	print(get_artifact_data(active_artifact_id))
+	print(get_artifact_progress(active_artifact_id))

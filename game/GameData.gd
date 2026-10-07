@@ -36,12 +36,14 @@ static func data() -> Dictionary:
 						"area" : 0,
 						"name" : "Zone 1 art 1",
 						"total_fragments" : 4,
-						"attempt_duration" : 10,
+						"attempt_duration" : 2,
 						"required_tool" : [],
 						"rep_reward" : 10,
 						"uncleaned_fragment_funds" : 5,
 						"cleaned_fragment_funds" : 15,
 						"completed_funds" : 100,
+						"success_chance" : 50,
+						"failure_reward" : 5,
 					},
 					{
 						"id" : 1,
@@ -54,6 +56,8 @@ static func data() -> Dictionary:
 						"uncleaned_fragment_funds" : 20,
 						"cleaned_fragment_funds" : 50,
 						"completed_funds" : 1000,
+						"success_chance" : 25,
+						"failure_reward" : 10,
 					},
 					{
 						"id" : 2,
@@ -65,7 +69,9 @@ static func data() -> Dictionary:
 						"rep_reward" : 100,
 						"uncleaned_fragment_funds" : 50,
 						"cleaned_fragment_funds" : 100,
-						"completed_funds" : 5000,
+						"completed_funds" : 3000,
+						"success_chance" : 10,
+						"failure_reward" : 25,
 					},
 				],
 				"speed_upgrade" : [
@@ -89,8 +95,6 @@ static func data() -> Dictionary:
 				"id" : 1,
 				"name" : "Zone 2",
 				"unlock_required_rep" : 35,
-				"success_chance" : 0.15,
-				"failure_reward" : 20,
 				"artifacts" : [
 					{
 						"id" : 3,
@@ -103,6 +107,8 @@ static func data() -> Dictionary:
 						"uncleaned_fragment_funds" : 35,
 						"cleaned_fragment_funds" : 70,
 						"completed_funds" : 2500,
+						"success_chance" : 20,
+						"failure_reward" : 25,
 					},
 					{
 						"id" : 4,
@@ -112,9 +118,11 @@ static func data() -> Dictionary:
 						"attempt_duration" : 45,
 						"required_tool" : [0],
 						"rep_reward" : 150,
-						"uncleaned_fragment_funds" : 20,
-						"cleaned_fragment_funds" : 50,
-						"completed_funds" : 1000,
+						"uncleaned_fragment_funds" :50,
+						"cleaned_fragment_funds" : 100,
+						"completed_funds" : 5000,
+						"success_chance" : 10,
+						"failure_reward" : 50,
 					},
 					{
 						"id" : 5,
@@ -127,6 +135,8 @@ static func data() -> Dictionary:
 						"uncleaned_fragment_funds" : 150,
 						"cleaned_fragment_funds" : 300,
 						"completed_funds" : 10000,
+						"success_chance" : 05,
+						"failure_reward" : 150,
 					},
 				],
 				"speed_upgrade" : [

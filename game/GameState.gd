@@ -83,8 +83,8 @@ func assemble_artifact(artifact: Dictionary) -> void:
 	return
 
 func select_excavation_target(artifact : Dictionary) -> void:
-	if get_artifact_progress(active_artifact_id)["fragments_found"] \
-	== get_artifact_progress(active_artifact_id)["total_fragments"]:
+	var progress = get_artifact_progress(artifact["id"])
+	if progress["fragments_found"] == progress["total_fragments"]:
 		return
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]
@@ -101,8 +101,6 @@ func excavation_attempt_result() -> void:
 				active_artifact_id = -1
 				excavation_countdown = -1
 			print("fragment found")
-			if active_artifact_id == -1:
-				return
 		else:
 			funds += get_artifact_data(active_artifact_id)["failure_reward"]
 			print("attempt failed")

@@ -20,6 +20,10 @@ func _ready() -> void:
 	set_artifact_progress()
 	rng.randomize()
 	
+	select_excavation_target(get_artifact_data(2))
+	print(active_artifact_id, "hi")
+	select_excavation_target(get_artifact_data(5))
+	print(active_artifact_id, "hi")
 	print(tools)
 	funds = 10000
 	print(funds)
@@ -33,7 +37,11 @@ func _ready() -> void:
 	print(tools)
 	print(funds)
 	print (rep)
+	select_excavation_target(get_artifact_data(5))
+	print(active_artifact_id, "hi")
 	buy_tool(1)
+	select_excavation_target(get_artifact_data(5))
+	print(active_artifact_id, "hi")
 	print(tools)
 	print(funds)
 	print (rep)
@@ -41,6 +49,7 @@ func _ready() -> void:
 	print(tools)
 	print(funds)
 	print (rep)
+	
 	
 
 func _process(delta: float) -> void:
@@ -117,6 +126,7 @@ func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
 	if progress["fragments_found"] >= progress["total_fragments"] \
 	|| progress["is_assembled"]:
+		print("no no")
 		return
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]

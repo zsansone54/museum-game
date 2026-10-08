@@ -21,6 +21,20 @@ func _ready() -> void:
 	areas = game_data["areas"]
 	set_artifact_progress()
 	rng.randomize()
+	
+	var art = get_artifact_data(0)
+	var area = get_area_data(0)
+	print(get_effective_attempt_duration(art))
+	print(get_effective_success_chance(art))
+	buy_chance_upgrade(area)
+	buy_speed_upgrade(area)
+	print(get_effective_attempt_duration(art))
+	print(get_effective_success_chance(art))
+	funds = 100000
+	buy_chance_upgrade(area)
+	buy_speed_upgrade(area)
+	print(get_effective_attempt_duration(art))
+	print(get_effective_success_chance(art))
 
 func _process(delta : float) -> void:
 	if excavation_countdown != -1:
@@ -70,7 +84,7 @@ func get_artifact_data(artifact_id : int) -> Dictionary:
 				data = artifact
 	return data
 
-func get_aera_data(area_id : int) -> Dictionary:
+func get_area_data(area_id : int) -> Dictionary:
 	var data ={}
 	for area in areas:
 		if area["id"] == area_id:
@@ -78,13 +92,13 @@ func get_aera_data(area_id : int) -> Dictionary:
 	return data
 
 func get_effective_attempt_duration(artifact : Dictionary) -> float:
-	var area = get_aera_data(artifact["id"])
-	return min(0.1, artifact["attempt_duration"] \
+	var area = get_area_data(artifact["area"])
+	return max(0.1, artifact["attempt_duration"] \
 	- area["speed_upgrade"]["time_dec_per_level"] * area_speed_upgrades[area["id"]])
 
 func get_effective_success_chance(artifact : Dictionary) -> float:
-	var area = get_aera_data(artifact["id"])
-	return max(100, artifact["success_chance"] \
+	var area = get_area_data(artifact["area"])
+	return min(100, artifact["success_chance"] \
 	+ area["chance_upgrade"]["chance_inc_per_level"] * area_chance_upgrades[area["id"]])
 
 #Increments found fragments by 1 for a given artifact id
@@ -115,7 +129,7 @@ func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
 	if progress["fragments_found"] >= artifact["total_fragments"] \
 	|| progress["is_assembled"] || !has_required_tools(artifact) \
-	|| !is_area_unlocked(get_aera_data(artifact["area"])):
+	|| !is_area_unlocked(get_area_data(artifact["area"])):
 		print("no no")
 		return
 	active_area_id = artifact["area"]
@@ -155,6 +169,7 @@ func buy_speed_upgrade(area : Dictionary) -> void:
 	if upgrade_count >= upgrade["max_level"] \
 	|| funds < cost:
 		return
+	print("speed success")
 	funds -= cost
 	area_speed_upgrades[area["id"]] += 1
 
@@ -165,6 +180,7 @@ func buy_chance_upgrade(area : Dictionary) -> void:
 	if upgrade_count >= upgrade["max_level"] \
 	|| funds < cost:
 		return
+	print("chance success")
 	funds -= cost
 	area_chance_upgrades[area["id"]] += 1
 

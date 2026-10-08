@@ -9,6 +9,8 @@ var artifact_progress : Array[Dictionary] = []
 var active_area_id : int = -1
 var active_artifact_id : int = -1
 var excavation_countdown : float = -1
+var area_speed_upgrades : Array[int] = [0,0]
+var area_chance_upgrades : Array[int] = [0,0]
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
@@ -19,13 +21,6 @@ func _ready() -> void:
 	areas = game_data["areas"]
 	set_artifact_progress()
 	rng.randomize()
-	
-	var area0 = get_aera_data(0)
-	var area1 = get_aera_data(1)
-	print(is_area_unlocked(area0))
-	print(is_area_unlocked(area1))
-	rep = 35
-	print(is_area_unlocked(area1))
 
 func _process(delta : float) -> void:
 	if excavation_countdown != -1:
@@ -60,7 +55,6 @@ func set_artifact_progress() -> void:
 			}
 			artifact_progress.append(progress_entry)
 
-
 func get_artifact_progress(artifact_id : int) -> Dictionary:
 	var artifact = {}
 	for progress_entry in artifact_progress:
@@ -82,6 +76,16 @@ func get_aera_data(area_id : int) -> Dictionary:
 		if area["id"] == area_id:
 			data = area
 	return data
+
+func get_effective_attempt_duration(artifact : Dictionary) -> float:
+	var area = get_aera_data(artifact["id"])
+	return min(0.1, artifact["attempt_duration"] \
+	- area["speed_upgrade"]["time_dec_per_level"] * area_speed_upgrades[area["id"]])
+
+func get_effective_success_chance(artifact : Dictionary) -> float:
+	var area = get_aera_data(artifact["id"])
+	return max(100, artifact["success_chance"] \
+	+ area["chance_upgrade"]["chance_inc_per_level"] * area_chance_upgrades[area["id"]])
 
 #Increments found fragments by 1 for a given artifact id
 func add_fragment(artifact : Dictionary) -> void:
@@ -116,7 +120,7 @@ func select_excavation_target(artifact : Dictionary) -> void:
 		return
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]
-	excavation_countdown = artifact["attempt_duration"]
+	excavation_countdown = get_effective_attempt_duration(artifact)
 
 func excavation_attempt_result() -> void:
 	var active_artifact = get_artifact_data(active_artifact_id)
@@ -124,7 +128,7 @@ func excavation_attempt_result() -> void:
 	if active_artifact_id != -1 \
 	&& has_required_tools(active_artifact):
 		var rand = rng.randi_range(1, 100)
-		if rand > (100 - active_artifact["success_chance"]):
+		if rand > (100 - get_effective_success_chance(active_artifact)):
 			add_fragment(active_artifact)
 			if active_artifact_progress["fragments_found"] \
 			>= active_artifact["total_fragments"]:
@@ -134,7 +138,7 @@ func excavation_attempt_result() -> void:
 				return
 		else:
 			funds += active_artifact["failure_reward"]
-		excavation_countdown = active_artifact["attempt_duration"]
+		excavation_countdown = get_effective_attempt_duration(active_artifact)
 
 func buy_tool(tool_id : int) -> void:
 	if tool_id >= 0 && tool_id < tools.size() \
@@ -143,6 +147,26 @@ func buy_tool(tool_id : int) -> void:
 	&& funds >= tools[tool_id]["cost"]:
 		funds -= tools[tool_id]["cost"]
 		tools[tool_id]["is_purchased"] = true
+
+func buy_speed_upgrade(area : Dictionary) -> void:
+	var upgrade : Dictionary = area["speed_upgrade"]
+	var upgrade_count : int = area_speed_upgrades[area["id"]]
+	var cost : float = upgrade["base_cost"] + upgrade["cost_mult_per_level"] * upgrade_count
+	if upgrade_count >= upgrade["max_level"] \
+	|| funds < cost:
+		return
+	funds -= cost
+	area_speed_upgrades[area["id"]] += 1
+
+func buy_chance_upgrade(area : Dictionary) -> void:
+	var upgrade : Dictionary = area["chance_upgrade"]
+	var upgrade_count : int = area_chance_upgrades[area["id"]]
+	var cost : float = upgrade["base_cost"] + upgrade["cost_mult_per_level"] * upgrade_count
+	if upgrade_count >= upgrade["max_level"] \
+	|| funds < cost:
+		return
+	funds -= cost
+	area_chance_upgrades[area["id"]] += 1
 
 func has_required_tools(artifact : Dictionary) -> bool:
 	var tools_owned : bool = true

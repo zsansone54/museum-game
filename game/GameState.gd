@@ -22,7 +22,6 @@ func _ready() -> void:
 	set_artifact_progress()
 	rng.randomize()
 	
-	select_excavation_target(get_artifact_data(5))
 
 func _process(delta : float) -> void:
 	if excavation_countdown != -1:
@@ -111,14 +110,16 @@ func assemble_artifact(artifact : Dictionary) -> void:
 	&& artifact["total_fragments"] <= progress["fragments_cleaned"]:
 		progress["is_assembled"] = true
 		rep += artifact["rep_reward"]
+	if(check_win_condition()):
+		print("win")
 	return
+	
 
 func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
 	if progress["fragments_found"] >= artifact["total_fragments"] \
 	|| progress["is_assembled"] || !has_required_tools(artifact) \
 	|| !is_area_unlocked(get_area_data(artifact["area"])):
-		print("no no")
 		return
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]
@@ -157,7 +158,6 @@ func buy_speed_upgrade(area : Dictionary) -> void:
 	if upgrade_count >= upgrade["max_level"] \
 	|| funds < cost:
 		return
-	print("speed success")
 	funds -= cost
 	area_speed_upgrades[area["id"]] += 1
 
@@ -168,7 +168,6 @@ func buy_chance_upgrade(area : Dictionary) -> void:
 	if upgrade_count >= upgrade["max_level"] \
 	|| funds < cost:
 		return
-	print("chance success")
 	funds -= cost
 	area_chance_upgrades[area["id"]] += 1
 
@@ -184,4 +183,10 @@ func is_area_unlocked(area : Dictionary) -> bool:
 	if area["unlock_required_rep"] <= rep:
 		area_unlocked = true
 	return area_unlocked
-	
+
+func check_win_condition() -> bool:
+	var win = true
+	for artifact in artifact_progress:
+		if !artifact["is_assembled"]:
+			win = false
+	return win

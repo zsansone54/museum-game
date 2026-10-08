@@ -20,45 +20,22 @@ func _ready() -> void:
 	set_artifact_progress()
 	rng.randomize()
 	
-	select_excavation_target(get_artifact_data(2))
-	print(active_artifact_id, "hi")
-	select_excavation_target(get_artifact_data(5))
-	print(active_artifact_id, "hi")
-	print(tools)
-	funds = 10000
-	print(funds)
-	print (rep)
-	buy_tool(0)
-	print(tools)
-	print(funds)
-	print (rep)
-	rep = 10000
-	buy_tool(0)
-	print(tools)
-	print(funds)
-	print (rep)
-	select_excavation_target(get_artifact_data(5))
-	print(active_artifact_id, "hi")
-	buy_tool(1)
-	select_excavation_target(get_artifact_data(5))
-	print(active_artifact_id, "hi")
-	print(tools)
-	print(funds)
-	print (rep)
-	buy_tool(30)
-	print(tools)
-	print(funds)
-	print (rep)
-	
-	
+	var area0 = get_aera_data(0)
+	var area1 = get_aera_data(1)
+	print(is_area_unlocked(area0))
+	print(is_area_unlocked(area1))
+	rep = 35
+	print(is_area_unlocked(area1))
 
-func _process(delta: float) -> void:
+func _process(delta : float) -> void:
 	if excavation_countdown != -1:
 		excavation_countdown -= delta
 		if excavation_countdown <= 0:
 			excavation_attempt_result()
+			
+	update_donation_income(delta)
 
-func update_donation_income(delta: float) -> void:
+func update_donation_income(delta : float) -> void:
 	var add : float = 0
 	for area in areas:
 		for artifact in area["artifacts"]:
@@ -77,23 +54,21 @@ func set_artifact_progress() -> void:
 		for artifact in area["artifacts"]:
 			var progress_entry : Dictionary = {
 				"artifact_id" : artifact["id"],
-				"total_fragments" : artifact["total_fragments"],
 				"fragments_found" : 0,
 				"fragments_cleaned" : 0,
 				"is_assembled" : false,
-				"rep_reward" : artifact["rep_reward"]
 			}
 			artifact_progress.append(progress_entry)
 
 
-func get_artifact_progress(artifact_id: int) -> Dictionary:
+func get_artifact_progress(artifact_id : int) -> Dictionary:
 	var artifact = {}
 	for progress_entry in artifact_progress:
 		if progress_entry["artifact_id"] == artifact_id:
 			artifact = progress_entry
 	return artifact
 
-func get_artifact_data(artifact_id: int) -> Dictionary:
+func get_artifact_data(artifact_id : int) -> Dictionary:
 	var data = {}
 	for area in areas: 
 		for artifact in area["artifacts"]:
@@ -101,31 +76,41 @@ func get_artifact_data(artifact_id: int) -> Dictionary:
 				data = artifact
 	return data
 
+func get_aera_data(area_id : int) -> Dictionary:
+	var data ={}
+	for area in areas:
+		if area["id"] == area_id:
+			data = area
+	return data
+
 #Increments found fragments by 1 for a given artifact id
-func add_fragment(artifact: Dictionary) -> void:
+func add_fragment(artifact : Dictionary) -> void:
 	if artifact["fragments_found"] < artifact["total_fragments"]:
 		artifact["fragments_found"] += 1
 	return
 
 #Increments cleaned fragments by 1 for a given artifact id
 #if there is an uncleaned found fragment
-func clean_fragment(artifact: Dictionary) -> void:
-	if artifact["fragments_found"] > 0 \
-	&& artifact["fragments_found"] > artifact["fragments_cleaned"]:
-		artifact["fragments_cleaned"] += 1
+func clean_fragment(artifact : Dictionary) -> void:
+	var progress = get_artifact_progress(artifact["id"])
+	if progress["fragments_found"] > 0 \
+	&& progress["fragments_found"] > progress["fragments_cleaned"]:
+		progress["fragments_cleaned"] += 1
 	return
 
-func assemble_artifact(artifact: Dictionary) -> void:
-	if !artifact["is_assembled"] \
-	&& artifact["total_fragments"] <= artifact["fragments_cleaned"]:
-		artifact["is_assembled"] = true
+func assemble_artifact(artifact : Dictionary) -> void:
+	var progress = get_artifact_progress(artifact["id"])
+	if !progress["is_assembled"] \
+	&& artifact["total_fragments"] <= progress["fragments_cleaned"]:
+		progress["is_assembled"] = true
 		rep += artifact["rep_reward"]
 	return
 
 func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
-	if progress["fragments_found"] >= progress["total_fragments"] \
-	|| progress["is_assembled"] || !has_required_tools(artifact):
+	if progress["fragments_found"] >= artifact["total_fragments"] \
+	|| progress["is_assembled"] || !has_required_tools(artifact) \
+	|| !is_area_unlocked(get_aera_data(artifact["id"])):
 		print("no no")
 		return
 	active_area_id = artifact["area"]
@@ -133,20 +118,21 @@ func select_excavation_target(artifact : Dictionary) -> void:
 	excavation_countdown = artifact["attempt_duration"]
 
 func excavation_attempt_result() -> void:
+	var active_artifact = get_artifact_data(active_artifact_id)
 	if active_artifact_id != -1 \
-	&& has_required_tools(get_artifact_data(active_artifact_id)):
+	&& has_required_tools(active_artifact):
 		var rand = rng.randi_range(1, 100)
-		if rand > (100 - get_artifact_data(active_artifact_id)["success_chance"]):
-			add_fragment(get_artifact_progress(active_artifact_id))
-			if get_artifact_progress(active_artifact_id)["fragments_found"] \
-			>= get_artifact_progress(active_artifact_id)["total_fragments"]:
+		if rand > (100 - active_artifact["success_chance"]):
+			add_fragment(active_artifact)
+			if active_artifact["fragments_found"] \
+			>= active_artifact["total_fragments"]:
 				active_area_id = -1
 				active_artifact_id = -1
 				excavation_countdown = -1
 				return
 		else:
-			funds += get_artifact_data(active_artifact_id)["failure_reward"]
-		excavation_countdown = get_artifact_data(active_artifact_id)["attempt_duration"]
+			funds += active_artifact["failure_reward"]
+		excavation_countdown = active_artifact["attempt_duration"]
 
 func buy_tool(tool_id : int) -> void:
 	if tool_id >= 0 && tool_id < tools.size() \
@@ -162,3 +148,10 @@ func has_required_tools(artifact : Dictionary) -> bool:
 		if !tools[tool]["is_purchased"]:
 			tools_owned = false
 	return tools_owned
+
+func is_area_unlocked(area : Dictionary) -> bool:
+	var area_unlocked = false
+	if area["unlock_required_rep"] <= rep:
+		area_unlocked = true
+	return area_unlocked
+	

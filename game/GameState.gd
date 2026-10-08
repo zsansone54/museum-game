@@ -125,7 +125,7 @@ func assemble_artifact(artifact: Dictionary) -> void:
 func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
 	if progress["fragments_found"] >= progress["total_fragments"] \
-	|| progress["is_assembled"]:
+	|| progress["is_assembled"] || !has_required_tools(artifact):
 		print("no no")
 		return
 	active_area_id = artifact["area"]
@@ -149,7 +149,7 @@ func excavation_attempt_result() -> void:
 		excavation_countdown = get_artifact_data(active_artifact_id)["attempt_duration"]
 
 func buy_tool(tool_id : int) -> void:
-	if tool_id <= tools.size() \
+	if tool_id >= 0 && tool_id < tools.size() \
 	&& !tools[tool_id]["is_purchased"] \
 	&& rep >= tools[tool_id]["unlock_required_rep"] \
 	&& funds >= tools[tool_id]["cost"]:
@@ -159,6 +159,6 @@ func buy_tool(tool_id : int) -> void:
 func has_required_tools(artifact : Dictionary) -> bool:
 	var tools_owned : bool = true
 	for tool : int in artifact["required_tool"]:
-		if !tools[tool]:
+		if !tools[tool]["is_purchased"]:
 			tools_owned = false
 	return tools_owned

@@ -139,24 +139,20 @@ static func data() -> Dictionary:
 						"failure_reward" : 150,
 					},
 				],
-				"speed_upgrade" : [
-					{
+				"speed_upgrade" : {
 						"name" : "speed",
 						"max_level" : 10,
 						"time_dec_per_level" : 2,
 						"base_cost" : 10,
 						"cost_mult_per_level" : 2,
-					}
-				],
-				"chance_upgrade" : [
-					{
+					},
+				"chance_upgrade" : {
 						"name" : "chance",
 						"max_level" : 10,
 						"chance_inc_per_level" : 5,
 						"base_cost" : 10,
 						"cost_mult_per_level" : 2,
-					}
-				]
+				},
 			},
 		]
 	}

@@ -22,19 +22,7 @@ func _ready() -> void:
 	set_artifact_progress()
 	rng.randomize()
 	
-	var art = get_artifact_data(0)
-	var area = get_area_data(0)
-	print(get_effective_attempt_duration(art))
-	print(get_effective_success_chance(art))
-	buy_chance_upgrade(area)
-	buy_speed_upgrade(area)
-	print(get_effective_attempt_duration(art))
-	print(get_effective_success_chance(art))
-	funds = 100000
-	buy_chance_upgrade(area)
-	buy_speed_upgrade(area)
-	print(get_effective_attempt_duration(art))
-	print(get_effective_success_chance(art))
+	select_excavation_target(get_artifact_data(5))
 
 func _process(delta : float) -> void:
 	if excavation_countdown != -1:

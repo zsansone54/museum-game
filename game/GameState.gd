@@ -85,8 +85,9 @@ func get_aera_data(area_id : int) -> Dictionary:
 
 #Increments found fragments by 1 for a given artifact id
 func add_fragment(artifact : Dictionary) -> void:
-	if artifact["fragments_found"] < artifact["total_fragments"]:
-		artifact["fragments_found"] += 1
+	var progress = get_artifact_progress(artifact["id"])
+	if progress["fragments_found"] < artifact["total_fragments"]:
+		progress["fragments_found"] += 1
 	return
 
 #Increments cleaned fragments by 1 for a given artifact id
@@ -110,7 +111,7 @@ func select_excavation_target(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
 	if progress["fragments_found"] >= artifact["total_fragments"] \
 	|| progress["is_assembled"] || !has_required_tools(artifact) \
-	|| !is_area_unlocked(get_aera_data(artifact["id"])):
+	|| !is_area_unlocked(get_aera_data(artifact["area"])):
 		print("no no")
 		return
 	active_area_id = artifact["area"]
@@ -119,12 +120,13 @@ func select_excavation_target(artifact : Dictionary) -> void:
 
 func excavation_attempt_result() -> void:
 	var active_artifact = get_artifact_data(active_artifact_id)
+	var active_artifact_progress = get_artifact_progress(active_artifact_id)
 	if active_artifact_id != -1 \
 	&& has_required_tools(active_artifact):
 		var rand = rng.randi_range(1, 100)
 		if rand > (100 - active_artifact["success_chance"]):
 			add_fragment(active_artifact)
-			if active_artifact["fragments_found"] \
+			if active_artifact_progress["fragments_found"] \
 			>= active_artifact["total_fragments"]:
 				active_area_id = -1
 				active_artifact_id = -1

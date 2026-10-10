@@ -1,6 +1,6 @@
 extends Node
 
-static func data() -> Dictionary:
+func data() -> Dictionary:
 	return {
 		"initial values" : {
 			"starting_funds" : 25,

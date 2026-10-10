@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://bu1af3cp8soep"]
 
 [ext_resource type="Script" uid="uid://dhk3begqtexxl" path="res://settings_menu.gd" id="1_svoao"]
+[ext_resource type="StyleBox" uid="uid://d1vcbri8riot2" path="res://rounded_button.tres" id="2_jttlj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svoao"]
+bg_color = Color(0, 0, 0, 0.60784316)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="SettingsMenu" type="Control" unique_id=1430616981]
 layout_mode = 3
@@ -10,6 +18,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_svoao")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1208112888]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="SettingsPanel" type="PanelContainer" parent="." unique_id=320651727]
 layout_mode = 1
@@ -24,46 +41,126 @@ offset_right = 22.0
 offset_bottom = 78.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_svoao")
 
 [node name="PanelMargin" type="MarginContainer" parent="SettingsPanel" unique_id=168262658]
 layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="SettingsBox" type="VBoxContainer" parent="SettingsPanel/PanelMargin" unique_id=1117676388]
-custom_minimum_size = Vector2(420, 360)
+custom_minimum_size = Vector2(600, 650)
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1765782075]
+[node name="TitleLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=787524012]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 60
 text = "Settings"
 horizontal_alignment = 1
 
-[node name="MusicLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1917095615]
+[node name="Divider" type="HSeparator" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1257328560]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-text = "Music Volume"
 
-[node name="MusicSlider" type="HSlider" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=880520562]
+[node name="DisplaySection" type="VBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1276027645]
 layout_mode = 2
-tick_count = 10
-ticks_position = 3
 
-[node name="SfxLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=2034420229]
+[node name="DisplayLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox/DisplaySection" unique_id=346712621]
 layout_mode = 2
-text = "Sound Effects Volumw"
+theme_override_font_sizes/font_size = 30
+text = "Display: "
 
-[node name="SfxSlider" type="HSlider" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=657552225]
+[node name="DisplayControls" type="HBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox/DisplaySection" unique_id=1661479191]
 layout_mode = 2
-tick_count = 10
-ticks_position = 3
 
-[node name="FullscreenButton" type="CheckButton" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1715081866]
+[node name="ResolutionDropdown" type="OptionButton" parent="SettingsPanel/PanelMargin/SettingsBox/DisplaySection/DisplayControls" unique_id=1502580533]
 layout_mode = 2
-text = "Fullscreen"
+theme_override_font_sizes/font_size = 20
+selected = 0
+item_count = 3
+popup/item_0/text = "1920 x 1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600 x 900"
+popup/item_1/id = 1
+popup/item_2/text = "1280 x 720"
+popup/item_2/id = 2
 
-[node name="Close Button" type="Button" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1308787684]
-custom_maximum_size = Vector2(100, -1)
+[node name="FullscreenCheckbox" type="CheckBox" parent="SettingsPanel/PanelMargin/SettingsBox/DisplaySection/DisplayControls" unique_id=1097723153]
 layout_mode = 2
-text = "Back"
-icon_alignment = 1
+theme_override_font_sizes/font_size = 20
+text = "Fullscreen "
 
-[connection signal="pressed" from="SettingsPanel/PanelMargin/SettingsBox/Close Button" to="." method="_on_close_button_pressed"]
+[node name="SfxSection" type="VBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=713244768]
+layout_mode = 2
+
+[node name="SfxLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox/SfxSection" unique_id=1344075341]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sound Effects: "
+
+[node name="SfxControls" type="HBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox/SfxSection" unique_id=64708548]
+layout_mode = 2
+
+[node name="SfxSlider" type="HSlider" parent="SettingsPanel/PanelMargin/SettingsBox/SfxSection/SfxControls" unique_id=1682426187]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SfxMuteCheckbox" type="CheckBox" parent="SettingsPanel/PanelMargin/SettingsBox/SfxSection/SfxControls" unique_id=1568449481]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Mute"
+
+[node name="MusicSection" type="VBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=125415479]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox/MusicSection" unique_id=1038538433]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Music:                "
+
+[node name="MusicControls" type="HBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox/MusicSection" unique_id=1724919797]
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/PanelMargin/SettingsBox/MusicSection/MusicControls" unique_id=1611566298]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicMuteCheckBox" type="CheckBox" parent="SettingsPanel/PanelMargin/SettingsBox/MusicSection/MusicControls" unique_id=776450530]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Mute"
+
+[node name="Spacer" type="Control" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=254392200]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonRow" type="HBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1156871407]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SaveButton" type="Button" parent="SettingsPanel/PanelMargin/SettingsBox/ButtonRow" unique_id=1231447990]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("2_jttlj")
+theme_override_styles/pressed = ExtResource("2_jttlj")
+theme_override_styles/hover = ExtResource("2_jttlj")
+theme_override_styles/disabled = ExtResource("2_jttlj")
+text = "Save"
+
+[node name="CancelButton" type="Button" parent="SettingsPanel/PanelMargin/SettingsBox/ButtonRow" unique_id=3932901]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("2_jttlj")
+theme_override_styles/pressed = ExtResource("2_jttlj")
+theme_override_styles/hover = ExtResource("2_jttlj")
+theme_override_styles/disabled = ExtResource("2_jttlj")
+text = "Cancel"
+
+[connection signal="pressed" from="SettingsPanel/PanelMargin/SettingsBox/ButtonRow/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="SettingsPanel/PanelMargin/SettingsBox/ButtonRow/CancelButton" to="." method="_on_cancel_button_pressed"]

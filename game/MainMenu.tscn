@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://br7by6rlm1u4i" path="res://MainMenu.gd" id="1_i26rj"]
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="2_eiy7p"]
+[ext_resource type="StyleBox" uid="uid://d1vcbri8riot2" path="res://rounded_button.tres" id="2_h7a2f"]
 
 [node name="MainMenu" type="Control" unique_id=1441152146]
 layout_mode = 3
@@ -70,16 +71,28 @@ layout_mode = 2
 [node name="StartButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=582135703]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_h7a2f")
+theme_override_styles/pressed = ExtResource("2_h7a2f")
+theme_override_styles/hover = ExtResource("2_h7a2f")
+theme_override_styles/disabled = ExtResource("2_h7a2f")
 text = "Start Game"
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=486316680]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_h7a2f")
+theme_override_styles/pressed = ExtResource("2_h7a2f")
+theme_override_styles/hover = ExtResource("2_h7a2f")
+theme_override_styles/disabled = ExtResource("2_h7a2f")
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=1879518218]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+theme_override_styles/normal = ExtResource("2_h7a2f")
+theme_override_styles/pressed = ExtResource("2_h7a2f")
+theme_override_styles/hover = ExtResource("2_h7a2f")
+theme_override_styles/disabled = ExtResource("2_h7a2f")
 text = "Quit Game"
 
 [node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("2_eiy7p")]

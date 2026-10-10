@@ -8,3 +8,32 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_i26rj")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1148142553]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 647.0
+color = Color(0.24279618, 0.22345892, 0.20224059, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1826669197]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=184491456]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1460045114]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=582135703]
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=486316680]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1879518218]
+layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="CenterContainer" unique_id=718188952]
+layout_mode = 2

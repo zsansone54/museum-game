@@ -9,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1, 0.99796754)
 script = ExtResource("1_i26rj")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1148142553]
@@ -70,12 +71,12 @@ custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 text = "Start Game"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=1879518218]
-custom_minimum_size = Vector2(300, 60)
-layout_mode = 2
-text = "Quit Game"
-
 [node name="SettingsButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=486316680]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 text = "Settings"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=1879518218]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+text = "Quit Game"

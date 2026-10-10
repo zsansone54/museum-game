@@ -4,36 +4,78 @@
 
 [node name="MainMenu" type="Control" unique_id=1441152146]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_i26rj")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1148142553]
-layout_mode = 0
-offset_right = 1153.0
-offset_bottom = 647.0
-color = Color(0.24279618, 0.22345892, 0.20224059, 1)
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1148142553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.24809936, 0.19378409, 0.14114234, 1)
+
+[node name="VersionLabel" type="Label" parent="." unique_id=718188952]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 32.0
+grow_vertical = 0
+text = "v0.1"
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1826669197]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -145.945
+offset_bottom = -145.945
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=184491456]
+[node name="MenuBox" type="VBoxContainer" parent="CenterContainer" unique_id=184491456]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1460045114]
+[node name="TitleLabel" type="Label" parent="CenterContainer/MenuBox" unique_id=1460045114]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Piece By Piece"
+
+[node name="ButtonCenter" type="CenterContainer" parent="CenterContainer/MenuBox/TitleLabel" unique_id=440732054]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -271.5
+offset_top = 75.604996
+offset_right = 271.5
+offset_bottom = 263.60522
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter" unique_id=81623660]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=582135703]
+[node name="StartButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=582135703]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+text = "Start Game"
 
-[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=486316680]
+[node name="QuitButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=1879518218]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+text = "Quit Game"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1879518218]
+[node name="SettingsButton" type="Button" parent="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer" unique_id=486316680]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
-
-[node name="VersionLabel" type="Label" parent="CenterContainer" unique_id=718188952]
-layout_mode = 2
+text = "Settings"

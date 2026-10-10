@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Museum game"
-run/main_scene="uid://0ufxslyo5jt6"
+run/main_scene="uid://b0q84pxoeuk0v"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

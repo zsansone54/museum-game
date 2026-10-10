@@ -110,8 +110,8 @@ func assemble_artifact(artifact : Dictionary) -> void:
 	&& artifact["total_fragments"] <= progress["fragments_cleaned"]:
 		progress["is_assembled"] = true
 		rep += artifact["rep_reward"]
-	if(check_win_condition()):
-		print("win")
+		if(check_win_condition()):
+			print("win")
 	return
 	
 

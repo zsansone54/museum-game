@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*uid://fgl8mstgxpe2"
+GameState="*uid://fgl8mstgxpe2"
 GameData="*uid://hs1gmb7gv484"
 
 [display]

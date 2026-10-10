@@ -13,6 +13,8 @@ var area_speed_upgrades : Array[int] = [0,0]
 var area_chance_upgrades : Array[int] = [0,0]
 var rng = RandomNumberGenerator.new()
 
+const SAVE_PATH := "user://museum_game_save.json"
+
 func _ready() -> void:
 	game_data = GameData.data()
 	funds = game_data["initial values"]["starting_funds"]
@@ -88,15 +90,12 @@ func get_effective_success_chance(artifact : Dictionary) -> float:
 	return min(100, artifact["success_chance"] \
 	+ area["chance_upgrade"]["chance_inc_per_level"] * area_chance_upgrades[area["id"]])
 
-#Increments found fragments by 1 for a given artifact id
 func add_fragment(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
 	if progress["fragments_found"] < artifact["total_fragments"]:
 		progress["fragments_found"] += 1
 	return
 
-#Increments cleaned fragments by 1 for a given artifact id
-#if there is an uncleaned found fragment
 func clean_fragment(artifact : Dictionary) -> void:
 	var progress = get_artifact_progress(artifact["id"])
 	if progress["fragments_found"] > 0 \
@@ -190,3 +189,17 @@ func check_win_condition() -> bool:
 		if !artifact["is_assembled"]:
 			win = false
 	return win
+
+func create_save_data() -> Dictionary:
+	var save: Dictionary = {
+		"funds" : funds,
+		"rep" : rep,
+		"progress" : artifact_progress,
+		"tools" : tools,
+		"speed upgrades" : area_speed_upgrades,
+		"chance upgrades" : area_chance_upgrades
+	}
+	return save
+
+func has_save_file() -> bool:
+	return FileAccess.file_exists(SAVE_PATH)

@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bu1af3cp8soep"]
+
+[ext_resource type="Script" uid="uid://dhk3begqtexxl" path="res://settings_menu.gd" id="1_svoao"]
+
+[node name="SettingsMenu" type="Control" unique_id=1430616981]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_svoao")
+
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=320651727]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -78.5
+offset_right = 22.0
+offset_bottom = 78.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelMargin" type="MarginContainer" parent="SettingsPanel" unique_id=168262658]
+layout_mode = 2
+
+[node name="SettingsBox" type="VBoxContainer" parent="SettingsPanel/PanelMargin" unique_id=1117676388]
+custom_minimum_size = Vector2(420, 360)
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1765782075]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1917095615]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=880520562]
+layout_mode = 2
+tick_count = 10
+ticks_position = 3
+
+[node name="SfxLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=2034420229]
+layout_mode = 2
+text = "Sound Effects Volumw"
+
+[node name="SfxSlider" type="HSlider" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=657552225]
+layout_mode = 2
+tick_count = 10
+ticks_position = 3
+
+[node name="FullscreenButton" type="CheckButton" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1715081866]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Close Button" type="Button" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1308787684]
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+text = "Back"
+icon_alignment = 1
+
+[connection signal="pressed" from="SettingsPanel/PanelMargin/SettingsBox/Close Button" to="." method="_on_close_button_pressed"]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b0q84pxoeuk0v"]
 
 [ext_resource type="Script" uid="uid://br7by6rlm1u4i" path="res://MainMenu.gd" id="1_i26rj"]
+[ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="2_eiy7p"]
 
 [node name="MainMenu" type="Control" unique_id=1441152146]
 layout_mode = 3
@@ -80,3 +81,11 @@ text = "Settings"
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 text = "Quit Game"
+
+[node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("2_eiy7p")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MenuBox/TitleLabel/ButtonCenter/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

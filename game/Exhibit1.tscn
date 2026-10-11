@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://mo46s1jtehjy"]
 
+[ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="1_d825m"]
+[ext_resource type="Script" uid="uid://c0rghn3j0vrym" path="res://Exhibit1.gd" id="1_gwv2w"]
+
 [node name="Exhibit1" type="Control" unique_id=124045584]
 layout_mode = 3
 anchors_preset = 15
@@ -7,9 +10,196 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gwv2w")
 
-[node name="Label" type="Label" parent="." unique_id=850391073]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "exhibit 1"
+[node name="Background" type="ColorRect" parent="." unique_id=2015553693]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3157873, 0.24210715, 0.12733114, 1)
+
+[node name="HudBackground" type="ColorRect" parent="." unique_id=1704515455]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Top" type="VBoxContainer" parent="." unique_id=392528749]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="TopHudMargin" type="MarginContainer" parent="Top" unique_id=2019853854]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="TopHud" type="HBoxContainer" parent="Top/TopHudMargin" unique_id=1732392329]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="FundsLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1513308518]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "$999,999"
+
+[node name="RepLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=403565111]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "1000 Rep"
+
+[node name="CountdownLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1909446689]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "10.0/10.0s"
+
+[node name="Spacer" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=2048826570]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PauseButton" type="Button" parent="Top/TopHudMargin/TopHud" unique_id=1719943783]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+
+[node name="ExhibitTitle" type="Label" parent="Top" unique_id=993421149]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 80
+text = "Exhibit 1"
+
+[node name="LeftButton" type="Button" parent="." unique_id=1669915334]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 23.0
+offset_bottom = 15.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "<-"
+
+[node name="RightButton" type="Button" parent="." unique_id=387485989]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -59.0
+offset_bottom = 59.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.1103836, 1.0138812)
+theme_override_font_sizes/font_size = 80
+text = "->"
+
+[node name="ArtifactMargin" type="MarginContainer" parent="." unique_id=1526326832]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 150
+
+[node name="Gallery" type="HBoxContainer" parent="ArtifactMargin" unique_id=773864599]
+layout_mode = 2
+theme_override_constants/separation = 220
+
+[node name="Artifact1" type="PanelContainer" parent="ArtifactMargin/Gallery" unique_id=1095740730]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Display" type="VBoxContainer" parent="ArtifactMargin/Gallery/Artifact1" unique_id=1463114686]
+layout_mode = 2
+
+[node name="ArtifactName" type="Label" parent="ArtifactMargin/Gallery/Artifact1/Display" unique_id=1589460650]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Art 1"
+
+[node name="DisplayCase" type="TextureRect" parent="ArtifactMargin/Gallery/Artifact1/Display" unique_id=448968607]
+layout_mode = 2
+
+[node name="InspectButton" type="Button" parent="ArtifactMargin/Gallery/Artifact1/Display" unique_id=1869970795]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Inspect"
+
+[node name="Artifact2" type="PanelContainer" parent="ArtifactMargin/Gallery" unique_id=360686727]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Display" type="VBoxContainer" parent="ArtifactMargin/Gallery/Artifact2" unique_id=969050391]
+layout_mode = 2
+
+[node name="ArtifactName" type="Label" parent="ArtifactMargin/Gallery/Artifact2/Display" unique_id=1177991013]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Art 2"
+
+[node name="DisplayCase" type="TextureRect" parent="ArtifactMargin/Gallery/Artifact2/Display" unique_id=1210014034]
+layout_mode = 2
+
+[node name="InspectButton" type="Button" parent="ArtifactMargin/Gallery/Artifact2/Display" unique_id=44273176]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Inspect"
+
+[node name="Artifact3" type="PanelContainer" parent="ArtifactMargin/Gallery" unique_id=1123587416]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Display" type="VBoxContainer" parent="ArtifactMargin/Gallery/Artifact3" unique_id=718127963]
+layout_mode = 2
+
+[node name="ArtifactName" type="Label" parent="ArtifactMargin/Gallery/Artifact3/Display" unique_id=1613981892]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Art 3"
+
+[node name="DisplayCase" type="TextureRect" parent="ArtifactMargin/Gallery/Artifact3/Display" unique_id=901363634]
+layout_mode = 2
+
+[node name="InspectButton" type="Button" parent="ArtifactMargin/Gallery/Artifact3/Display" unique_id=1540139997]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Inspect"
+
+[node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("1_d825m")]
+visible = false
+layout_mode = 1

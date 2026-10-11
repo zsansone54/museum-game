@@ -24,9 +24,12 @@ const RESOLUTIONS = [
 	Vector2i(1280, 720)
 ]
 
+const SETTINGS_PATH := "user://museum_settings.json"
+
 func _ready() -> void:
 	open_position = settings_panel.position
 	closed_position = open_position + Vector2(0, settings_panel.size.y + 20)
+	load_settings()
 	remember_current_settings()
 	hide()
 
@@ -45,6 +48,72 @@ func close() -> void:
 		.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
 	tween.tween_property(dimmer, "color:a", 0.0, 0.2)
 	tween.chain().tween_callback(hide)
+
+func create_settings_data() -> Dictionary:
+	return {
+		"resolution_index" : resolution_dropdown.selected,
+		"fullscreen" : fullscreen_check_box.button_pressed,
+		"sfx_volume" : sfx_slider.value,
+		"sfx_muted" : sfx_mute_check_box.button_pressed,
+		"music_volume" : music_slider.value,
+		"music_muted" : music_mute_check_box.button_pressed
+	}
+
+func save_settings() -> bool:
+	var file = FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
+	
+	if file == null:
+		push_error("Could not open the settings file.")
+		return false
+	
+	var settings_json: String = JSON.stringify(create_settings_data())
+	file.store_string(settings_json)
+	file.close()
+	
+	return true
+
+func load_settings() -> bool:
+	if !FileAccess.file_exists(SETTINGS_PATH):
+		return false
+	
+	var file = FileAccess.open(SETTINGS_PATH, FileAccess.READ)
+	
+	if file == null:
+		push_error("Could not open the settings file.")
+		return false
+	
+	var settings_json: String = file.get_as_text()
+	file.close()
+	
+	var json := JSON.new()
+	
+	if json.parse(settings_json) != OK:
+		push_error("Could not read the settings file.")
+		return false
+	
+	var settings_data = json.data
+	
+	if !(settings_data is Dictionary):
+		push_error("Settings data is not a dictionary.")
+		return false
+	
+	resolution_dropdown.select(
+		int(settings_data.get("resolution_index", resolution_dropdown.selected))
+	)
+	fullscreen_check_box.button_pressed = settings_data.get(
+		"fullscreen", fullscreen_check_box.button_pressed
+	)
+	sfx_slider.value = float(settings_data.get("sfx_volume", sfx_slider.value))
+	sfx_mute_check_box.button_pressed = settings_data.get(
+		"sfx_muted", sfx_mute_check_box.button_pressed
+	)
+	music_slider.value = float(settings_data.get("music_volume", music_slider.value))
+	music_mute_check_box.button_pressed = settings_data.get(
+		"music_muted", music_mute_check_box.button_pressed
+	)
+	
+	apply_display_settings()
+	return true
 
 func remember_current_settings() -> void:
 	saved_resolution_index = resolution_dropdown.selected
@@ -74,6 +143,8 @@ func apply_display_settings() -> void:
 func _on_save_button_pressed() -> void:
 	apply_display_settings()
 	remember_current_settings()
+	save_settings()
+	print(save_settings())
 	close()
 
 func _on_cancel_button_pressed() -> void:

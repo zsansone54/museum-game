@@ -25,6 +25,7 @@ func _ready() -> void:
 	rng.randomize()
 	
 
+
 func _process(delta : float) -> void:
 	if excavation_countdown != -1:
 		excavation_countdown -= delta
@@ -32,6 +33,9 @@ func _process(delta : float) -> void:
 			excavation_attempt_result()
 			
 	update_donation_income(delta)
+	funds = 10000
+	rep = 1000
+	
 
 func update_donation_income(delta : float) -> void:
 	var add : float = 0
@@ -191,15 +195,88 @@ func check_win_condition() -> bool:
 	return win
 
 func create_save_data() -> Dictionary:
+	var purchased_tools: Array[bool] = []
+	for tool in tools:
+		purchased_tools.append(tool["is_purchased"])
 	var save: Dictionary = {
+		"save_version" : 1,
 		"funds" : funds,
 		"rep" : rep,
-		"progress" : artifact_progress,
-		"tools" : tools,
-		"speed upgrades" : area_speed_upgrades,
-		"chance upgrades" : area_chance_upgrades
+		"artifact_progress" : artifact_progress,
+		"purchased_tools" : purchased_tools,
+		"speed_upgrades" : area_speed_upgrades,
+		"chance_upgrades" : area_chance_upgrades
 	}
 	return save
+
+func save_game() -> bool:
+	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	
+	if file == null:
+		push_error("Could not open the save file.")
+		return false
+	
+	var save_json: String = JSON.stringify(create_save_data())
+	file.store_string(save_json)
+	file.close()
+	
+	return true
+
+func load_game() -> bool:
+	if !has_save_file():
+		return false
+	
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	
+	if file == null:
+		push_error("Could not open the save file.")
+		return false
+	
+	var save_json: String = file.get_as_text()
+	file.close()
+	
+	var json := JSON.new()
+	
+	if json.parse(save_json) != OK:
+		push_error("Could not read the save file.")
+		return false
+	
+	var save_data = json.data
+	
+	if !(save_data is Dictionary):
+		push_error("Save data is not a dictionary.")
+		return false
+	
+	funds = float(save_data.get("funds", funds))
+	rep = int(save_data.get("rep", rep))
+	
+	var saved_progress = save_data.get("artifact_progress", [])
+
+	if saved_progress is Array:
+		artifact_progress.clear()
+	
+	for entry in saved_progress:
+		if entry is Dictionary:
+			artifact_progress.append(entry)
+	
+	var saved_purchased_tools = save_data.get("purchased_tools", [])
+
+	if saved_purchased_tools is Array:
+		for index in range(min(tools.size(), saved_purchased_tools.size())):
+			tools[index]["is_purchased"] = bool(saved_purchased_tools[index])
+			
+	var saved_speed_upgrades = save_data.get("speed_upgrades", [])
+
+	if saved_speed_upgrades is Array:
+		for index in range(min(area_speed_upgrades.size(), saved_speed_upgrades.size())):
+			area_speed_upgrades[index] = int(saved_speed_upgrades[index])
+
+	var saved_chance_upgrades = save_data.get("chance_upgrades", [])
+
+	if saved_chance_upgrades is Array:
+		for index in range(min(area_chance_upgrades.size(), saved_chance_upgrades.size())):
+			area_chance_upgrades[index] = int(saved_chance_upgrades[index])
+	return true
 
 func has_save_file() -> bool:
 	return FileAccess.file_exists(SAVE_PATH)

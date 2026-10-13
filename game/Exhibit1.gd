@@ -6,6 +6,7 @@ extends Control
 
 func _ready() -> void:
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
+	$SettingsMenu.closed.connect(_on_settings_menu_closed)
 	
 func _process(_delta: float) -> void:
 	update_hud()
@@ -40,5 +41,9 @@ func _on_pause_menu_action_selected(action: String) -> void:
 			get_tree().paused = false
 			get_tree().change_scene_to_file("res://MainMenu.tscn")
 		
+
+func _on_settings_menu_closed() -> void:
+	$PauseMenu.open()
+
 func _on_pause_button_pressed() -> void:
 	$PauseMenu.open()

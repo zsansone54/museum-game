@@ -34,9 +34,15 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 
+	load_settings()
+
+	await get_tree().process_frame
+
 	open_position = settings_panel.position
 	closed_position = open_position + Vector2(0, settings_panel.size.y + 20)
 	settings_panel.position = closed_position
+
+	remember_current_settings()
 
 func open() -> void:
 	show()

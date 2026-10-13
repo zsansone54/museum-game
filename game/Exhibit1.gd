@@ -23,3 +23,6 @@ func update_hud() -> void:
 			max(GameState.excavation_countdown, 0.0),
 			total_time
 		]
+
+func _on_pause_button_pressed() -> void:
+	$PauseMenu.open

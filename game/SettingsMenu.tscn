@@ -29,6 +29,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="SettingsPanel" type="PanelContainer" parent="." unique_id=320651727]
+custom_minimum_size = Vector2(660, 700)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

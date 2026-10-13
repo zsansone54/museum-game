@@ -11,6 +11,7 @@ var is_closing := false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	open_position = pause_panel.position
 	closed_position = open_position + Vector2(0, pause_panel.size.y + 20)

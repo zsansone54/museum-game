@@ -1,5 +1,7 @@
 extends Control
 
+signal closed
+
 @onready var settings_panel: PanelContainer = $SettingsPanel
 @onready var dimmer: ColorRect = $Dimmer
 @onready var resolution_dropdown: OptionButton = $SettingsPanel/PanelMargin/SettingsBox/DisplaySection/DisplayControls/ResolutionDropdown
@@ -27,11 +29,14 @@ const RESOLUTIONS = [
 const SETTINGS_PATH := "user://museum_settings.json"
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	hide()
+
+	await get_tree().process_frame
+
 	open_position = settings_panel.position
 	closed_position = open_position + Vector2(0, settings_panel.size.y + 20)
-	load_settings()
-	remember_current_settings()
-	hide()
+	settings_panel.position = closed_position
 
 func open() -> void:
 	show()
@@ -44,10 +49,14 @@ func open() -> void:
 
 func close() -> void:
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(settings_panel, "position", closed_position, 0.3)\
+	tween.tween_property(settings_panel, "position", closed_position, 0.3) \
 		.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
 	tween.tween_property(dimmer, "color:a", 0.0, 0.2)
-	tween.chain().tween_callback(hide)
+
+	tween.finished.connect(func() -> void:
+		hide()
+		closed.emit()
+	)
 
 func create_settings_data() -> Dictionary:
 	return {

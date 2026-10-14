@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0q84pxoeuk0v"]
 
-[ext_resource type="Script" uid="uid://br7by6rlm1u4i" path="res://MainMenu.gd" id="1_i26rj"]
+[ext_resource type="Script" uid="uid://br7by6rlm1u4i" path="res://main_menu.gd" id="1_i26rj"]
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="2_eiy7p"]
 [ext_resource type="StyleBox" uid="uid://d1vcbri8riot2" path="res://rounded_button.tres" id="2_h7a2f"]
 

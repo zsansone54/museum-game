@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bcsblyftdjksp" path="res://artifact_menu.gd" id="1_u3t71"]
 
 [node name="ArtifactMenu" type="Control" unique_id=1918927880]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,14 +13,27 @@ grow_vertical = 2
 script = ExtResource("1_u3t71")
 
 [node name="Dimmer" type="ColorRect" parent="." unique_id=1856308245]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="ArtifactPanel" type="PanelContainer" parent="." unique_id=2040389278]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -60.5
+offset_right = 20.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="ArtifactPanel" unique_id=392507774]
 layout_mode = 2
@@ -30,20 +44,20 @@ layout_mode = 2
 [node name="ArtifactNameLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1393105923]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=893109691]
+[node name="FragmentProgressLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=893109691]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1108776996]
+[node name="CleaProgressLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1108776996]
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=493968231]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=552363847]
+[node name="CleanButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=552363847]
 layout_mode = 2
 
-[node name="Button2" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1694501054]
+[node name="AssembleButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1694501054]
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=462694691]
+[node name="CloseButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=462694691]
 layout_mode = 2

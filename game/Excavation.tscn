@@ -20,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3157873, 0.24210715, 0.12733114, 1)
+color = Color(0.113936834, 0.30100793, 0.1795462, 1)
 
 [node name="HudBackground" type="ColorRect" parent="." unique_id=1319612334]
 custom_minimum_size = Vector2(0, 80)
@@ -81,13 +81,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "="
 
-[node name="ExhibitTitle" type="Label" parent="Top" unique_id=2019318629]
+[node name="Title" type="Label" parent="Top" unique_id=2019318629]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 80
-text = "Exhibit 1"
+text = "Excavation Map"
 
-[node name="RightButton" type="Button" parent="." unique_id=1136414345]
+[node name="BackButton" type="Button" parent="." unique_id=1136414345]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -103,25 +103,23 @@ scale = Vector2(1.1103836, 1.0138812)
 theme_override_font_sizes/font_size = 80
 text = "->"
 
-[node name="MapLabel" type="Label" parent="." unique_id=1249338393]
+[node name="Area1Button" type="Button" parent="." unique_id=275443215]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 510.0
+offset_top = 759.0
+offset_right = 638.0
+offset_bottom = 822.0
+theme_override_font_sizes/font_size = 40
+text = "area 1"
 
-[node name="MapArea" type="ColorRect" parent="." unique_id=1730253543]
+[node name="Area2Button" type="Button" parent="." unique_id=1140805455]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Area1Button" type="Button" parent="MapArea" unique_id=275443215]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-
-[node name="Area2Button" type="Button" parent="MapArea" unique_id=1140805455]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 1452.0
+offset_top = 415.0
+offset_right = 1580.0
+offset_bottom = 478.0
+theme_override_font_sizes/font_size = 40
+text = "area 2"
 
 [node name="SitePanel" type="PanelContainer" parent="." unique_id=1765479893]
 visible = false

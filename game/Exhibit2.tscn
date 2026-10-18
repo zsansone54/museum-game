@@ -118,14 +118,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Inspect"
 
-[node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("2_irlb0")]
-visible = false
-layout_mode = 1
-
-[node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("3_nm046")]
-visible = false
-layout_mode = 1
-
 [node name="ArtifactMenu" parent="." unique_id=1918927880 instance=ExtResource("4_2u0ix")]
 visible = false
 layout_mode = 1
@@ -234,5 +226,13 @@ offset_bottom = 59.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 80
 text = "<-"
+
+[node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("3_nm046")]
+visible = false
+layout_mode = 1
+
+[node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("2_irlb0")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Top/TopHudMargin/TopHud/PauseButton" to="." method="_on_pause_button_pressed"]

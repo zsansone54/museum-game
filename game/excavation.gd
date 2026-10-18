@@ -7,6 +7,7 @@ extends Control
 @onready var back_button: Button = $BackButton
 @onready var area_1_button: Button = $MapArea/Area1Button
 @onready var area_2_button: Button = $MapArea/Area2Button
+@onready var pause_button: Button = $Top/TopHudMargin/TopHud/PauseButton
 
 @onready var site_panel: PanelContainer = $SitePanel
 @onready var site_name_label: Label = $SitePanel/MarginContainer/VBoxContainer/SiteNameLabel
@@ -23,7 +24,7 @@ var current_site_artifacts: Array = []
 func _ready() -> void:
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
-
+	pause_button.pressed.connect(_on_pause_button_pressed)
 	back_button.pressed.connect(_on_back_button_pressed)
 	area_1_button.pressed.connect(_on_area_1_button_pressed)
 	area_2_button.pressed.connect(_on_area_2_button_pressed)

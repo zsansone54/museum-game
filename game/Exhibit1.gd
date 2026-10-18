@@ -8,7 +8,7 @@ extends Control
 func _ready() -> void:
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
-
+	$LeftButton.pressed.connect(_on_left_button_pressed)
 	$RightButton.pressed.connect(_on_right_button_pressed)
 
 	$ArtifactMargin/Gallery/Artifact1/Display/InspectButton.pressed.connect(
@@ -68,6 +68,8 @@ func _on_artifact_3_inspect_button_pressed() -> void:
 func _on_right_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://Exhibit2.tscn")
 
+func _on_left_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Excavation.tscn")
 
 func _on_pause_menu_action_selected(action: String) -> void:
 	match action:

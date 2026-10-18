@@ -41,8 +41,6 @@ func _ready() -> void:
 	rng.randomize()
 	if has_save_file():
 		load_game()
-	funds = 10000
-	rep = 1000
 
 
 

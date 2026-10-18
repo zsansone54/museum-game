@@ -4,10 +4,10 @@ extends Control
 @onready var rep_label: Label = $Top/TopHudMargin/TopHud/RepLabel
 @onready var countdown_label: Label = $Top/TopHudMargin/TopHud/CountdownLabel
 
+@onready var pause_button: Button = $Top/TopHudMargin/TopHud/PauseButton
 @onready var back_button: Button = $BackButton
 @onready var area_1_button: Button = $Area1Button
 @onready var area_2_button: Button = $Area2Button
-@onready var pause_button: Button = $Top/TopHudMargin/TopHud/PauseButton
 
 @onready var site_panel: PanelContainer = $SitePanel
 @onready var site_name_label: Label = $SitePanel/MarginContainer/VBoxContainer/SiteNameLabel
@@ -24,6 +24,7 @@ var current_site_artifacts: Array = []
 func _ready() -> void:
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
+
 	pause_button.pressed.connect(_on_pause_button_pressed)
 	back_button.pressed.connect(_on_back_button_pressed)
 	area_1_button.pressed.connect(_on_area_1_button_pressed)
@@ -34,6 +35,7 @@ func _ready() -> void:
 	artifact_buttons[2].pressed.connect(_on_artifact_3_button_pressed)
 
 	close_button.pressed.connect(_on_close_button_pressed)
+	close_button.text = "Close"
 
 	site_panel.hide()
 	update_hud()
@@ -76,6 +78,7 @@ func open_site(area_id: int) -> void:
 
 		for button in artifact_buttons:
 			button.disabled = true
+			button.tooltip_text = "Requires %d Reputation" % area["unlock_required_rep"]
 
 		return
 
@@ -84,13 +87,31 @@ func open_site(area_id: int) -> void:
 	for index in range(artifact_buttons.size()):
 		var artifact: Dictionary = current_site_artifacts[index]
 		var progress: Dictionary = GameState.get_artifact_progress(artifact["id"])
+		var button: Button = artifact_buttons[index]
 
-		artifact_buttons[index].text = artifact["name"]
-		artifact_buttons[index].disabled = (
-			progress["is_assembled"]
-			or progress["fragments_found"] >= artifact["total_fragments"]
-			or !GameState.has_required_tools(artifact)
-		)
+		button.text = artifact["name"]
+		button.tooltip_text = ""
+
+		if !GameState.has_required_tools(artifact):
+			var missing_tools: PackedStringArray = []
+
+			for tool_id in artifact["required_tool"]:
+				if !GameState.tools[tool_id]["is_purchased"]:
+					missing_tools.append(GameState.tools[tool_id]["name"])
+
+			button.disabled = true
+			button.tooltip_text = "Requires: " + ", ".join(missing_tools)
+
+		elif progress["is_assembled"]:
+			button.disabled = true
+			button.tooltip_text = "Artifact already assembled"
+
+		elif progress["fragments_found"] >= artifact["total_fragments"]:
+			button.disabled = true
+			button.tooltip_text = "All fragments found — clean and assemble it in the museum"
+
+		else:
+			button.disabled = false
 
 
 func select_site_artifact(index: int) -> void:

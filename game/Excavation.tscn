@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://lenmkamk67wc" path="res://excavation.gd" id="1_rbatp"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="2_x6ne2"]
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="3_a50wm"]
+[ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="4_x6ne2"]
 
 [node name="Excavation" type="Control" unique_id=2032322113]
 layout_mode = 3
@@ -124,9 +125,18 @@ text = "area 2"
 [node name="SitePanel" type="PanelContainer" parent="." unique_id=1765479893]
 visible = false
 custom_minimum_size = Vector2(500, 350)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -175.0
+offset_right = 250.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="SitePanel" unique_id=1628466259]
 layout_mode = 2
@@ -148,6 +158,7 @@ layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=337294363]
 layout_mode = 2
+text = "close"
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("2_x6ne2")]
 visible = false
@@ -155,4 +166,7 @@ layout_mode = 1
 
 [node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("3_a50wm")]
 visible = false
+layout_mode = 1
+
+[node name="NotificationToast" parent="." unique_id=1611973884 instance=ExtResource("4_x6ne2")]
 layout_mode = 1

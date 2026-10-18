@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="2_irlb0"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_nm046"]
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_2u0ix"]
+[ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="5_irlb0"]
 
 [node name="Exhibit2" type="Control" unique_id=124045584]
 layout_mode = 3
@@ -233,6 +234,9 @@ layout_mode = 1
 
 [node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("2_irlb0")]
 visible = false
+layout_mode = 1
+
+[node name="NotificationToast" parent="." unique_id=1611973884 instance=ExtResource("5_irlb0")]
 layout_mode = 1
 
 [connection signal="pressed" from="Top/TopHudMargin/TopHud/PauseButton" to="." method="_on_pause_button_pressed"]

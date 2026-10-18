@@ -29,6 +29,9 @@ func _ready() -> void:
 	assemble_button.pressed.connect(_on_assemble_button_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
 
+func _process(_delta: float) -> void:
+	if visible and current_artifact_id != -1:
+		refresh()
 
 func open_menu(artifact_id: int) -> void:
 	current_artifact_id = artifact_id

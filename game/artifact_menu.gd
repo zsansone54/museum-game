@@ -8,6 +8,9 @@ extends Control
 @onready var clean_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/CleanButton
 @onready var assemble_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/AssembleButton
 @onready var close_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/CloseButton
+@onready var uncleaned_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/UncleanedIncomeLabel
+@onready var cleaned_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/CleanedIncomeLabel
+@onready var assembled_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/AssembledIncomeLabel
 
 var current_artifact_id := -1
 var open_position: Vector2
@@ -77,6 +80,11 @@ func refresh() -> void:
 		progress["fragments_cleaned"],
 		artifact["total_fragments"]
 	]
+
+	var income: Dictionary = GameState.get_artifact_income_breakdown(artifact)
+	uncleaned_income_label.text = "Uncleaned fragments: $%.2f / sec" % income["uncleaned"]
+	cleaned_income_label.text = "Cleaned fragments: $%.2f / sec" % income["cleaned"]
+	assembled_income_label.text = "Assembled artifact: $%.2f / sec" % income["assembled"]
 
 	clean_button.text = "Clean Fragment"
 	assemble_button.text = "Assemble Artifact"

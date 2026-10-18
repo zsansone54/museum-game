@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://330qm08acygp"]
+
+[ext_resource type="Script" uid="uid://bjk7g0lha7wjm" path="res://win_menu.gd" id="1_xjwx6"]
+
+[node name="WinMenu" type="Control" unique_id=1237677374]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xjwx6")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=360318580]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=231545853]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1414989673]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=240607792]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=133055255]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=785969900]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Museum Complete!"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1644665942]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Every artifact has been restored and displayed."
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1250576302]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Return to Main Menu"

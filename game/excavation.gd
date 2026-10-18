@@ -3,6 +3,7 @@ extends Control
 @onready var funds_label: Label = $Top/TopHudMargin/TopHud/FundsLabel
 @onready var rep_label: Label = $Top/TopHudMargin/TopHud/RepLabel
 @onready var countdown_label: Label = $Top/TopHudMargin/TopHud/CountdownLabel
+@onready var income_label: Label = $Top/TopHudMargin/TopHud/IncomeLabel
 
 @onready var pause_button: Button = $Top/TopHudMargin/TopHud/PauseButton
 @onready var back_button: Button = $BackButton
@@ -100,6 +101,7 @@ func _process(_delta: float) -> void:
 func update_hud() -> void:
 	funds_label.text = "$%d" % int(GameState.funds)
 	rep_label.text = "%d Rep" % GameState.rep
+	income_label.text = "+$%.2f / sec" % GameState.get_total_donation_income_per_second()
 
 	if GameState.active_artifact_id == -1:
 		countdown_label.text = "--.-- / --.-- s"
@@ -166,7 +168,10 @@ func refresh_artifact_buttons() -> void:
 		var progress: Dictionary = GameState.get_artifact_progress(artifact["id"])
 		var button: Button = artifact_buttons[index]
 
-		button.text = artifact["name"]
+		button.text = "%s\nSuccess Chance: %.0f%%" % [
+			artifact["name"],
+			GameState.get_effective_success_chance(artifact)
+		]
 		button.tooltip_text = ""
 
 		if !GameState.has_required_tools(artifact):

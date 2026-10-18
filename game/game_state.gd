@@ -8,6 +8,7 @@ signal excavation_succeeded(
 )
 signal excavation_failed(reward: float)
 signal artifact_assembled(artifact_name: String, rep_reward: int)
+signal game_completed
 
 var game_data: Dictionary
 var funds: float
@@ -54,28 +55,39 @@ func _process(delta: float) -> void:
 	update_donation_income(delta)
 
 
-func update_donation_income(delta: float) -> void:
-	var add: float = 0.0
+func get_artifact_income_breakdown(artifact: Dictionary) -> Dictionary:
+	var progress: Dictionary = get_artifact_progress(artifact["id"])
+	var uncleaned_income: float = 0.0
+	var cleaned_income: float = 0.0
+	var assembled_income: float = 0.0
+
+	if progress["is_assembled"]:
+		assembled_income = artifact["completed_funds"]
+	else:
+		var uncleaned_fragments: int = progress["fragments_found"] - progress["fragments_cleaned"]
+		uncleaned_income = uncleaned_fragments * artifact["uncleaned_fragment_funds_ps"]
+		cleaned_income = progress["fragments_cleaned"] * artifact["cleaned_fragment_funds_ps"]
+
+	return {
+		"uncleaned": uncleaned_income,
+		"cleaned": cleaned_income,
+		"assembled": assembled_income
+	}
+
+
+func get_total_donation_income_per_second() -> float:
+	var total_income: float = 0.0
 
 	for area in areas:
 		for artifact in area["artifacts"]:
-			var progress: Dictionary = get_artifact_progress(artifact["id"])
+			var income: Dictionary = get_artifact_income_breakdown(artifact)
+			total_income += income["uncleaned"] + income["cleaned"] + income["assembled"]
 
-			if !progress["is_assembled"]:
-				add += (
-					progress["fragments_found"]
-					- progress["fragments_cleaned"]
-				) * artifact["uncleaned_fragment_funds_ps"] * delta
+	return total_income
 
-				add += (
-					progress["fragments_cleaned"]
-					* artifact["cleaned_fragment_funds_ps"]
-					* delta
-				)
-			else:
-				add += artifact["completed_funds"] * delta
 
-	funds += add
+func update_donation_income(delta: float) -> void:
+	funds += get_total_donation_income_per_second() * delta
 
 
 func set_artifact_progress() -> void:
@@ -171,7 +183,7 @@ func assemble_artifact(artifact: Dictionary) -> void:
 		)
 
 		if check_win_condition():
-			print("win")
+			game_completed.emit()
 
 
 func select_excavation_target(artifact: Dictionary) -> void:

@@ -73,6 +73,21 @@ theme_override_font_sizes/font_size = 24
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
+[node name="UncleanedIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1852701805]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Uncleaned fragments: $0.20 / sec"
+
+[node name="CleanedIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1525709348]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Cleaned fragments: $0.60 / sec"
+
+[node name="AssembledIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1353303455]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Assembled artifact: $0.00 / sec"
+
 [node name="HSeparator" type="HSeparator" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=493968231]
 layout_mode = 2
 

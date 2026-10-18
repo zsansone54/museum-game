@@ -3,6 +3,7 @@ extends Control
 @onready var funds_label: Label = $Top/TopHudMargin/TopHud/FundsLabel
 @onready var rep_label: Label = $Top/TopHudMargin/TopHud/RepLabel
 @onready var countdown_label: Label = $Top/TopHudMargin/TopHud/CountdownLabel
+@onready var income_label: Label = $Top/TopHudMargin/TopHud/IncomeLabel
 @onready var lock_overlay: Control = $LockOverlay
 @onready var requirement_label: Label = $LockOverlay/CenterContainer/VBoxContainer/RequirementLabel
 
@@ -42,6 +43,7 @@ func _process(_delta: float) -> void:
 func update_hud() -> void:
 	funds_label.text = "$%d" % int(GameState.funds)
 	rep_label.text = "%d Rep" % GameState.rep
+	income_label.text = "+$%.2f / sec" % GameState.get_total_donation_income_per_second()
 
 	if GameState.active_artifact_id == -1:
 		countdown_label.text = "--.-- / --.-- s"

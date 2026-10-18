@@ -123,6 +123,7 @@ text = "area 2"
 
 [node name="SitePanel" type="PanelContainer" parent="." unique_id=1765479893]
 visible = false
+custom_minimum_size = Vector2(500, 350)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

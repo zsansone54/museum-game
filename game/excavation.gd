@@ -5,8 +5,8 @@ extends Control
 @onready var countdown_label: Label = $Top/TopHudMargin/TopHud/CountdownLabel
 
 @onready var back_button: Button = $BackButton
-@onready var area_1_button: Button = $MapArea/Area1Button
-@onready var area_2_button: Button = $MapArea/Area2Button
+@onready var area_1_button: Button = $Area1Button
+@onready var area_2_button: Button = $Area2Button
 @onready var pause_button: Button = $Top/TopHudMargin/TopHud/PauseButton
 
 @onready var site_panel: PanelContainer = $SitePanel

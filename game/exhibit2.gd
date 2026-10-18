@@ -31,6 +31,7 @@ func _ready() -> void:
 		GameState.get_artifact_data(5)["name"]
 
 	update_lock_state()
+	update_hud()
 
 
 func _process(_delta: float) -> void:

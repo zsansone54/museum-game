@@ -14,39 +14,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o8ey3")
 
-[node name="LockOverlay" type="Control" parent="." unique_id=1306285949]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Dimmer" type="ColorRect" parent="LockOverlay" unique_id=1467375596]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.44313726)
-
-[node name="CenterContainer" type="CenterContainer" parent="LockOverlay" unique_id=1365891852]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LockOverlay/CenterContainer" unique_id=2064522600]
-layout_mode = 2
-
-[node name="LockTitleLabel" type="Label" parent="LockOverlay/CenterContainer/VBoxContainer" unique_id=1599607101]
-layout_mode = 2
-text = "Exhibit Locked"
-
-[node name="RequirementLabel" type="Label" parent="LockOverlay/CenterContainer/VBoxContainer" unique_id=1320365008]
-layout_mode = 2
-text = "Requires 35 Reputation"
-
 [node name="Background" type="ColorRect" parent="." unique_id=2015553693]
 layout_mode = 1
 anchors_preset = 15
@@ -63,75 +30,6 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
-
-[node name="Top" type="VBoxContainer" parent="." unique_id=392528749]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 137.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="TopHudMargin" type="MarginContainer" parent="Top" unique_id=2019853854]
-layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
-
-[node name="TopHud" type="HBoxContainer" parent="Top/TopHudMargin" unique_id=1732392329]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="FundsLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1513308518]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "$999,999"
-
-[node name="RepLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=403565111]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "1000 Rep"
-
-[node name="CountdownLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1909446689]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "10.0/10.0s"
-
-[node name="Spacer" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=2048826570]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PauseButton" type="Button" parent="Top/TopHudMargin/TopHud" unique_id=1719943783]
-custom_minimum_size = Vector2(60, 60)
-custom_maximum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "="
-
-[node name="ExhibitTitle" type="Label" parent="Top" unique_id=993421149]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 80
-text = "Exhibit 2"
-
-[node name="LeftButton" type="Button" parent="." unique_id=1669915334]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -15.5
-offset_right = 23.0
-offset_bottom = 15.5
-grow_vertical = 2
-theme_override_font_sizes/font_size = 80
-text = "<-"
 
 [node name="ArtifactMargin" type="MarginContainer" parent="." unique_id=1526326832]
 layout_mode = 1
@@ -231,5 +129,110 @@ layout_mode = 1
 [node name="ArtifactMenu" parent="." unique_id=1918927880 instance=ExtResource("4_2u0ix")]
 visible = false
 layout_mode = 1
+
+[node name="LockOverlay" type="Control" parent="." unique_id=1306285949]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dimmer" type="ColorRect" parent="LockOverlay" unique_id=1467375596]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.44313726)
+
+[node name="CenterContainer" type="CenterContainer" parent="LockOverlay" unique_id=1365891852]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LockOverlay/CenterContainer" unique_id=2064522600]
+layout_mode = 2
+
+[node name="LockTitleLabel" type="Label" parent="LockOverlay/CenterContainer/VBoxContainer" unique_id=1599607101]
+layout_mode = 2
+text = "Exhibit Locked"
+
+[node name="RequirementLabel" type="Label" parent="LockOverlay/CenterContainer/VBoxContainer" unique_id=1320365008]
+layout_mode = 2
+text = "Requires 35 Reputation"
+
+[node name="Top" type="VBoxContainer" parent="." unique_id=392528749]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="TopHudMargin" type="MarginContainer" parent="Top" unique_id=2019853854]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="TopHud" type="HBoxContainer" parent="Top/TopHudMargin" unique_id=1732392329]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="FundsLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1513308518]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "$999,999"
+
+[node name="RepLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=403565111]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "1000 Rep"
+
+[node name="CountdownLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1909446689]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "10.0/10.0s"
+
+[node name="Spacer" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=2048826570]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PauseButton" type="Button" parent="Top/TopHudMargin/TopHud" unique_id=1719943783]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "="
+
+[node name="ExhibitTitle" type="Label" parent="Top" unique_id=993421149]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 80
+text = "Exhibit 2"
+
+[node name="LeftButton" type="Button" parent="." unique_id=1669915334]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -59.0
+offset_right = 80.0
+offset_bottom = 59.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "<-"
 
 [connection signal="pressed" from="Top/TopHudMargin/TopHud/PauseButton" to="." method="_on_pause_button_pressed"]

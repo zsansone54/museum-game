@@ -27,6 +27,8 @@ func _ready() -> void:
 		GameState.get_artifact_data(1)["name"]
 	$ArtifactMargin/Gallery/Artifact3/Display/ArtifactName.text = \
 		GameState.get_artifact_data(2)["name"]
+		
+	update_hud()
 
 
 func _process(_delta: float) -> void:

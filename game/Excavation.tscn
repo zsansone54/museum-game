@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://cnmiv3n2nh6xs"]
+
+[node name="Excavation" type="Control" unique_id=2032322113]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=1278012946]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3157873, 0.24210715, 0.12733114, 1)
+
+[node name="HudBackground" type="ColorRect" parent="." unique_id=1319612334]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Top" type="VBoxContainer" parent="." unique_id=1838530976]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="TopHudMargin" type="MarginContainer" parent="Top" unique_id=426362140]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="TopHud" type="HBoxContainer" parent="Top/TopHudMargin" unique_id=827325785]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="FundsLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1825245687]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "$999,999"
+
+[node name="RepLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1352064607]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "1000 Rep"
+
+[node name="CountdownLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=866856722]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "10.0/10.0s"
+
+[node name="Spacer" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=408952144]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PauseButton" type="Button" parent="Top/TopHudMargin/TopHud" unique_id=734675095]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "="
+
+[node name="ExhibitTitle" type="Label" parent="Top" unique_id=2019318629]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 80
+text = "Exhibit 1"
+
+[node name="RightButton" type="Button" parent="." unique_id=1136414345]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -59.0
+offset_bottom = 59.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.1103836, 1.0138812)
+theme_override_font_sizes/font_size = 80
+text = "->"

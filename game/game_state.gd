@@ -23,7 +23,7 @@ func _ready() -> void:
 	areas = game_data["areas"]
 	set_artifact_progress()
 	rng.randomize()
-	select_excavation_target(get_artifact_data(1))
+	
 
 
 func _process(delta : float) -> void:
@@ -33,8 +33,7 @@ func _process(delta : float) -> void:
 			excavation_attempt_result()
 			
 	update_donation_income(delta)
-	funds += 1
-	rep += 1
+
 	
 
 func update_donation_income(delta : float) -> void:

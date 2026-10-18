@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://cnmiv3n2nh6xs"]
 
+[ext_resource type="Script" uid="uid://lenmkamk67wc" path="res://excavation.gd" id="1_rbatp"]
+[ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="2_x6ne2"]
+[ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="3_a50wm"]
+
 [node name="Excavation" type="Control" unique_id=2032322113]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rbatp")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1278012946]
 layout_mode = 1
@@ -97,3 +102,58 @@ grow_vertical = 2
 scale = Vector2(1.1103836, 1.0138812)
 theme_override_font_sizes/font_size = 80
 text = "->"
+
+[node name="MapLabel" type="Label" parent="." unique_id=1249338393]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MapArea" type="ColorRect" parent="." unique_id=1730253543]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Area1Button" type="Button" parent="MapArea" unique_id=275443215]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Area2Button" type="Button" parent="MapArea" unique_id=1140805455]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="SitePanel" type="PanelContainer" parent="." unique_id=1765479893]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="SitePanel" unique_id=1628466259]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SitePanel/MarginContainer" unique_id=70571344]
+layout_mode = 2
+
+[node name="SiteNameLabel" type="Label" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=218872737]
+layout_mode = 2
+
+[node name="Artifact1Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=616408072]
+layout_mode = 2
+
+[node name="Artifact2Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1149261035]
+layout_mode = 2
+
+[node name="Artifact3Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=525389543]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=337294363]
+layout_mode = 2
+
+[node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("2_x6ne2")]
+visible = false
+layout_mode = 1
+
+[node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("3_a50wm")]
+visible = false
+layout_mode = 1

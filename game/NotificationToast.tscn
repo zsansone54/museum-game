@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7xym3ilf0iv6"]
 
-[ext_resource type="Script" uid="uid://dwu4tmt871fx8" path="res://message_label.gd" id="1_bs4q3"]
+[ext_resource type="Script" uid="uid://dwu4tmt871fx8" path="res://notification_toast.gd" id="1_bs4q3"]
 
 [node name="NotificationToast" type="Control" unique_id=1611973884]
 process_mode = 3
@@ -12,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_bs4q3")
 
 [node name="MessageLabel" type="Label" parent="." unique_id=142940917]
 modulate = Color(1, 1, 1, 0)
@@ -20,10 +21,10 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -20.0
+offset_top = 90.0
 offset_right = 20.0
-offset_bottom = 23.0
+offset_bottom = 113.0
 grow_horizontal = 2
 offset_transform_enabled = true
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("1_bs4q3")

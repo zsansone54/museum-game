@@ -39,6 +39,11 @@ func _ready() -> void:
 
 	set_artifact_progress()
 	rng.randomize()
+	if has_save_file():
+		load_game()
+	funds = 10000
+	rep = 1000
+
 
 
 func _process(delta: float) -> void:
@@ -308,7 +313,10 @@ func create_save_data() -> Dictionary:
 		"artifact_progress": artifact_progress,
 		"purchased_tools": purchased_tools,
 		"speed_upgrades": area_speed_upgrades,
-		"chance_upgrades": area_chance_upgrades
+		"chance_upgrades": area_chance_upgrades,
+		"active_area_id": active_area_id,
+		"active_artifact_id": active_artifact_id,
+		"excavation_countdown": excavation_countdown,
 	}
 
 
@@ -385,7 +393,9 @@ func load_game() -> bool:
 			min(area_chance_upgrades.size(), saved_chance_upgrades.size())
 		):
 			area_chance_upgrades[index] = int(saved_chance_upgrades[index])
-
+	active_area_id = int(save_data.get("active_area_id", -1))
+	active_artifact_id = int(save_data.get("active_artifact_id", -1))
+	excavation_countdown = float(save_data.get("excavation_countdown", -1.0))
 	return true
 
 

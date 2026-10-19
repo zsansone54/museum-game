@@ -272,7 +272,7 @@ func refresh_upgrade_buttons() -> void:
 func get_upgrade_cost(upgrade: Dictionary, current_level: int) -> float:
 	return (
 		upgrade["base_cost"]
-		+ upgrade["cost_mult_per_level"] * current_level
+		* pow(upgrade["cost_multiplier"], current_level)
 	)
 
 

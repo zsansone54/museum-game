@@ -82,17 +82,18 @@ func refresh() -> void:
 	]
 
 	var income: Dictionary = GameState.get_artifact_income_breakdown(artifact)
-	uncleaned_income_label.text = "Uncleaned fragments: $%.2f / sec" % income["uncleaned"]
+	uncleaned_income_label.hide()
 	cleaned_income_label.text = "Cleaned fragments: $%.2f / sec" % income["cleaned"]
 	assembled_income_label.text = "Assembled artifact: $%.2f / sec" % income["assembled"]
 
-	clean_button.text = "Clean Fragment"
+	clean_button.text = "Clean All Fragments"
 	assemble_button.text = "Assemble Artifact"
 	close_button.text = "Close"
 
 	clean_button.disabled = (
 		progress["is_assembled"]
-		or progress["fragments_cleaned"] >= progress["fragments_found"]
+		or progress["fragments_found"] < artifact["total_fragments"]
+		or progress["fragments_cleaned"] >= artifact["total_fragments"]
 	)
 
 	assemble_button.disabled = (

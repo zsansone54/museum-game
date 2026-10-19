@@ -44,6 +44,10 @@ func _ready() -> void:
 		load_game()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_game()
+
 
 func _process(delta: float) -> void:
 	if excavation_countdown != -1.0:
@@ -57,19 +61,19 @@ func _process(delta: float) -> void:
 
 func get_artifact_income_breakdown(artifact: Dictionary) -> Dictionary:
 	var progress: Dictionary = get_artifact_progress(artifact["id"])
-	var uncleaned_income: float = 0.0
 	var cleaned_income: float = 0.0
 	var assembled_income: float = 0.0
 
 	if progress["is_assembled"]:
 		assembled_income = artifact["completed_funds"]
 	else:
-		var uncleaned_fragments: int = progress["fragments_found"] - progress["fragments_cleaned"]
-		uncleaned_income = uncleaned_fragments * artifact["uncleaned_fragment_funds_ps"]
-		cleaned_income = progress["fragments_cleaned"] * artifact["cleaned_fragment_funds_ps"]
+		cleaned_income = (
+			progress["fragments_cleaned"]
+			* artifact["cleaned_fragment_funds_ps"]
+		)
 
 	return {
-		"uncleaned": uncleaned_income,
+		"uncleaned": 0.0,
 		"cleaned": cleaned_income,
 		"assembled": assembled_income
 	}
@@ -130,12 +134,12 @@ func get_area_data(area_id: int) -> Dictionary:
 
 func get_effective_attempt_duration(artifact: Dictionary) -> float:
 	var area: Dictionary = get_area_data(artifact["area"])
+	var level: int = area_speed_upgrades[area["id"]]
 
 	return max(
-		0.1,
+		1.0,
 		artifact["attempt_duration"]
-		- area["speed_upgrade"]["time_dec_per_level"]
-		* area_speed_upgrades[area["id"]]
+		* pow(area["speed_upgrade"]["time_multiplier_per_level"], level)
 	)
 
 
@@ -143,7 +147,7 @@ func get_effective_success_chance(artifact: Dictionary) -> float:
 	var area: Dictionary = get_area_data(artifact["area"])
 
 	return min(
-		100.0,
+		90.0,
 		artifact["success_chance"]
 		+ area["chance_upgrade"]["chance_inc_per_level"]
 		* area_chance_upgrades[area["id"]]
@@ -161,10 +165,11 @@ func clean_fragment(artifact: Dictionary) -> void:
 	var progress: Dictionary = get_artifact_progress(artifact["id"])
 
 	if (
-		progress["fragments_found"] > 0
-		&& progress["fragments_found"] > progress["fragments_cleaned"]
+		progress["fragments_found"] >= artifact["total_fragments"]
+		&& progress["fragments_cleaned"] < artifact["total_fragments"]
 	):
-		progress["fragments_cleaned"] += 1
+		progress["fragments_cleaned"] = progress["fragments_found"]
+		save_game()
 
 
 func assemble_artifact(artifact: Dictionary) -> void:
@@ -181,6 +186,7 @@ func assemble_artifact(artifact: Dictionary) -> void:
 			artifact["name"],
 			artifact["rep_reward"]
 		)
+		save_game()
 
 		if check_win_condition():
 			game_completed.emit()
@@ -200,6 +206,7 @@ func select_excavation_target(artifact: Dictionary) -> void:
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]
 	excavation_countdown = get_effective_attempt_duration(artifact)
+	save_game()
 
 	excavation_started.emit(artifact["name"])
 
@@ -238,12 +245,14 @@ func excavation_attempt_result() -> void:
 			active_area_id = -1
 			active_artifact_id = -1
 			excavation_countdown = -1.0
+			save_game()
 			return
 	else:
 		funds += active_artifact["failure_reward"]
 		excavation_failed.emit(active_artifact["failure_reward"])
 
 	excavation_countdown = get_effective_attempt_duration(active_artifact)
+	save_game()
 
 
 func buy_tool(tool_id: int) -> void:
@@ -256,15 +265,15 @@ func buy_tool(tool_id: int) -> void:
 	):
 		funds -= tools[tool_id]["cost"]
 		tools[tool_id]["is_purchased"] = true
+		save_game()
 
 
 func buy_speed_upgrade(area: Dictionary) -> void:
 	var upgrade: Dictionary = area["speed_upgrade"]
 	var upgrade_count: int = area_speed_upgrades[area["id"]]
-
 	var cost: float = (
 		upgrade["base_cost"]
-		+ upgrade["cost_mult_per_level"] * upgrade_count
+		* pow(upgrade["cost_multiplier"], upgrade_count)
 	)
 
 	if upgrade_count >= upgrade["max_level"] || funds < cost:
@@ -273,14 +282,23 @@ func buy_speed_upgrade(area: Dictionary) -> void:
 	funds -= cost
 	area_speed_upgrades[area["id"]] += 1
 
+	if active_area_id == area["id"] && active_artifact_id != -1:
+		var active_artifact: Dictionary = get_artifact_data(active_artifact_id)
+
+		excavation_countdown = min(
+			excavation_countdown,
+			get_effective_attempt_duration(active_artifact)
+		)
+
+	save_game()
+
 
 func buy_chance_upgrade(area: Dictionary) -> void:
 	var upgrade: Dictionary = area["chance_upgrade"]
 	var upgrade_count: int = area_chance_upgrades[area["id"]]
-
 	var cost: float = (
 		upgrade["base_cost"]
-		+ upgrade["cost_mult_per_level"] * upgrade_count
+		* pow(upgrade["cost_multiplier"], upgrade_count)
 	)
 
 	if upgrade_count >= upgrade["max_level"] || funds < cost:
@@ -288,6 +306,7 @@ func buy_chance_upgrade(area: Dictionary) -> void:
 
 	funds -= cost
 	area_chance_upgrades[area["id"]] += 1
+	save_game()
 
 
 func has_required_tools(artifact: Dictionary) -> bool:

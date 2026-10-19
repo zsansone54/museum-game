@@ -57,6 +57,19 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "$999,999"
 
+[node name="IncomeLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1466485656]
+custom_minimum_size = Vector2(200, 60)
+custom_maximum_size = Vector2(200, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "$0.00 / sec"
+
+[node name="Spacer2" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=2034720174]
+custom_minimum_size = Vector2(50, 0)
+custom_maximum_size = Vector2(50, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="RepLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1352064607]
 custom_minimum_size = Vector2(200, 60)
 custom_maximum_size = Vector2(200, 60)
@@ -70,13 +83,6 @@ custom_maximum_size = Vector2(200, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "10.0/10.0s"
-
-[node name="IncomeLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1466485656]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "$0.00 / sec"
 
 [node name="Spacer" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=408952144]
 layout_mode = 2

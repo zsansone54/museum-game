@@ -44,6 +44,10 @@ var equipment_panel_open_position: Vector2
 var equipment_panel_closed_position: Vector2
 var equipment_panel_tween: Tween
 
+var site_panel_open_position: Vector2
+var site_panel_closed_position: Vector2
+var site_panel_tween: Tween
+
 
 func _ready() -> void:
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
@@ -87,6 +91,14 @@ func _ready() -> void:
 
 	equipment_panel.position = equipment_panel_closed_position
 
+	site_panel_open_position = site_panel.position
+	site_panel_closed_position = (
+		site_panel_open_position
+		+ Vector2(0, site_panel.size.y + 40)
+	)
+
+	site_panel.position = site_panel_closed_position
+
 
 func _process(_delta: float) -> void:
 	update_hud()
@@ -121,8 +133,39 @@ func open_site(area_id: int) -> void:
 	current_site_area = GameState.get_area_data(area_id)
 	current_site_artifacts = current_site_area["artifacts"]
 
-	site_panel.show()
 	refresh_site_panel()
+
+	if site_panel_tween and site_panel_tween.is_valid():
+		site_panel_tween.kill()
+
+	site_panel.position = site_panel_closed_position
+	site_panel.show()
+
+	site_panel_tween = create_tween()
+	site_panel_tween.set_trans(Tween.TRANS_QUAD)
+	site_panel_tween.set_ease(Tween.EASE_OUT)
+	site_panel_tween.tween_property(
+		site_panel,
+		"position",
+		site_panel_open_position,
+		0.25
+	)
+
+
+func close_site_panel() -> void:
+	if site_panel_tween and site_panel_tween.is_valid():
+		site_panel_tween.kill()
+
+	site_panel_tween = create_tween()
+	site_panel_tween.set_trans(Tween.TRANS_QUAD)
+	site_panel_tween.set_ease(Tween.EASE_IN)
+	site_panel_tween.tween_property(
+		site_panel,
+		"position",
+		site_panel_closed_position,
+		0.2
+	)
+	site_panel_tween.tween_callback(site_panel.hide)
 
 
 func refresh_site_panel() -> void:
@@ -278,7 +321,7 @@ func select_site_artifact(index: int) -> void:
 	var artifact: Dictionary = current_site_artifacts[index]
 
 	GameState.select_excavation_target(artifact)
-	site_panel.hide()
+	close_site_panel()
 
 
 func open_equipment_panel() -> void:
@@ -444,7 +487,7 @@ func _on_chance_upgrade_button_pressed() -> void:
 
 
 func _on_site_close_button_pressed() -> void:
-	site_panel.hide()
+	close_site_panel()
 
 
 func _on_tool_1_button_pressed() -> void:

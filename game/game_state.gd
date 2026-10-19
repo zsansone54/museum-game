@@ -40,8 +40,7 @@ func _ready() -> void:
 
 	set_artifact_progress()
 	rng.randomize()
-	if has_save_file():
-		load_game()
+
 
 
 

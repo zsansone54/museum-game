@@ -61,20 +61,19 @@ func _process(delta: float) -> void:
 
 func get_artifact_income_breakdown(artifact: Dictionary) -> Dictionary:
 	var progress: Dictionary = get_artifact_progress(artifact["id"])
-	var cleaned_income: float = 0.0
+	var fragment_income: float = 0.0
 	var assembled_income: float = 0.0
 
 	if progress["is_assembled"]:
 		assembled_income = artifact["completed_funds"]
 	else:
-		cleaned_income = (
-			progress["fragments_cleaned"]
-			* artifact["cleaned_fragment_funds_ps"]
+		fragment_income = (
+			progress["fragments_found"]
+			* artifact["fragment_funds_ps"]
 		)
 
 	return {
-		"uncleaned": 0.0,
-		"cleaned": cleaned_income,
+		"fragments": fragment_income,
 		"assembled": assembled_income
 	}
 
@@ -85,7 +84,7 @@ func get_total_donation_income_per_second() -> float:
 	for area in areas:
 		for artifact in area["artifacts"]:
 			var income: Dictionary = get_artifact_income_breakdown(artifact)
-			total_income += income["uncleaned"] + income["cleaned"] + income["assembled"]
+			total_income += income["fragments"] + income["assembled"]
 
 	return total_income
 
@@ -100,7 +99,6 @@ func set_artifact_progress() -> void:
 			var progress_entry: Dictionary = {
 				"artifact_id": artifact["id"],
 				"fragments_found": 0,
-				"fragments_cleaned": 0,
 				"is_assembled": false
 			}
 
@@ -161,23 +159,12 @@ func add_fragment(artifact: Dictionary) -> void:
 		progress["fragments_found"] += 1
 
 
-func clean_fragment(artifact: Dictionary) -> void:
-	var progress: Dictionary = get_artifact_progress(artifact["id"])
-
-	if (
-		progress["fragments_found"] >= artifact["total_fragments"]
-		&& progress["fragments_cleaned"] < artifact["total_fragments"]
-	):
-		progress["fragments_cleaned"] = progress["fragments_found"]
-		save_game()
-
-
 func assemble_artifact(artifact: Dictionary) -> void:
 	var progress: Dictionary = get_artifact_progress(artifact["id"])
 
 	if (
 		!progress["is_assembled"]
-		&& progress["fragments_cleaned"] >= artifact["total_fragments"]
+		&& progress["fragments_found"] >= artifact["total_fragments"]
 	):
 		progress["is_assembled"] = true
 		rep += artifact["rep_reward"]

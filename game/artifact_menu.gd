@@ -4,12 +4,9 @@ extends Control
 @onready var dimmer: ColorRect = $Dimmer
 @onready var artifact_name_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/ArtifactNameLabel
 @onready var fragment_progress_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/FragmentProgressLabel
-@onready var clean_progress_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/CleaProgressLabel
-@onready var clean_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/CleanButton
 @onready var assemble_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/AssembleButton
 @onready var close_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/CloseButton
-@onready var uncleaned_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/UncleanedIncomeLabel
-@onready var cleaned_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/CleanedIncomeLabel
+@onready var fragment_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/FragmentIncomeLabel
 @onready var assembled_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/AssembledIncomeLabel
 
 var current_artifact_id := -1
@@ -28,7 +25,6 @@ func _ready() -> void:
 	closed_position = open_position + Vector2(0, artifact_panel.size.y + 20)
 	artifact_panel.position = closed_position
 
-	clean_button.pressed.connect(_on_clean_button_pressed)
 	assemble_button.pressed.connect(_on_assemble_button_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
 
@@ -76,39 +72,22 @@ func refresh() -> void:
 		progress["fragments_found"],
 		artifact["total_fragments"]
 	]
-	clean_progress_label.text = "Fragments cleaned: %d / %d" % [
-		progress["fragments_cleaned"],
-		artifact["total_fragments"]
-	]
-
 	var income: Dictionary = GameState.get_artifact_income_breakdown(artifact)
-	uncleaned_income_label.hide()
-	cleaned_income_label.text = "Cleaned fragments: $%.2f / sec" % income["cleaned"]
-	assembled_income_label.text = "Assembled artifact: $%.2f / sec" % income["assembled"]
-
-	clean_button.text = "Clean All Fragments"
+	fragment_income_label.text = "Recovered fragments: $%.2f / sec" % income["fragments"]
+	assembled_income_label.text = "Completed exhibit: $%.2f / sec" % income["assembled"]
 	assemble_button.text = "Assemble Artifact"
 	close_button.text = "Close"
 
-	clean_button.disabled = (
-		progress["is_assembled"]
-		or progress["fragments_found"] < artifact["total_fragments"]
-		or progress["fragments_cleaned"] >= artifact["total_fragments"]
-	)
 
 	assemble_button.disabled = (
 		progress["is_assembled"]
-		or progress["fragments_cleaned"] < artifact["total_fragments"]
+		or progress["fragments_found"] < artifact["total_fragments"]
 	)
 
 	if progress["is_assembled"]:
 		assemble_button.text = "Artifact Assembled"
 
 
-func _on_clean_button_pressed() -> void:
-	var artifact: Dictionary = GameState.get_artifact_data(current_artifact_id)
-	GameState.clean_fragment(artifact)
-	refresh()
 
 
 func _on_assemble_button_pressed() -> void:

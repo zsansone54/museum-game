@@ -35,27 +35,21 @@ func data() -> Dictionary:
 						"id": 0, "area": 0, "name": "Zone 1 art 1",
 						"total_fragments": 4, "attempt_duration": 10,
 						"required_tool": [], "rep_reward": 10,
-						"uncleaned_fragment_funds_ps": 0.0,
-						"cleaned_fragment_funds_ps": 0.5,
-						"completed_funds": 4.0,
+						"fragment_funds_ps": 0.5, "completed_funds": 4.0,
 						"success_chance": 40, "failure_reward": 10
 					},
 					{
 						"id": 1, "area": 0, "name": "Zone 1 art 2",
 						"total_fragments": 4, "attempt_duration": 20,
 						"required_tool": [], "rep_reward": 25,
-						"uncleaned_fragment_funds_ps": 0.0,
-						"cleaned_fragment_funds_ps": 1.25,
-						"completed_funds": 10.0,
+						"fragment_funds_ps": 1.25, "completed_funds": 10.0,
 						"success_chance": 25, "failure_reward": 20
 					},
 					{
 						"id": 2, "area": 0, "name": "Zone 1 art 3",
 						"total_fragments": 4, "attempt_duration": 40,
 						"required_tool": [0], "rep_reward": 100,
-						"uncleaned_fragment_funds_ps": 0.0,
-						"cleaned_fragment_funds_ps": 3.0,
-						"completed_funds": 25.0,
+						"fragment_funds_ps": 3.0, "completed_funds": 25.0,
 						"success_chance": 10, "failure_reward": 45
 					}
 				],
@@ -79,27 +73,21 @@ func data() -> Dictionary:
 						"id": 3, "area": 1, "name": "Zone 2 art 1",
 						"total_fragments": 4, "attempt_duration": 20,
 						"required_tool": [], "rep_reward": 40,
-						"uncleaned_fragment_funds_ps": 0.0,
-						"cleaned_fragment_funds_ps": 3.0,
-						"completed_funds": 35.0,
+						"fragment_funds_ps": 3.0, "completed_funds": 35.0,
 						"success_chance": 20, "failure_reward": 40
 					},
 					{
 						"id": 4, "area": 1, "name": "Zone 2 art 2",
 						"total_fragments": 4, "attempt_duration": 45,
 						"required_tool": [0], "rep_reward": 150,
-						"uncleaned_fragment_funds_ps": 0.0,
-						"cleaned_fragment_funds_ps": 5.0,
-						"completed_funds": 70.0,
+						"fragment_funds_ps": 5.0, "completed_funds": 70.0,
 						"success_chance": 10, "failure_reward": 80
 					},
 					{
 						"id": 5, "area": 1, "name": "Zone 2 art 3",
 						"total_fragments": 4, "attempt_duration": 80,
 						"required_tool": [1], "rep_reward": 300,
-						"uncleaned_fragment_funds_ps": 0.0,
-						"cleaned_fragment_funds_ps": 8.0,
-						"completed_funds": 150.0,
+						"fragment_funds_ps": 8.0, "completed_funds": 150.0,
 						"success_chance": 5, "failure_reward": 160
 					}
 				],

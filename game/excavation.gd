@@ -234,7 +234,7 @@ func refresh_artifact_buttons() -> void:
 		elif progress["fragments_found"] >= artifact["total_fragments"]:
 			button.disabled = true
 			button.tooltip_text = (
-				"All fragments found — clean and assemble it in the museum"
+				"All fragments found — assemble it in the museum"
 			)
 
 		else:

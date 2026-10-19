@@ -69,16 +69,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
-[node name="CleaProgressLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1108776996]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-
-[node name="UncleanedIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1852701805]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Uncleaned fragments: $0.20 / sec"
-
-[node name="CleanedIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1525709348]
+[node name="FragmentIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1525709348]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Cleaned fragments: $0.60 / sec"
@@ -89,10 +80,6 @@ theme_override_font_sizes/font_size = 24
 text = "Assembled artifact: $0.00 / sec"
 
 [node name="HSeparator" type="HSeparator" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=493968231]
-layout_mode = 2
-
-[node name="CleanButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=552363847]
-custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
 [node name="AssembleButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1694501054]

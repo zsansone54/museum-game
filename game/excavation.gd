@@ -80,7 +80,6 @@ func _ready() -> void:
 
 	update_hud()
 
-	# Wait one frame so Godot knows the panel's final size and position.
 	await get_tree().process_frame
 
 	equipment_panel_open_position = equipment_panel.position
@@ -88,7 +87,6 @@ func _ready() -> void:
 		equipment_panel_open_position
 		+ Vector2(0, equipment_panel.size.y + 40)
 	)
-
 	equipment_panel.position = equipment_panel_closed_position
 
 	site_panel_open_position = site_panel.position
@@ -96,7 +94,6 @@ func _ready() -> void:
 		site_panel_open_position
 		+ Vector2(0, site_panel.size.y + 40)
 	)
-
 	site_panel.position = site_panel_closed_position
 
 
@@ -112,8 +109,10 @@ func _process(_delta: float) -> void:
 
 func update_hud() -> void:
 	funds_label.text = "$%d" % int(GameState.funds)
+	income_label.text = "+$%.2f / sec" % (
+		GameState.get_total_donation_income_per_second()
+	)
 	rep_label.text = "%d Rep" % GameState.rep
-	income_label.text = "+$%.2f / sec" % GameState.get_total_donation_income_per_second()
 
 	if GameState.active_artifact_id == -1:
 		countdown_label.text = "--.-- / --.-- s"
@@ -130,7 +129,19 @@ func update_hud() -> void:
 
 
 func open_site(area_id: int) -> void:
+	if (
+		site_panel.visible
+		&& !current_site_area.is_empty()
+		&& current_site_area["id"] == area_id
+	):
+		close_site_panel()
+		return
+
 	current_site_area = GameState.get_area_data(area_id)
+
+	if current_site_area.is_empty():
+		return
+
 	current_site_artifacts = current_site_area["artifacts"]
 
 	refresh_site_panel()
@@ -148,7 +159,7 @@ func open_site(area_id: int) -> void:
 		site_panel,
 		"position",
 		site_panel_open_position,
-		0.25
+		0.1
 	)
 
 
@@ -163,7 +174,7 @@ func close_site_panel() -> void:
 		site_panel,
 		"position",
 		site_panel_closed_position,
-		0.2
+		0.1
 	)
 	site_panel_tween.tween_callback(site_panel.hide)
 
@@ -181,21 +192,19 @@ func refresh_site_panel() -> void:
 		]
 
 		for button in artifact_buttons:
+			button.text = "Locked Artifact"
 			button.disabled = true
-			button.tooltip_text = (
-				"Requires %d Reputation"
-				% current_site_area["unlock_required_rep"]
+			button.tooltip_text = "Requires %d Reputation" % (
+				current_site_area["unlock_required_rep"]
 			)
 
+		speed_upgrade_button.text = "Improve Excavation Speed\nLocked"
 		speed_upgrade_button.disabled = true
-		speed_upgrade_button.tooltip_text = (
-			"Unlock this site first"
-		)
+		speed_upgrade_button.tooltip_text = "Unlock this site first"
 
+		chance_upgrade_button.text = "Improve Success Chance\nLocked"
 		chance_upgrade_button.disabled = true
-		chance_upgrade_button.tooltip_text = (
-			"Unlock this site first"
-		)
+		chance_upgrade_button.tooltip_text = "Unlock this site first"
 
 		return
 
@@ -270,9 +279,9 @@ func refresh_upgrade_buttons() -> void:
 
 
 func get_upgrade_cost(upgrade: Dictionary, current_level: int) -> float:
-	return round(
+	return (
 		upgrade["base_cost"]
-		* pow(upgrade["cost_multiplier"], current_level)
+		+ upgrade["cost_increase_per_level"] * current_level
 	)
 
 
@@ -325,6 +334,10 @@ func select_site_artifact(index: int) -> void:
 
 
 func open_equipment_panel() -> void:
+	if equipment_panel.visible:
+		close_equipment_panel()
+		return
+
 	refresh_tool_buttons()
 
 	if equipment_panel_tween and equipment_panel_tween.is_valid():
@@ -340,7 +353,7 @@ func open_equipment_panel() -> void:
 		equipment_panel,
 		"position",
 		equipment_panel_open_position,
-		0.25
+		0.1
 	)
 
 
@@ -355,7 +368,7 @@ func close_equipment_panel() -> void:
 		equipment_panel,
 		"position",
 		equipment_panel_closed_position,
-		0.2
+		0.1
 	)
 	equipment_panel_tween.tween_callback(equipment_panel.hide)
 

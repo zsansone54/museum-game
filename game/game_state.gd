@@ -156,6 +156,13 @@ func get_effective_success_chance(artifact: Dictionary) -> float:
 	)
 
 
+func get_upgrade_cost(upgrade: Dictionary, current_level: int) -> float:
+	return (
+		upgrade["base_cost"]
+		+ upgrade["cost_increase_per_level"] * current_level
+	)
+
+
 func add_fragment(artifact: Dictionary) -> void:
 	var progress: Dictionary = get_artifact_progress(artifact["id"])
 
@@ -263,10 +270,7 @@ func buy_tool(tool_id: int) -> void:
 func buy_speed_upgrade(area: Dictionary) -> void:
 	var upgrade: Dictionary = area["speed_upgrade"]
 	var upgrade_count: int = area_speed_upgrades[area["id"]]
-	var cost: float = round(
-		upgrade["base_cost"]
-		* pow(upgrade["cost_multiplier"], upgrade_count)
-	)
+	var cost: float = get_upgrade_cost(upgrade, upgrade_count)
 
 	if upgrade_count >= upgrade["max_level"] || funds < cost:
 		return
@@ -288,10 +292,7 @@ func buy_speed_upgrade(area: Dictionary) -> void:
 func buy_chance_upgrade(area: Dictionary) -> void:
 	var upgrade: Dictionary = area["chance_upgrade"]
 	var upgrade_count: int = area_chance_upgrades[area["id"]]
-	var cost: float = round(
-		upgrade["base_cost"]
-		* pow(upgrade["cost_multiplier"], upgrade_count)
-	)
+	var cost: float = get_upgrade_cost(upgrade, upgrade_count)
 
 	if upgrade_count >= upgrade["max_level"] || funds < cost:
 		return

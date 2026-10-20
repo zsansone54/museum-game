@@ -40,6 +40,7 @@ func _ready() -> void:
 
 	set_artifact_progress()
 	rng.randomize()
+
 	if has_save_file():
 		load_game()
 
@@ -96,13 +97,11 @@ func update_donation_income(delta: float) -> void:
 func set_artifact_progress() -> void:
 	for area in areas:
 		for artifact in area["artifacts"]:
-			var progress_entry: Dictionary = {
+			artifact_progress.append({
 				"artifact_id": artifact["id"],
 				"fragments_found": 0,
 				"is_assembled": false
-			}
-
-			artifact_progress.append(progress_entry)
+			})
 
 
 func get_artifact_progress(artifact_id: int) -> Dictionary:
@@ -132,12 +131,17 @@ func get_area_data(area_id: int) -> Dictionary:
 
 func get_effective_attempt_duration(artifact: Dictionary) -> float:
 	var area: Dictionary = get_area_data(artifact["area"])
+	var upgrade: Dictionary = area["speed_upgrade"]
 	var level: int = area_speed_upgrades[area["id"]]
 
-	return max(
-		1.0,
+	var reduction_per_level: float = round(
 		artifact["attempt_duration"]
-		* pow(area["speed_upgrade"]["time_multiplier_per_level"], level)
+		* upgrade["time_reduction_percent"]
+	)
+
+	return max(
+		upgrade["minimum_duration"],
+		artifact["attempt_duration"] - reduction_per_level * level
 	)
 
 
@@ -173,6 +177,7 @@ func assemble_artifact(artifact: Dictionary) -> void:
 			artifact["name"],
 			artifact["rep_reward"]
 		)
+
 		save_game()
 
 		if check_win_condition():
@@ -193,8 +198,8 @@ func select_excavation_target(artifact: Dictionary) -> void:
 	active_area_id = artifact["area"]
 	active_artifact_id = artifact["id"]
 	excavation_countdown = get_effective_attempt_duration(artifact)
-	save_game()
 
+	save_game()
 	excavation_started.emit(artifact["name"])
 
 
@@ -258,7 +263,7 @@ func buy_tool(tool_id: int) -> void:
 func buy_speed_upgrade(area: Dictionary) -> void:
 	var upgrade: Dictionary = area["speed_upgrade"]
 	var upgrade_count: int = area_speed_upgrades[area["id"]]
-	var cost: float = (
+	var cost: float = round(
 		upgrade["base_cost"]
 		* pow(upgrade["cost_multiplier"], upgrade_count)
 	)
@@ -283,7 +288,7 @@ func buy_speed_upgrade(area: Dictionary) -> void:
 func buy_chance_upgrade(area: Dictionary) -> void:
 	var upgrade: Dictionary = area["chance_upgrade"]
 	var upgrade_count: int = area_chance_upgrades[area["id"]]
-	var cost: float = (
+	var cost: float = round(
 		upgrade["base_cost"]
 		* pow(upgrade["cost_multiplier"], upgrade_count)
 	)
@@ -332,7 +337,7 @@ func create_save_data() -> Dictionary:
 		"chance_upgrades": area_chance_upgrades,
 		"active_area_id": active_area_id,
 		"active_artifact_id": active_artifact_id,
-		"excavation_countdown": excavation_countdown,
+		"excavation_countdown": excavation_countdown
 	}
 
 
@@ -409,9 +414,11 @@ func load_game() -> bool:
 			min(area_chance_upgrades.size(), saved_chance_upgrades.size())
 		):
 			area_chance_upgrades[index] = int(saved_chance_upgrades[index])
+
 	active_area_id = int(save_data.get("active_area_id", -1))
 	active_artifact_id = int(save_data.get("active_artifact_id", -1))
 	excavation_countdown = float(save_data.get("excavation_countdown", -1.0))
+
 	return true
 
 

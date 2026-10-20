@@ -4,7 +4,7 @@ extends Node
 func data() -> Dictionary:
 	return {
 		"initial values": {
-			"starting_funds": 50,
+			"starting_funds": 0,
 			"starting_rep": 0,
 			"total_artifacts": 6
 		},

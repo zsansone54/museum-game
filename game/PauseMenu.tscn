@@ -1,13 +1,8 @@
 [gd_scene format=3 uid="uid://coh5nxkprs0sc"]
 
 [ext_resource type="Script" uid="uid://bfhswv7vxaxh1" path="res://pause_menu.gd" id="1_etnfi"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8y7ot"]
-bg_color = Color(0, 0, 0, 0.60784316)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+[ext_resource type="StyleBox" uid="uid://cn24prh10foj8" path="res://assets/ui/pause_panel_brown.tres" id="2_etnfi"]
+[ext_resource type="FontFile" uid="uid://bmu8x7xtkrbma" path="res://assets/fonts/karma/Karma Suture.otf" id="3_q775a"]
 
 [node name="PauseMenu" type="Control" unique_id=463487379]
 layout_mode = 3
@@ -25,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.64705884)
 
 [node name="PausePanel" type="PanelContainer" parent="." unique_id=1020325523]
 layout_mode = 1
@@ -40,7 +35,7 @@ offset_right = 160.0
 offset_bottom = 158.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_8y7ot")
+theme_override_styles/panel = ExtResource("2_etnfi")
 
 [node name="MarginContainer" type="MarginContainer" parent="PausePanel" unique_id=71530367]
 layout_mode = 2
@@ -55,6 +50,8 @@ theme_override_constants/separation = 20
 
 [node name="TitleLabel" type="Label" parent="PausePanel/MarginContainer/VBoxContainer" unique_id=493913374]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q775a")
 theme_override_font_sizes/font_size = 60
 text = "Pause"
 horizontal_alignment = 1

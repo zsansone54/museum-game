@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://coh5nxkprs0sc"]
 
 [ext_resource type="Script" uid="uid://bfhswv7vxaxh1" path="res://pause_menu.gd" id="1_etnfi"]
-[ext_resource type="StyleBox" uid="uid://d1vcbri8riot2" path="res://rounded_button.tres" id="1_nov15"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8y7ot"]
 bg_color = Color(0, 0, 0, 0.60784316)
@@ -68,10 +67,6 @@ custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("1_nov15")
-theme_override_styles/pressed = ExtResource("1_nov15")
-theme_override_styles/hover = ExtResource("1_nov15")
-theme_override_styles/disabled = ExtResource("1_nov15")
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="PausePanel/MarginContainer/VBoxContainer" unique_id=1185278625]
@@ -79,10 +74,6 @@ custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("1_nov15")
-theme_override_styles/pressed = ExtResource("1_nov15")
-theme_override_styles/hover = ExtResource("1_nov15")
-theme_override_styles/disabled = ExtResource("1_nov15")
 text = "Settings"
 
 [node name="ExitButton" type="Button" parent="PausePanel/MarginContainer/VBoxContainer" unique_id=1998420829]
@@ -90,10 +81,6 @@ custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("1_nov15")
-theme_override_styles/pressed = ExtResource("1_nov15")
-theme_override_styles/hover = ExtResource("1_nov15")
-theme_override_styles/disabled = ExtResource("1_nov15")
 text = "Exit"
 
 [connection signal="pressed" from="PausePanel/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

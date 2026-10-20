@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bu1af3cp8soep"]
 
 [ext_resource type="Script" uid="uid://dhk3begqtexxl" path="res://settings_menu.gd" id="1_svoao"]
-[ext_resource type="StyleBox" uid="uid://d1vcbri8riot2" path="res://rounded_button.tres" id="2_jttlj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_svoao"]
 bg_color = Color(0, 0, 0, 0.60784316)
@@ -147,20 +146,12 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("2_jttlj")
-theme_override_styles/pressed = ExtResource("2_jttlj")
-theme_override_styles/hover = ExtResource("2_jttlj")
-theme_override_styles/disabled = ExtResource("2_jttlj")
 text = "Save"
 
 [node name="CancelButton" type="Button" parent="SettingsPanel/PanelMargin/SettingsBox/ButtonRow" unique_id=3932901]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("2_jttlj")
-theme_override_styles/pressed = ExtResource("2_jttlj")
-theme_override_styles/hover = ExtResource("2_jttlj")
-theme_override_styles/disabled = ExtResource("2_jttlj")
 text = "Cancel"
 
 [connection signal="pressed" from="SettingsPanel/PanelMargin/SettingsBox/ButtonRow/SaveButton" to="." method="_on_save_button_pressed"]

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cnmiv3n2nh6xs"]
 
+[ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_a50wm"]
 [ext_resource type="Script" uid="uid://lenmkamk67wc" path="res://excavation.gd" id="1_rbatp"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="2_x6ne2"]
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="3_a50wm"]
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_a50wm")
 script = ExtResource("1_rbatp")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1278012946]

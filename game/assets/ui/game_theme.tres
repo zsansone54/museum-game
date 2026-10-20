@@ -1,0 +1,35 @@
+[gd_resource type="Theme" format=3 uid="uid://bvelnbej037ho"]
+
+[ext_resource type="FontFile" uid="uid://crwhndxohbygp" path="res://assets/fonts/karma/Karma Future.otf" id="1_36qhr"]
+[ext_resource type="Texture2D" uid="uid://bywutdhijmfge" path="res://assets/ui/UIpack_RPG/PNG/buttonLong_blue.png" id="1_hsry8"]
+[ext_resource type="Texture2D" uid="uid://bbfb6y7h15yc8" path="res://assets/ui/UIpack_RPG/PNG/buttonLong_beige.png" id="2_7c7mo"]
+[ext_resource type="Texture2D" uid="uid://dhjkn25ghmc5p" path="res://assets/ui/UIpack_RPG/PNG/buttonLong_brown.png" id="2_8fqvh"]
+[ext_resource type="Texture2D" uid="uid://cxw2ih27if16d" path="res://assets/ui/UIpack_RPG/PNG/buttonLong_brown_pressed.png" id="3_7c7mo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h7a2f"]
+texture = ExtResource("1_hsry8")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vxtnk"]
+texture = ExtResource("2_7c7mo")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k4r43"]
+texture = ExtResource("2_8fqvh")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_afec1"]
+texture = ExtResource("3_7c7mo")
+texture_margin_left = 10.0
+texture_margin_right = 10.0
+
+[resource]
+default_font = ExtResource("1_36qhr")
+default_font_size = 24
+Button/styles/disabled = SubResource("StyleBoxTexture_h7a2f")
+Button/styles/hover = SubResource("StyleBoxTexture_vxtnk")
+Button/styles/normal = SubResource("StyleBoxTexture_k4r43")
+Button/styles/pressed = SubResource("StyleBoxTexture_afec1")

@@ -67,6 +67,7 @@ text = "Every artifact has
 been restored 
 and displayed."
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=223071566]
 custom_minimum_size = Vector2(0, 10)

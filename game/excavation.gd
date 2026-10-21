@@ -12,21 +12,21 @@ extends Control
 @onready var tools_button: Button = $ToolsButton
 
 @onready var site_panel: PanelContainer = $SitePanel
-@onready var site_name_label: Label = $SitePanel/MarginContainer/VBoxContainer/SiteNameLabel
+@onready var site_name_label: Label = (
+	$SitePanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer/SiteNameLabel
+)
 @onready var artifact_buttons: Array[Button] = [
 	$SitePanel/MarginContainer/VBoxContainer/Artifact1Button,
 	$SitePanel/MarginContainer/VBoxContainer/Artifact2Button,
 	$SitePanel/MarginContainer/VBoxContainer/Artifact3Button
 ]
 @onready var speed_upgrade_button: Button = (
-	$SitePanel/MarginContainer/VBoxContainer/SpeedUpgradeButton
+	$SitePanel/MarginContainer/VBoxContainer/UpgradeRow/SpeedUpgradeButton
 )
 @onready var chance_upgrade_button: Button = (
-	$SitePanel/MarginContainer/VBoxContainer/ChanceUpgradeButton
+	$SitePanel/MarginContainer/VBoxContainer/UpgradeRow/ChanceUpgradeButton
 )
-@onready var site_close_button: Button = (
-	$SitePanel/MarginContainer/VBoxContainer/CloseButton
-)
+@onready var site_close_button: TextureButton = $SitePanel/SiteCloseButton
 
 @onready var equipment_panel: PanelContainer = $EquipmentPanel
 @onready var tool_buttons: Array[Button] = [
@@ -72,7 +72,6 @@ func _ready() -> void:
 	tool_buttons[1].pressed.connect(_on_tool_2_button_pressed)
 	equipment_close_button.pressed.connect(_on_equipment_close_button_pressed)
 
-	site_close_button.text = "Close"
 	equipment_close_button.text = "Close"
 
 	site_panel.hide()
@@ -198,11 +197,11 @@ func refresh_site_panel() -> void:
 				current_site_area["unlock_required_rep"]
 			)
 
-		speed_upgrade_button.text = "Improve Excavation Speed\nLocked"
+		speed_upgrade_button.text = "Speed\nLocked"
 		speed_upgrade_button.disabled = true
 		speed_upgrade_button.tooltip_text = "Unlock this site first"
 
-		chance_upgrade_button.text = "Improve Success Chance\nLocked"
+		chance_upgrade_button.text = "Chance\nLocked"
 		chance_upgrade_button.disabled = true
 		chance_upgrade_button.tooltip_text = "Unlock this site first"
 
@@ -263,7 +262,7 @@ func refresh_upgrade_buttons() -> void:
 
 	update_upgrade_button(
 		speed_upgrade_button,
-		"Improve Excavation Speed",
+		"Speed",
 		speed_upgrade,
 		speed_level,
 		speed_cost
@@ -271,7 +270,7 @@ func refresh_upgrade_buttons() -> void:
 
 	update_upgrade_button(
 		chance_upgrade_button,
-		"Improve Success Chance",
+		"Chance",
 		chance_upgrade,
 		chance_level,
 		chance_cost
@@ -297,7 +296,7 @@ func update_upgrade_button(
 	button.tooltip_text = ""
 
 	if current_level >= max_level:
-		button.text = "%s\nLevel %d / %d — MAX LEVEL" % [
+		button.text = "%s\nLv. %d / %d\nMAX" % [
 			upgrade_name,
 			current_level,
 			max_level
@@ -306,7 +305,7 @@ func update_upgrade_button(
 		button.tooltip_text = "This upgrade is already at its maximum level"
 
 	elif GameState.funds < cost:
-		button.text = "%s\nLevel %d / %d — $%d" % [
+		button.text = "%s\nLv. %d / %d\n$%d" % [
 			upgrade_name,
 			current_level,
 			max_level,
@@ -316,7 +315,7 @@ func update_upgrade_button(
 		button.tooltip_text = "Requires $%d" % int(cost)
 
 	else:
-		button.text = "%s\nLevel %d / %d — $%d\nPurchase" % [
+		button.text = "%s\nLv. %d / %d\n$%d" % [
 			upgrade_name,
 			current_level,
 			max_level,

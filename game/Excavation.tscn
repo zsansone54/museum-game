@@ -4,7 +4,28 @@
 [ext_resource type="Script" uid="uid://lenmkamk67wc" path="res://excavation.gd" id="1_rbatp"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="2_x6ne2"]
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="3_a50wm"]
+[ext_resource type="Texture2D" uid="uid://c5jghn7dsgkf5" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0018.png" id="3_vxnk4"]
+[ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_3ro8f"]
+[ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="4_x6ne2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
+texture = ExtResource("3_vxnk4")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8wqh"]
+atlas = ExtResource("4_3ro8f")
+region = Rect2(108, 414, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t8wqh"]
+texture = ExtResource("4_t8wqh")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
 [node name="Excavation" type="Control" unique_id=2032322113]
 layout_mode = 3
@@ -189,7 +210,7 @@ text = "Close"
 
 [node name="SitePanel" type="PanelContainer" parent="." unique_id=1765479893]
 visible = false
-custom_minimum_size = Vector2(500, 350)
+custom_minimum_size = Vector2(660, 560)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -202,39 +223,70 @@ offset_right = 250.0
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_gcfin")
+
+[node name="SiteCloseButton" type="TextureButton" parent="SitePanel" unique_id=1248166019]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_t8wqh")
 
 [node name="MarginContainer" type="MarginContainer" parent="SitePanel" unique_id=1628466259]
 layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 25
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SitePanel/MarginContainer" unique_id=70571344]
 layout_mode = 2
 
-[node name="SiteNameLabel" type="Label" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=218872737]
+[node name="HeaderPanel" type="PanelContainer" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1794857731]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_t8wqh")
+
+[node name="MarginContainer" type="MarginContainer" parent="SitePanel/MarginContainer/VBoxContainer/HeaderPanel" unique_id=98001586]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="SiteNameLabel" type="Label" parent="SitePanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer" unique_id=218872737]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="HeaderSpacer" type="Control" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=2119222577]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="Artifact1Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=616408072]
+custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
 [node name="Artifact2Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1149261035]
+custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
 [node name="Artifact3Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=525389543]
+custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=589348204]
 layout_mode = 2
 
-[node name="SpeedUpgradeButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1998904188]
+[node name="UpgradeRow" type="HBoxContainer" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1701642899]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SpeedUpgradeButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer/UpgradeRow" unique_id=1998904188]
+custom_minimum_size = Vector2(280, 110)
 layout_mode = 2
 text = "Improve Excavation Speed"
 
-[node name="ChanceUpgradeButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=2060038494]
+[node name="ChanceUpgradeButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer/UpgradeRow" unique_id=2060038494]
+custom_minimum_size = Vector2(280, 110)
 layout_mode = 2
 text = "Improve Success Chance"
-
-[node name="CloseButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=337294363]
-layout_mode = 2
-text = "close"
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("2_x6ne2")]
 visible = false

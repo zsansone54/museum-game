@@ -38,7 +38,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="SettingsPanel" type="PanelContainer" parent="." unique_id=320651727]
-custom_minimum_size = Vector2(660, 700)
+custom_minimum_size = Vector2(660, 580)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -61,7 +61,6 @@ theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
 [node name="SettingsBox" type="VBoxContainer" parent="SettingsPanel/PanelMargin" unique_id=1117676388]
-custom_minimum_size = Vector2(600, 650)
 layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=787524012]
@@ -82,7 +81,6 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_jttlj")
 
 [node name="SettingsBox" type="VBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox/SettingsPannel" unique_id=79240889]
-custom_minimum_size = Vector2(600, 650)
 layout_mode = 2
 
 [node name="DisplaySection" type="VBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox/SettingsPannel/SettingsBox" unique_id=1276027645]
@@ -156,9 +154,9 @@ theme_override_font_sizes/font_size = 20
 text = "Mute"
 
 [node name="Spacer" type="Control" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=254392200]
-custom_maximum_size = Vector2(-1, 100)
+custom_minimum_size = Vector2(0, 20)
+custom_maximum_size = Vector2(-1, 20)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="ButtonRow" type="HBoxContainer" parent="SettingsPanel/PanelMargin/SettingsBox" unique_id=1156871407]
 layout_mode = 2

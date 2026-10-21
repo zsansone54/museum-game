@@ -50,7 +50,7 @@ theme_override_constants/separation = 20
 
 [node name="TitleLabel" type="Label" parent="PausePanel/MarginContainer/VBoxContainer" unique_id=493913374]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.41960785, 0.2901961, 0.1764706, 1)
 theme_override_fonts/font = ExtResource("3_q775a")
 theme_override_font_sizes/font_size = 60
 text = "Pause"
@@ -63,6 +63,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Resume"
 
@@ -70,6 +71,7 @@ text = "Resume"
 custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Settings"
 
@@ -77,6 +79,7 @@ text = "Settings"
 custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 

@@ -2,12 +2,12 @@ extends Control
 
 @onready var artifact_panel: PanelContainer = $ArtifactPanel
 @onready var dimmer: ColorRect = $Dimmer
-@onready var artifact_name_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/ArtifactNameLabel
-@onready var fragment_progress_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/FragmentProgressLabel
+@onready var artifact_name_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/ArtifactNameLabel"
+@onready var fragment_progress_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentProgressLabel"
 @onready var assemble_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/AssembleButton
 @onready var close_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/CloseButton
-@onready var fragment_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/FragmentIncomeLabel
-@onready var assembled_income_label: Label = $ArtifactPanel/MarginContainer/VBoxContainer/AssembledIncomeLabel
+@onready var fragment_income_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentIncomeLabel"
+@onready var assembled_income_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/AssembledIncomeLabel"
 
 var current_artifact_id := -1
 var open_position: Vector2

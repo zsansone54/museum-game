@@ -4,12 +4,12 @@ signal closed
 
 @onready var settings_panel: PanelContainer = $SettingsPanel
 @onready var dimmer: ColorRect = $Dimmer
-@onready var resolution_dropdown: OptionButton = $SettingsPanel/PanelMargin/SettingsBox/DisplaySection/DisplayControls/ResolutionDropdown
-@onready var fullscreen_check_box: CheckBox = $SettingsPanel/PanelMargin/SettingsBox/DisplaySection/DisplayControls/FullscreenCheckbox
-@onready var sfx_slider: HSlider = $SettingsPanel/PanelMargin/SettingsBox/SfxSection/SfxControls/SfxSlider
-@onready var sfx_mute_check_box: CheckBox = $SettingsPanel/PanelMargin/SettingsBox/SfxSection/SfxControls/SfxMuteCheckbox
-@onready var music_slider: HSlider = $SettingsPanel/PanelMargin/SettingsBox/MusicSection/MusicControls/MusicSlider
-@onready var music_mute_check_box: CheckBox = $SettingsPanel/PanelMargin/SettingsBox/MusicSection/MusicControls/MusicMuteCheckBox
+@onready var resolution_dropdown: OptionButton = $SettingsPanel/PanelMargin/SettingsBox/SettingsPannel/SettingsBox/DisplaySection/DisplayControls/ResolutionDropdown
+@onready var fullscreen_check_box: CheckBox = $SettingsPanel/PanelMargin/SettingsBox/SettingsPannel/SettingsBox/DisplaySection/DisplayControls/FullscreenCheckbox
+@onready var sfx_slider: HSlider = $SettingsPanel/PanelMargin/SettingsBox/SettingsPannel/SettingsBox/SfxSection/SfxControls/SfxSlider
+@onready var sfx_mute_check_box: CheckBox = $SettingsPanel/PanelMargin/SettingsBox/SettingsPannel/SettingsBox/SfxSection/SfxControls/SfxMuteCheckbox
+@onready var music_slider: HSlider = $SettingsPanel/PanelMargin/SettingsBox/SettingsPannel/SettingsBox/MusicSection/MusicControls/MusicSlider
+@onready var music_mute_check_box: CheckBox = $SettingsPanel/PanelMargin/SettingsBox/SettingsPannel/SettingsBox/MusicSection/MusicControls/MusicMuteCheckBox
 
 var open_position: Vector2
 var closed_position: Vector2

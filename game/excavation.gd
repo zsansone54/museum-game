@@ -11,7 +11,7 @@ extends Control
 @onready var area_2_button: Button = $Area2Button
 @onready var tools_button: Button = $ToolsButton
 
-@onready var site_panel: PanelContainer = $SitePanel
+@onready var site_panel: PanelContainer = $SitePanel/OuterPanel
 @onready var site_name_label: Label = (
 	$SitePanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer/SiteNameLabel
 )

@@ -16,16 +16,16 @@ texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t8wqh"]
-atlas = ExtResource("4_3ro8f")
-region = Rect2(108, 414, 16, 16)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t8wqh"]
 texture = ExtResource("4_t8wqh")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8wqh"]
+atlas = ExtResource("4_3ro8f")
+region = Rect2(108, 414, 16, 16)
 
 [node name="Excavation" type="Control" unique_id=2032322113]
 layout_mode = 3
@@ -208,85 +208,99 @@ text = "Tool 2"
 layout_mode = 2
 text = "Close"
 
-[node name="SitePanel" type="PanelContainer" parent="." unique_id=1765479893]
-visible = false
-custom_minimum_size = Vector2(660, 560)
+[node name="SitePanel" type="Control" parent="." unique_id=661606568]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -175.0
-offset_right = 250.0
-offset_bottom = 175.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OuterPanel" type="PanelContainer" parent="SitePanel" unique_id=1765479893]
+visible = false
+custom_minimum_size = Vector2(660, 560)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_gcfin")
 
-[node name="SiteCloseButton" type="TextureButton" parent="SitePanel" unique_id=1248166019]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_t8wqh")
-
-[node name="MarginContainer" type="MarginContainer" parent="SitePanel" unique_id=1628466259]
+[node name="MarginContainer" type="MarginContainer" parent="SitePanel/OuterPanel" unique_id=1628466259]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SitePanel/MarginContainer" unique_id=70571344]
+[node name="VBoxContainer" type="VBoxContainer" parent="SitePanel/OuterPanel/MarginContainer" unique_id=70571344]
 layout_mode = 2
 
-[node name="HeaderPanel" type="PanelContainer" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1794857731]
+[node name="HeaderPanel" type="PanelContainer" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1794857731]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_t8wqh")
 
-[node name="MarginContainer" type="MarginContainer" parent="SitePanel/MarginContainer/VBoxContainer/HeaderPanel" unique_id=98001586]
+[node name="MarginContainer" type="MarginContainer" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel" unique_id=98001586]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="SiteNameLabel" type="Label" parent="SitePanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer" unique_id=218872737]
+[node name="SiteNameLabel" type="Label" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer" unique_id=218872737]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="HeaderSpacer" type="Control" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=2119222577]
+[node name="HeaderSpacer" type="Control" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=2119222577]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Artifact1Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=616408072]
+[node name="Artifact1Button" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=616408072]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
-[node name="Artifact2Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1149261035]
+[node name="Artifact2Button" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1149261035]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
-[node name="Artifact3Button" type="Button" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=525389543]
+[node name="Artifact3Button" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=525389543]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=589348204]
+[node name="HSeparator" type="HSeparator" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=589348204]
 layout_mode = 2
 
-[node name="UpgradeRow" type="HBoxContainer" parent="SitePanel/MarginContainer/VBoxContainer" unique_id=1701642899]
+[node name="UpgradeRow" type="HBoxContainer" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1701642899]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SpeedUpgradeButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer/UpgradeRow" unique_id=1998904188]
+[node name="SpeedUpgradeButton" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer/UpgradeRow" unique_id=1998904188]
 custom_minimum_size = Vector2(280, 110)
 layout_mode = 2
 text = "Improve Excavation Speed"
 
-[node name="ChanceUpgradeButton" type="Button" parent="SitePanel/MarginContainer/VBoxContainer/UpgradeRow" unique_id=2060038494]
+[node name="ChanceUpgradeButton" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer/UpgradeRow" unique_id=2060038494]
 custom_minimum_size = Vector2(280, 110)
 layout_mode = 2
 text = "Improve Success Chance"
+
+[node name="SiteCloseButton" type="TextureButton" parent="SitePanel" unique_id=1248166019]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_t8wqh")
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("2_x6ne2")]
 visible = false

@@ -178,37 +178,44 @@ theme_override_font_sizes/font_size = 40
 text = "area 2"
 
 [node name="EquipmentPanel2" type="Control" parent="." unique_id=781250698]
-anchors_preset = 0
-offset_left = 745.0
-offset_top = 443.0
-offset_right = 785.0
-offset_bottom = 483.0
-
-[node name="OuterPanel" type="PanelContainer" parent="EquipmentPanel2" unique_id=1541608228]
-custom_minimum_size = Vector2(430, 260)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -53.0
-offset_right = 410.0
-offset_bottom = 207.0
+offset_left = -215.0
+offset_top = -167.5
+offset_right = 215.0
+offset_bottom = 147.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OuterPanel" type="PanelContainer" parent="EquipmentPanel2" unique_id=1541608228]
+custom_minimum_size = Vector2(430, 230)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -167.5
+offset_right = 215.0
+offset_bottom = 147.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_s7ls6")
 
 [node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel2/OuterPanel" unique_id=924727289]
 layout_mode = 2
-theme_override_constants/margin_left = 28
-theme_override_constants/margin_top = 28
-theme_override_constants/margin_right = 28
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer" unique_id=1578129418]
 layout_mode = 2
+theme_override_constants/separation = 14
 
 [node name="HeaderPanel" type="PanelContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=1602075814]
 layout_mode = 2
@@ -226,15 +233,7 @@ layout_mode = 2
 text = "Excavation tools"
 horizontal_alignment = 1
 
-[node name="Spacer2" type="Control" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=716843413]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-
 [node name="HSeparator" type="HSeparator" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=2130280621]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=534703674]
-custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
 [node name="Tool1Button" type="Button" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=357386427]
@@ -257,10 +256,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 613.3871
-offset_top = -334.864
-offset_right = 677.3871
-offset_bottom = -270.864
+offset_left = -25.670013
+offset_top = -17.97
+offset_right = 38.329987
+offset_bottom = 46.03
 grow_horizontal = 0
 scale = Vector2(2.3, 2.3)
 texture_normal = SubResource("AtlasTexture_t8wqh")

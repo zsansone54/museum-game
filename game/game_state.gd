@@ -40,6 +40,11 @@ func _ready() -> void:
 
 	set_artifact_progress()
 	rng.randomize()
+	
+	#if has_save_file():
+		#load_game()
+	
+	
 
 
 
@@ -57,6 +62,7 @@ func _process(delta: float) -> void:
 			excavation_attempt_result()
 
 	update_donation_income(delta)
+	game_completed.emit()
 
 
 func get_artifact_income_breakdown(artifact: Dictionary) -> Dictionary:

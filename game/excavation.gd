@@ -28,13 +28,13 @@ extends Control
 )
 @onready var site_close_button: TextureButton = $SitePanel/SiteCloseButton
 
-@onready var equipment_panel: PanelContainer = $EquipmentPanel
+@onready var equipment_panel: Control = $EquipmentPanel2
 @onready var tool_buttons: Array[Button] = [
-	$EquipmentPanel/MarginContainer/VBoxContainer/Tool1Button,
-	$EquipmentPanel/MarginContainer/VBoxContainer/Tool2Button
+	$EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/Tool1Button,
+	$EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/Tool2Button
 ]
-@onready var equipment_close_button: Button = (
-	$EquipmentPanel/MarginContainer/VBoxContainer/CloseButton
+@onready var equipment_close_button: TextureButton = (
+	$EquipmentPanel2/EquipmentClosePanel
 )
 
 var current_site_artifacts: Array = []
@@ -72,8 +72,6 @@ func _ready() -> void:
 	tool_buttons[1].pressed.connect(_on_tool_2_button_pressed)
 	equipment_close_button.pressed.connect(_on_equipment_close_button_pressed)
 
-	equipment_close_button.text = "Close"
-
 	site_panel.hide()
 	equipment_panel.hide()
 
@@ -99,7 +97,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	update_hud()
 
-	if site_panel.visible && !current_site_area.is_empty():
+	if site_panel.visible and not current_site_area.is_empty():
 		refresh_site_panel()
 
 	if equipment_panel.visible:
@@ -108,9 +106,11 @@ func _process(_delta: float) -> void:
 
 func update_hud() -> void:
 	funds_label.text = "$%d" % int(GameState.funds)
+
 	income_label.text = "+$%.2f / sec" % (
 		GameState.get_total_donation_income_per_second()
 	)
+
 	rep_label.text = "%d Rep" % GameState.rep
 
 	if GameState.active_artifact_id == -1:
@@ -119,7 +119,10 @@ func update_hud() -> void:
 		var artifact: Dictionary = GameState.get_artifact_data(
 			GameState.active_artifact_id
 		)
-		var total_time: float = GameState.get_effective_attempt_duration(artifact)
+
+		var total_time: float = GameState.get_effective_attempt_duration(
+			artifact
+		)
 
 		countdown_label.text = "%.2f / %.2f s" % [
 			max(GameState.excavation_countdown, 0.0),
@@ -130,8 +133,8 @@ func update_hud() -> void:
 func open_site(area_id: int) -> void:
 	if (
 		site_panel.visible
-		&& !current_site_area.is_empty()
-		&& current_site_area["id"] == area_id
+		and not current_site_area.is_empty()
+		and current_site_area["id"] == area_id
 	):
 		close_site_panel()
 		return
@@ -154,6 +157,7 @@ func open_site(area_id: int) -> void:
 	site_panel_tween = create_tween()
 	site_panel_tween.set_trans(Tween.TRANS_QUAD)
 	site_panel_tween.set_ease(Tween.EASE_OUT)
+
 	site_panel_tween.tween_property(
 		site_panel,
 		"position",
@@ -169,12 +173,14 @@ func close_site_panel() -> void:
 	site_panel_tween = create_tween()
 	site_panel_tween.set_trans(Tween.TRANS_QUAD)
 	site_panel_tween.set_ease(Tween.EASE_IN)
+
 	site_panel_tween.tween_property(
 		site_panel,
 		"position",
 		site_panel_closed_position,
 		0.1
 	)
+
 	site_panel_tween.tween_callback(site_panel.hide)
 
 
@@ -184,7 +190,7 @@ func refresh_site_panel() -> void:
 
 	var is_unlocked: bool = GameState.is_area_unlocked(current_site_area)
 
-	if !is_unlocked:
+	if not is_unlocked:
 		site_name_label.text = "%s\nRequires %d Reputation" % [
 			current_site_area["name"],
 			current_site_area["unlock_required_rep"]
@@ -216,20 +222,24 @@ func refresh_site_panel() -> void:
 func refresh_artifact_buttons() -> void:
 	for index in range(artifact_buttons.size()):
 		var artifact: Dictionary = current_site_artifacts[index]
-		var progress: Dictionary = GameState.get_artifact_progress(artifact["id"])
+		var progress: Dictionary = GameState.get_artifact_progress(
+			artifact["id"]
+		)
+
 		var button: Button = artifact_buttons[index]
 
 		button.text = "%s\nSuccess Chance: %.0f%%" % [
 			artifact["name"],
 			GameState.get_effective_success_chance(artifact)
 		]
+
 		button.tooltip_text = ""
 
-		if !GameState.has_required_tools(artifact):
+		if not GameState.has_required_tools(artifact):
 			var missing_tools: PackedStringArray = []
 
 			for tool_id in artifact["required_tool"]:
-				if !GameState.tools[tool_id]["is_purchased"]:
+				if not GameState.tools[tool_id]["is_purchased"]:
 					missing_tools.append(GameState.tools[tool_id]["name"])
 
 			button.disabled = true
@@ -301,6 +311,7 @@ func update_upgrade_button(
 			current_level,
 			max_level
 		]
+
 		button.disabled = true
 		button.tooltip_text = "This upgrade is already at its maximum level"
 
@@ -311,6 +322,7 @@ func update_upgrade_button(
 			max_level,
 			int(cost)
 		]
+
 		button.disabled = true
 		button.tooltip_text = "Requires $%d" % int(cost)
 
@@ -321,6 +333,7 @@ func update_upgrade_button(
 			max_level,
 			int(cost)
 		]
+
 		button.disabled = false
 		button.tooltip_text = "Purchase this upgrade"
 
@@ -348,6 +361,7 @@ func open_equipment_panel() -> void:
 	equipment_panel_tween = create_tween()
 	equipment_panel_tween.set_trans(Tween.TRANS_QUAD)
 	equipment_panel_tween.set_ease(Tween.EASE_OUT)
+
 	equipment_panel_tween.tween_property(
 		equipment_panel,
 		"position",
@@ -363,12 +377,14 @@ func close_equipment_panel() -> void:
 	equipment_panel_tween = create_tween()
 	equipment_panel_tween.set_trans(Tween.TRANS_QUAD)
 	equipment_panel_tween.set_ease(Tween.EASE_IN)
+
 	equipment_panel_tween.tween_property(
 		equipment_panel,
 		"position",
 		equipment_panel_closed_position,
 		0.1
 	)
+
 	equipment_panel_tween.tween_callback(equipment_panel.hide)
 
 
@@ -400,6 +416,7 @@ func refresh_tool_buttons() -> void:
 				tool_cost,
 				required_rep
 			]
+
 			button.disabled = true
 			button.tooltip_text = "Requires %d Reputation" % required_rep
 
@@ -409,6 +426,7 @@ func refresh_tool_buttons() -> void:
 				tool_cost,
 				required_rep
 			]
+
 			button.disabled = true
 			button.tooltip_text = "Requires $%d" % tool_cost
 
@@ -418,19 +436,20 @@ func refresh_tool_buttons() -> void:
 				tool_cost,
 				required_rep
 			]
+
 			button.disabled = false
 			button.tooltip_text = "Purchase " + tool_name
 
 
 func purchase_tool(tool_id: int) -> void:
-	if tool_id < 0 || tool_id >= GameState.tools.size():
+	if tool_id < 0 or tool_id >= GameState.tools.size():
 		return
 
 	var was_purchased: bool = GameState.tools[tool_id]["is_purchased"]
 
 	GameState.buy_tool(tool_id)
 
-	if !was_purchased && GameState.tools[tool_id]["is_purchased"]:
+	if not was_purchased and GameState.tools[tool_id]["is_purchased"]:
 		GameState.save_game()
 
 	refresh_tool_buttons()

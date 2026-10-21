@@ -1,6 +1,16 @@
 [gd_scene format=3 uid="uid://330qm08acygp"]
 
+[ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_rkk4k"]
 [ext_resource type="Script" uid="uid://bjk7g0lha7wjm" path="res://win_menu.gd" id="1_xjwx6"]
+[ext_resource type="Texture2D" uid="uid://c5jghn7dsgkf5" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0018.png" id="3_eu45w"]
+[ext_resource type="FontFile" uid="uid://bmu8x7xtkrbma" path="res://assets/fonts/karma/Karma Suture.otf" id="4_cykwu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ro8f"]
+texture = ExtResource("3_eu45w")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
 [node name="WinMenu" type="Control" unique_id=1237677374]
 layout_mode = 3
@@ -9,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_rkk4k")
 script = ExtResource("1_xjwx6")
 
 [node name="Dimmer" type="ColorRect" parent="." unique_id=360318580]
@@ -29,7 +40,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1414989673]
+custom_minimum_size = Vector2(380, 310)
+custom_maximum_size = Vector2(380, 310)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_3ro8f")
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=240607792]
 layout_mode = 2
@@ -39,16 +53,36 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=785969900]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.41960785, 0.2901961, 0.1764706, 1)
 theme_override_font_sizes/font_size = 40
 text = "Museum Complete!"
 horizontal_alignment = 1
 
 [node name="MessageLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1644665942]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.41960785, 0.2901961, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("4_cykwu")
 theme_override_font_sizes/font_size = 30
-text = "Every artifact has been restored and displayed."
+text = "Every artifact has  
+been restored 
+and displayed."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=223071566]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1051521449]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=569135058]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
 [node name="MainMenuButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1250576302]
+custom_minimum_size = Vector2(300, 60)
+custom_maximum_size = Vector2(300, 60)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 25
-text = "Return to Main Menu"
+text = "Return to Title"

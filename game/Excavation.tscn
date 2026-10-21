@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="4_x6ne2"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8wqh"]
+atlas = ExtResource("4_3ro8f")
+region = Rect2(108, 414, 16, 16)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
 texture = ExtResource("3_vxnk4")
 texture_margin_left = 16.0
@@ -22,10 +26,6 @@ texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t8wqh"]
-atlas = ExtResource("4_3ro8f")
-region = Rect2(108, 414, 16, 16)
 
 [node name="Excavation" type="Control" unique_id=2032322113]
 layout_mode = 3
@@ -209,6 +209,7 @@ layout_mode = 2
 text = "Close"
 
 [node name="SitePanel" type="Control" parent="." unique_id=661606568]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -222,8 +223,18 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="SiteCloseButton" type="TextureButton" parent="SitePanel" unique_id=1248166019]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_t8wqh")
+
 [node name="OuterPanel" type="PanelContainer" parent="SitePanel" unique_id=1765479893]
-visible = false
 custom_minimum_size = Vector2(660, 560)
 layout_mode = 1
 anchors_preset = 15
@@ -290,17 +301,6 @@ text = "Improve Excavation Speed"
 custom_minimum_size = Vector2(280, 110)
 layout_mode = 2
 text = "Improve Success Chance"
-
-[node name="SiteCloseButton" type="TextureButton" parent="SitePanel" unique_id=1248166019]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -64.0
-offset_bottom = 64.0
-grow_horizontal = 0
-texture_normal = SubResource("AtlasTexture_t8wqh")
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("2_x6ne2")]
 visible = false

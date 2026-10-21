@@ -42,7 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ArtifactPanel" type="PanelContainer" parent="." unique_id=2040389278]
+[node name="ArtifactPanel" type="Control" parent="." unique_id=251041595]
 custom_minimum_size = Vector2(520, 260)
 layout_mode = 1
 anchors_preset = 8
@@ -50,66 +50,95 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -60.5
-offset_right = 20.0
-offset_bottom = 60.5
+offset_left = -260.0
+offset_top = -130.0
+offset_right = 260.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OuterPanel" type="PanelContainer" parent="ArtifactPanel" unique_id=2040389278]
+custom_minimum_size = Vector2(520, 450)
+custom_maximum_size = Vector2(520, 450)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -130.0
+offset_right = 260.0
+offset_bottom = 299.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_gcfin")
 
-[node name="MarginContainer" type="MarginContainer" parent="ArtifactPanel" unique_id=392507774]
+[node name="MarginContainer" type="MarginContainer" parent="ArtifactPanel/OuterPanel" unique_id=392507774]
 layout_mode = 2
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ArtifactPanel/MarginContainer" unique_id=1932758864]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArtifactPanel/OuterPanel/MarginContainer" unique_id=1932758864]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Header Panel" type="PanelContainer" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=999656446]
+[node name="Header Panel" type="PanelContainer" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=999656446]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_s7ls6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ArtifactPanel/MarginContainer/VBoxContainer/Header Panel" unique_id=166568474]
+[node name="VBoxContainer" type="VBoxContainer" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel" unique_id=166568474]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ArtifactNameLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=1393105923]
+[node name="ArtifactNameLabel" type="Label" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=1393105923]
 layout_mode = 2
 theme_override_font_sizes/font_size = 38
 horizontal_alignment = 1
 
-[node name="FragmentProgressLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=893109691]
+[node name="FragmentProgressLabel" type="Label" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=893109691]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
-[node name="FragmentIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=1525709348]
+[node name="FragmentIncomeLabel" type="Label" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=1525709348]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Cleaned fragments: $0.60 / sec"
 
-[node name="AssembledIncomeLabel" type="Label" parent="ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=1353303455]
+[node name="AssembledIncomeLabel" type="Label" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer" unique_id=1353303455]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Assembled artifact: $0.00 / sec"
 
-[node name="HSeparator" type="HSeparator" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=493968231]
+[node name="Spacer" type="Control" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1684418672]
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="AssembleButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1694501054]
+[node name="HSeparator" type="HSeparator" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=493968231]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1413994978]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="AssembleButton" type="Button" parent="ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1694501054]
 custom_minimum_size = Vector2(400, 90)
 custom_maximum_size = Vector2(400, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="SiteCloseButton" type="TextureButton" parent="." unique_id=579030410]
+[node name="SiteCloseButton" type="TextureButton" parent="ArtifactPanel" unique_id=579030410]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -23.054993
+offset_top = -23.15
+offset_right = 40.94519
+offset_bottom = 40.85
 grow_horizontal = 0
 scale = Vector2(2.2, 2.2)
 size_flags_horizontal = 8

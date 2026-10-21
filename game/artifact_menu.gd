@@ -1,29 +1,33 @@
 extends Control
 
-@onready var artifact_panel: PanelContainer = $ArtifactPanel
+@onready var artifact_panel: Control = $ArtifactPanel
 @onready var dimmer: ColorRect = $Dimmer
+
 @onready var artifact_name_label: Label = (
-	$"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/ArtifactNameLabel"
+	$"ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/ArtifactNameLabel"
 )
+
 @onready var fragment_progress_label: Label = (
-	$"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentProgressLabel"
+	$"ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentProgressLabel"
 )
+
 @onready var fragment_income_label: Label = (
-	$"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentIncomeLabel"
+	$"ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentIncomeLabel"
 )
+
 @onready var assembled_income_label: Label = (
-	$"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/AssembledIncomeLabel"
+	$"ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/AssembledIncomeLabel"
 )
+
 @onready var assemble_button: Button = (
-	$ArtifactPanel/MarginContainer/VBoxContainer/AssembleButton
+	$ArtifactPanel/OuterPanel/MarginContainer/VBoxContainer/AssembleButton
 )
-@onready var close_button: TextureButton = $SiteCloseButton
+
+@onready var close_button: TextureButton = $ArtifactPanel/SiteCloseButton
 
 var current_artifact_id := -1
 var open_position: Vector2
 var closed_position: Vector2
-var close_open_position: Vector2
-var close_closed_position: Vector2
 var is_closing := false
 
 
@@ -35,17 +39,7 @@ func _ready() -> void:
 
 	open_position = artifact_panel.position
 	closed_position = open_position + Vector2(0, artifact_panel.size.y + 20)
-
-	var close_offset := Vector2(
-		artifact_panel.size.x - close_button.size.x * 0.55,
-		-close_button.size.y * 0.35
-	)
-
-	close_open_position = open_position + close_offset
-	close_closed_position = closed_position + close_offset
-
 	artifact_panel.position = closed_position
-	close_button.position = close_closed_position
 
 	assemble_button.pressed.connect(_on_assemble_button_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
@@ -63,7 +57,6 @@ func open_menu(artifact_id: int) -> void:
 
 	show()
 	artifact_panel.position = closed_position
-	close_button.position = close_closed_position
 	dimmer.color.a = 0.0
 
 	var tween := create_tween().set_parallel(true)
@@ -72,13 +65,6 @@ func open_menu(artifact_id: int) -> void:
 		artifact_panel,
 		"position",
 		open_position,
-		0.35
-	).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-
-	tween.tween_property(
-		close_button,
-		"position",
-		close_open_position,
 		0.35
 	).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 
@@ -97,13 +83,6 @@ func close_menu() -> void:
 		artifact_panel,
 		"position",
 		closed_position,
-		0.3
-	).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
-
-	tween.tween_property(
-		close_button,
-		"position",
-		close_closed_position,
 		0.3
 	).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
 
@@ -136,6 +115,7 @@ func refresh() -> void:
 	)
 
 	assemble_button.text = "Assemble Artifact"
+
 	assemble_button.disabled = (
 		progress["is_assembled"]
 		or progress["fragments_found"] < artifact["total_fragments"]

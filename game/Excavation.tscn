@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="4_x6ne2"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s7ls6"]
 texture = ExtResource("3_vxnk4")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
@@ -26,6 +26,13 @@ texture_margin_bottom = 16.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_t8wqh"]
 atlas = ExtResource("4_3ro8f")
 region = Rect2(108, 414, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
+texture = ExtResource("3_vxnk4")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
 [node name="Excavation" type="Control" unique_id=2032322113]
 layout_mode = 3
@@ -170,8 +177,14 @@ offset_bottom = 478.0
 theme_override_font_sizes/font_size = 40
 text = "area 2"
 
-[node name="EquipmentPanel" type="PanelContainer" parent="." unique_id=1541608228]
-visible = false
+[node name="EquipmentPanel2" type="Control" parent="." unique_id=781250698]
+anchors_preset = 0
+offset_left = 745.0
+offset_top = 443.0
+offset_right = 785.0
+offset_bottom = 483.0
+
+[node name="OuterPanel" type="PanelContainer" parent="EquipmentPanel2" unique_id=1541608228]
 custom_minimum_size = Vector2(430, 260)
 layout_mode = 1
 anchors_preset = 8
@@ -180,33 +193,77 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -23.5
-offset_right = 20.0
-offset_bottom = 23.5
+offset_top = -53.0
+offset_right = 410.0
+offset_bottom = 207.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_s7ls6")
 
-[node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel" unique_id=924727289]
+[node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel2/OuterPanel" unique_id=924727289]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer" unique_id=1578129418]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EquipmentPanel/MarginContainer" unique_id=1578129418]
+[node name="HeaderPanel" type="PanelContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=1602075814]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_t8wqh")
 
-[node name="TitleLabel" type="Label" parent="EquipmentPanel/MarginContainer/VBoxContainer" unique_id=1751450131]
+[node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel" unique_id=1395763530]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="TitleLabel" type="Label" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer" unique_id=464727323]
 layout_mode = 2
 text = "Excavation tools"
+horizontal_alignment = 1
 
-[node name="Tool1Button" type="Button" parent="EquipmentPanel/MarginContainer/VBoxContainer" unique_id=357386427]
+[node name="Spacer2" type="Control" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=716843413]
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=2130280621]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=534703674]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Tool1Button" type="Button" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=357386427]
+custom_minimum_size = Vector2(330, 60)
+custom_maximum_size = Vector2(330, 60)
+layout_mode = 2
+size_flags_horizontal = 4
 text = "Tool 1"
 
-[node name="Tool2Button" type="Button" parent="EquipmentPanel/MarginContainer/VBoxContainer" unique_id=1845087250]
+[node name="Tool2Button" type="Button" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=1845087250]
+custom_minimum_size = Vector2(330, 60)
+custom_maximum_size = Vector2(330, 60)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Tool 2"
 
-[node name="CloseButton" type="Button" parent="EquipmentPanel/MarginContainer/VBoxContainer" unique_id=1828290071]
-layout_mode = 2
-text = "Close"
+[node name="EquipmentClosePanel" type="TextureButton" parent="EquipmentPanel2" unique_id=1378171230]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 613.3871
+offset_top = -334.864
+offset_right = 677.3871
+offset_bottom = -270.864
+grow_horizontal = 0
+scale = Vector2(2.3, 2.3)
+texture_normal = SubResource("AtlasTexture_t8wqh")
 
 [node name="SitePanel" type="Control" parent="." unique_id=661606568]
 visible = false

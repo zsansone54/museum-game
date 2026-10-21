@@ -5,7 +5,7 @@ extends Control
 @onready var artifact_name_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/ArtifactNameLabel"
 @onready var fragment_progress_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentProgressLabel"
 @onready var assemble_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/AssembleButton
-@onready var close_button: Button = $ArtifactPanel/MarginContainer/VBoxContainer/CloseButton
+@onready var close_button: TextureButton = $ArtifactPanel/SiteCloseButton
 @onready var fragment_income_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/FragmentIncomeLabel"
 @onready var assembled_income_label: Label = $"ArtifactPanel/MarginContainer/VBoxContainer/Header Panel/VBoxContainer/AssembledIncomeLabel"
 
@@ -76,7 +76,6 @@ func refresh() -> void:
 	fragment_income_label.text = "Recovered fragments: $%.2f / sec" % income["fragments"]
 	assembled_income_label.text = "Completed exhibit: $%.2f / sec" % income["assembled"]
 	assemble_button.text = "Assemble Artifact"
-	close_button.text = "Close"
 
 
 	assemble_button.disabled = (

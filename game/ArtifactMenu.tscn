@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bcsblyftdjksp" path="res://artifact_menu.gd" id="1_u3t71"]
 [ext_resource type="Texture2D" uid="uid://c5jghn7dsgkf5" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0018.png" id="2_eycya"]
 [ext_resource type="Texture2D" uid="uid://b5ibf23ol2mey" path="res://assets/ui/kenney_pixel-ui-pack/9-Slice/Ancient/brown_inlay.png" id="3_4o6xv"]
+[ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_64qi4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
 texture = ExtResource("2_eycya")
@@ -17,6 +18,10 @@ texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2aebv"]
+atlas = ExtResource("4_64qi4")
+region = Rect2(108, 414, 16, 16)
 
 [node name="ArtifactMenu" type="Control" unique_id=1918927880]
 process_mode = 3
@@ -95,9 +100,17 @@ text = "Assembled artifact: $0.00 / sec"
 layout_mode = 2
 
 [node name="AssembleButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=1694501054]
-custom_minimum_size = Vector2(0, 55)
+custom_minimum_size = Vector2(400, 90)
+custom_maximum_size = Vector2(400, -1)
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="CloseButton" type="Button" parent="ArtifactPanel/MarginContainer/VBoxContainer" unique_id=462694691]
-custom_minimum_size = Vector2(0, 55)
+[node name="SiteCloseButton" type="TextureButton" parent="ArtifactPanel" unique_id=579030410]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(92.505, 10.235)
+offset_transform_scale = Vector2(2.2, 2.2)
+texture_normal = SubResource("AtlasTexture_2aebv")

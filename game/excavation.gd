@@ -11,20 +11,20 @@ extends Control
 @onready var area_2_button: Button = $Area2Button
 @onready var tools_button: Button = $ToolsButton
 
-@onready var site_panel: PanelContainer = $SitePanel/OuterPanel
+@onready var site_panel: Control = $SitePanel
 @onready var site_name_label: Label = (
-	$SitePanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer/SiteNameLabel
+	$SitePanel/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer/SiteNameLabel
 )
 @onready var artifact_buttons: Array[Button] = [
-	$SitePanel/MarginContainer/VBoxContainer/Artifact1Button,
-	$SitePanel/MarginContainer/VBoxContainer/Artifact2Button,
-	$SitePanel/MarginContainer/VBoxContainer/Artifact3Button
+	$SitePanel/OuterPanel/MarginContainer/VBoxContainer/Artifact1Button,
+	$SitePanel/OuterPanel/MarginContainer/VBoxContainer/Artifact2Button,
+	$SitePanel/OuterPanel/MarginContainer/VBoxContainer/Artifact3Button
 ]
 @onready var speed_upgrade_button: Button = (
-	$SitePanel/MarginContainer/VBoxContainer/UpgradeRow/SpeedUpgradeButton
+	$SitePanel/OuterPanel/MarginContainer/VBoxContainer/UpgradeRow/SpeedUpgradeButton
 )
 @onready var chance_upgrade_button: Button = (
-	$SitePanel/MarginContainer/VBoxContainer/UpgradeRow/ChanceUpgradeButton
+	$SitePanel/OuterPanel/MarginContainer/VBoxContainer/UpgradeRow/ChanceUpgradeButton
 )
 @onready var site_close_button: TextureButton = $SitePanel/SiteCloseButton
 

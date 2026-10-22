@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="3_a50wm"]
 [ext_resource type="Texture2D" uid="uid://c5jghn7dsgkf5" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0018.png" id="3_vxnk4"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_3ro8f"]
+[ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="4_ae8nq"]
 [ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="4_x6ne2"]
 
@@ -65,76 +66,6 @@ anchor_right = 1.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Top" type="VBoxContainer" parent="." unique_id=1838530976]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 137.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="TopHudMargin" type="MarginContainer" parent="Top" unique_id=426362140]
-layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
-
-[node name="TopHud" type="HBoxContainer" parent="Top/TopHudMargin" unique_id=827325785]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="FundsLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1825245687]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "$999,999"
-
-[node name="IncomeLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1466485656]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "$0.00 / sec"
-
-[node name="Spacer2" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=2034720174]
-custom_minimum_size = Vector2(50, 0)
-custom_maximum_size = Vector2(50, -1)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RepLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1352064607]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "1000 Rep"
-
-[node name="CountdownLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=866856722]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "10.0/10.0s"
-
-[node name="Spacer" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=408952144]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PauseButton" type="Button" parent="Top/TopHudMargin/TopHud" unique_id=734675095]
-custom_minimum_size = Vector2(60, 60)
-custom_maximum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "="
-
-[node name="Title" type="Label" parent="Top" unique_id=2019318629]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 80
-text = "Excavation Map"
-
 [node name="ToolsButton" type="Button" parent="." unique_id=1104520362]
 layout_mode = 1
 anchors_preset = 4
@@ -166,6 +97,7 @@ scale = Vector2(1.1103836, 1.0138812)
 texture_normal = SubResource("AtlasTexture_3ro8f")
 ignore_texture_size = true
 stretch_mode = 0
+script = ExtResource("4_ae8nq")
 
 [node name="Area1Button" type="Button" parent="." unique_id=275443215]
 layout_mode = 0

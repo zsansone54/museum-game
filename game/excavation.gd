@@ -534,7 +534,7 @@ func _on_equipment_close_button_pressed() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Exhibit1.tscn")
+	SceneTransition.change_scene("res://Exhibit1.tscn")
 
 
 func _on_pause_menu_action_selected(action: String) -> void:

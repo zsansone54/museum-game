@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_nm046"]
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_2u0ix"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_fkk1p"]
+[ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="5_7rlx5"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="5_irlb0"]
 [ext_resource type="PackedScene" uid="uid://330qm08acygp" path="res://WinMenu.tscn" id="6_nm046"]
 
@@ -168,76 +169,6 @@ text = "Exhibit Locked"
 layout_mode = 2
 text = "Requires 35 Reputation"
 
-[node name="Top" type="VBoxContainer" parent="." unique_id=392528749]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 200.0
-grow_horizontal = 2
-theme_override_constants/separation = 10
-
-[node name="TopHudMargin" type="MarginContainer" parent="Top" unique_id=2019853854]
-layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 10
-
-[node name="TopHud" type="HBoxContainer" parent="Top/TopHudMargin" unique_id=1732392329]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="FundsLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1513308518]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "$999,999"
-
-[node name="IncomeLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=303113680]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "$0.00 / sec"
-
-[node name="Spacer2" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=1809584306]
-custom_minimum_size = Vector2(50, 0)
-custom_maximum_size = Vector2(50, -1)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RepLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=403565111]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "1000 Rep"
-
-[node name="CountdownLabel" type="Label" parent="Top/TopHudMargin/TopHud" unique_id=1909446689]
-custom_minimum_size = Vector2(200, 60)
-custom_maximum_size = Vector2(200, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "10.0/10.0s"
-
-[node name="Spacer" type="Control" parent="Top/TopHudMargin/TopHud" unique_id=2048826570]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PauseButton" type="Button" parent="Top/TopHudMargin/TopHud" unique_id=1719943783]
-custom_minimum_size = Vector2(60, 60)
-custom_maximum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "="
-
-[node name="ExhibitTitle" type="Label" parent="Top" unique_id=993421149]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 80
-text = "Exhibit 2"
-
 [node name="LeftButton" type="TextureButton" parent="." unique_id=152629910]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
@@ -253,6 +184,7 @@ grow_vertical = 2
 texture_normal = SubResource("AtlasTexture_fkk1p")
 ignore_texture_size = true
 stretch_mode = 0
+script = ExtResource("5_7rlx5")
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("3_nm046")]
 visible = false
@@ -268,5 +200,3 @@ layout_mode = 1
 [node name="WinMenu" parent="." unique_id=1237677374 instance=ExtResource("6_nm046")]
 visible = false
 layout_mode = 1
-
-[connection signal="pressed" from="Top/TopHudMargin/TopHud/PauseButton" to="." method="_on_pause_button_pressed"]

@@ -1,12 +1,21 @@
 [gd_scene format=3 uid="uid://mo46s1jtehjy"]
 
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="1_d825m"]
-[ext_resource type="Script" uid="uid://c0rghn3j0vrym" path="res://Exhibit1.gd" id="1_gwv2w"]
+[ext_resource type="Script" uid="uid://c0rghn3j0vrym" path="res://exhibit1.gd" id="1_gwv2w"]
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_u2ur0"]
+[ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="3_5bj8y"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_bsrcs"]
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_seecs"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="5_equix"]
 [ext_resource type="PackedScene" uid="uid://330qm08acygp" path="res://WinMenu.tscn" id="6_64dqa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcfin"]
+atlas = ExtResource("3_5bj8y")
+region = Rect2(126, 432, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7ls6"]
+atlas = ExtResource("3_5bj8y")
+region = Rect2(144, 432, 16, 16)
 
 [node name="Exhibit1" type="Control" unique_id=124045584]
 layout_mode = 3
@@ -105,19 +114,20 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 80
 text = "Exhibit 1"
 
-[node name="LeftButton" type="Button" parent="." unique_id=1669915334]
+[node name="LeftButton" type="TextureButton" parent="." unique_id=1508538183]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_top = -15.5
-offset_right = 23.0
-offset_bottom = 15.5
+offset_right = 101.0
+offset_bottom = 81.5
 grow_vertical = 2
-theme_override_font_sizes/font_size = 80
-text = "<-"
+texture_normal = SubResource("AtlasTexture_gcfin")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="RightButton" type="Button" parent="." unique_id=387485989]
+[node name="RightButton" type="TextureButton" parent="." unique_id=2030724827]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -126,12 +136,14 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -80.0
 offset_top = -59.0
+offset_right = 21.0
 offset_bottom = 59.0
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(1.1103836, 1.0138812)
-theme_override_font_sizes/font_size = 80
-text = "->"
+texture_normal = SubResource("AtlasTexture_s7ls6")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="ArtifactMargin" type="MarginContainer" parent="." unique_id=1526326832]
 layout_mode = 1

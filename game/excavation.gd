@@ -1,11 +1,7 @@
 extends Control
 
-@onready var funds_label: Label = $Top/TopHudMargin/TopHud/FundsLabel
-@onready var rep_label: Label = $Top/TopHudMargin/TopHud/RepLabel
-@onready var countdown_label: Label = $Top/TopHudMargin/TopHud/CountdownLabel
-@onready var income_label: Label = $Top/TopHudMargin/TopHud/IncomeLabel
+@onready var top_hud: TopHud = $TopHud
 
-@onready var pause_button: Button = $Top/TopHudMargin/TopHud/PauseButton
 @onready var back_button: TextureButton = $RightButton
 @onready var area_1_button: Button = $Area1Button
 @onready var area_2_button: Button = $Area2Button
@@ -50,10 +46,11 @@ var site_panel_tween: Tween
 
 
 func _ready() -> void:
+	top_hud.pause_requested.connect(_on_pause_button_pressed)
+
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
 
-	pause_button.pressed.connect(_on_pause_button_pressed)
 	back_button.pressed.connect(_on_back_button_pressed)
 
 	area_1_button.pressed.connect(_on_area_1_button_pressed)
@@ -75,8 +72,6 @@ func _ready() -> void:
 	site_panel.hide()
 	equipment_panel.hide()
 
-	update_hud()
-
 	await get_tree().process_frame
 
 	equipment_panel_open_position = equipment_panel.position
@@ -95,39 +90,11 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	update_hud()
-
 	if site_panel.visible and not current_site_area.is_empty():
 		refresh_site_panel()
 
 	if equipment_panel.visible:
 		refresh_tool_buttons()
-
-
-func update_hud() -> void:
-	funds_label.text = "$%d" % int(GameState.funds)
-
-	income_label.text = "+$%.2f / sec" % (
-		GameState.get_total_donation_income_per_second()
-	)
-
-	rep_label.text = "%d Rep" % GameState.rep
-
-	if GameState.active_artifact_id == -1:
-		countdown_label.text = "--.-- / --.-- s"
-	else:
-		var artifact: Dictionary = GameState.get_artifact_data(
-			GameState.active_artifact_id
-		)
-
-		var total_time: float = GameState.get_effective_attempt_duration(
-			artifact
-		)
-
-		countdown_label.text = "%.2f / %.2f s" % [
-			max(GameState.excavation_countdown, 0.0),
-			total_time
-		]
 
 
 func open_site(area_id: int) -> void:

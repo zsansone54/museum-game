@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="5_7rlx5"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="5_irlb0"]
 [ext_resource type="PackedScene" uid="uid://330qm08acygp" path="res://WinMenu.tscn" id="6_nm046"]
+[ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_cfs8m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkk1p"]
 atlas = ExtResource("4_fkk1p")
@@ -199,4 +200,7 @@ layout_mode = 1
 
 [node name="WinMenu" parent="." unique_id=1237677374 instance=ExtResource("6_nm046")]
 visible = false
+layout_mode = 1
+
+[node name="TopHud" parent="." unique_id=1977575653 instance=ExtResource("10_cfs8m")]
 layout_mode = 1

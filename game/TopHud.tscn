@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_4i2vw"]
 [ext_resource type="Texture2D" uid="uid://8sabfrve8iit" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0017.png" id="2_k3km3"]
+[ext_resource type="Script" uid="uid://dgl7uj18sa7qv" path="res://top_hud.gd" id="2_wne50"]
 [ext_resource type="Texture2D" uid="uid://cn6d4nnx5iah3" path="res://assets/ui/coin/money.png" id="3_wne50"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_m3vwo"]
 [ext_resource type="FontFile" uid="uid://bmu8x7xtkrbma" path="res://assets/fonts/karma/Karma Suture.otf" id="5_atkrj"]
@@ -129,6 +130,7 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 theme = ExtResource("1_4i2vw")
+script = ExtResource("2_wne50")
 
 [node name="TextureRect" type="PanelContainer" parent="." unique_id=1546591004]
 custom_minimum_size = Vector2(1920, 100)
@@ -145,8 +147,8 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_gcfin")
 layout_mode = 2
 
 [node name="FundsPlate" type="PanelContainer" parent="TextureRect/HBoxContainer" unique_id=174806767]
-custom_minimum_size = Vector2(245, 68)
-custom_maximum_size = Vector2(245, 68)
+custom_minimum_size = Vector2(280, 68)
+custom_maximum_size = Vector2(280, 68)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2e1rq")
 
@@ -169,7 +171,11 @@ position = Vector2(34, 34)
 scale = Vector2(4.2, 4.2)
 sprite_frames = SubResource("SpriteFrames_s7ls6")
 animation = &"spin"
-frame_progress = 0.11310043
+frame_progress = 0.3159495
+
+[node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=712252902]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=791356299]
 custom_minimum_size = Vector2(0, 60)
@@ -180,17 +186,18 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_gcfin")
 
 [node name="Spacer" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=1046286042]
+custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
 [node name="FundsText" type="VBoxContainer" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=1131721461]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=540151196]
+[node name="FundsLabel" type="Label" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=540151196]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_atkrj")
 text = "$999,999"
 
-[node name="Label2" type="Label" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=1653888703]
+[node name="IncomeLabel" type="Label" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=1653888703]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.50980395, 0.76862746, 0.35686275, 1)
 theme_override_fonts/font = ExtResource("5_atkrj")

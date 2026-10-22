@@ -1,14 +1,15 @@
 extends Control
 
-@onready var funds_label: Label = $Top/TopHudMargin/TopHud/FundsLabel
-@onready var rep_label: Label = $Top/TopHudMargin/TopHud/RepLabel
-@onready var countdown_label: Label = $Top/TopHudMargin/TopHud/CountdownLabel
-@onready var income_label: Label = $Top/TopHudMargin/TopHud/IncomeLabel
+@onready var top_hud: TopHud = $TopHud
 @onready var lock_overlay: Control = $LockOverlay
-@onready var requirement_label: Label = $LockOverlay/CenterContainer/VBoxContainer/RequirementLabel
+@onready var requirement_label: Label = (
+	$LockOverlay/CenterContainer/VBoxContainer/RequirementLabel
+)
 
 
 func _ready() -> void:
+	top_hud.pause_requested.connect(_on_pause_button_pressed)
+
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
 
@@ -32,31 +33,10 @@ func _ready() -> void:
 		GameState.get_artifact_data(5)["name"]
 
 	update_lock_state()
-	update_hud()
 
 
 func _process(_delta: float) -> void:
-	update_hud()
 	update_lock_state()
-
-
-func update_hud() -> void:
-	funds_label.text = "$%d" % int(GameState.funds)
-	rep_label.text = "%d Rep" % GameState.rep
-	income_label.text = "+$%.2f / sec" % GameState.get_total_donation_income_per_second()
-
-	if GameState.active_artifact_id == -1:
-		countdown_label.text = "--.-- / --.-- s"
-	else:
-		var artifact: Dictionary = GameState.get_artifact_data(
-			GameState.active_artifact_id
-		)
-		var total_time: float = GameState.get_effective_attempt_duration(artifact)
-
-		countdown_label.text = "%.2f / %.2f s" % [
-			max(GameState.excavation_countdown, 0.0),
-			total_time
-		]
 
 
 func update_lock_state() -> void:

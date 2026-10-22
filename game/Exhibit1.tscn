@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://mo46s1jtehjy"]
 
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="1_d825m"]
-[ext_resource type="Script" uid="uid://c0rghn3j0vrym" path="res://exhibit1.gd" id="1_gwv2w"]
+[ext_resource type="Script" uid="uid://c0rghn3j0vrym" path="res://Exhibit1.gd" id="1_gwv2w"]
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_u2ur0"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="3_5bj8y"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_bsrcs"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_seecs"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="5_equix"]
 [ext_resource type="PackedScene" uid="uid://330qm08acygp" path="res://WinMenu.tscn" id="6_64dqa"]
+[ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_27pqb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gcfin"]
 atlas = ExtResource("3_5bj8y")
@@ -189,3 +190,7 @@ layout_mode = 1
 [node name="WinMenu" parent="." unique_id=1237677374 instance=ExtResource("6_64dqa")]
 visible = false
 layout_mode = 1
+
+[node name="TopHud" parent="." unique_id=1977575653 instance=ExtResource("10_27pqb")]
+layout_mode = 1
+offset_bottom = 100.0

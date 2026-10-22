@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://bfhswv7vxaxh1" path="res://pause_menu.gd" id="1_etnfi"]
 [ext_resource type="StyleBox" uid="uid://cn24prh10foj8" path="res://assets/ui/pause_panel_brown.tres" id="2_etnfi"]
 [ext_resource type="FontFile" uid="uid://bmu8x7xtkrbma" path="res://assets/fonts/karma/Karma Suture.otf" id="3_q775a"]
+[ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="4_qg8xq"]
 
 [node name="PauseMenu" type="Control" unique_id=463487379]
+texture_filter = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,6 +51,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TitleLabel" type="Label" parent="PausePanel/MarginContainer/VBoxContainer" unique_id=493913374]
+texture_filter = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.41960785, 0.2901961, 0.1764706, 1)
 theme_override_fonts/font = ExtResource("3_q775a")
@@ -63,6 +66,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
+theme = ExtResource("4_qg8xq")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Resume"
@@ -71,6 +75,7 @@ text = "Resume"
 custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
+theme = ExtResource("4_qg8xq")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Settings"
@@ -79,6 +84,7 @@ text = "Settings"
 custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
 layout_mode = 2
+theme = ExtResource("4_qg8xq")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Exit"

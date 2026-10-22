@@ -26,6 +26,7 @@ scale = Vector2(1.009037, 1.0187331)
 color = Color(0.24809936, 0.19378409, 0.14114234, 1)
 
 [node name="VersionLabel" type="Label" parent="." unique_id=718188952]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

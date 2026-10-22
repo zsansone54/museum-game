@@ -20,6 +20,7 @@ texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
 [node name="SettingsMenu" type="Control" unique_id=1430616981]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

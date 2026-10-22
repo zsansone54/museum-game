@@ -18,6 +18,7 @@ atlas = ExtResource("3_5bj8y")
 region = Rect2(144, 432, 16, 16)
 
 [node name="Exhibit1" type="Control" unique_id=124045584]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,29 +116,34 @@ theme_override_font_sizes/font_size = 80
 text = "Exhibit 1"
 
 [node name="LeftButton" type="TextureButton" parent="." unique_id=1508538183]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -15.5
-offset_right = 101.0
-offset_bottom = 81.5
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 120.0
+offset_bottom = 50.0
 grow_vertical = 2
 texture_normal = SubResource("AtlasTexture_gcfin")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="RightButton" type="TextureButton" parent="." unique_id=2030724827]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -59.0
-offset_right = 21.0
-offset_bottom = 59.0
+offset_left = -120.0
+offset_top = -50.0
+offset_right = -20.0
+offset_bottom = 50.0
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(1.1103836, 1.0138812)
@@ -248,6 +254,7 @@ layout_mode = 1
 layout_mode = 1
 
 [node name="WinMenu" parent="." unique_id=1237677374 instance=ExtResource("6_64dqa")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="Top/TopHudMargin/TopHud/PauseButton" to="." method="_on_pause_button_pressed"]

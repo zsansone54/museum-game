@@ -5,10 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="2_irlb0"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_nm046"]
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_2u0ix"]
+[ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_fkk1p"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="5_irlb0"]
 [ext_resource type="PackedScene" uid="uid://330qm08acygp" path="res://WinMenu.tscn" id="6_nm046"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkk1p"]
+atlas = ExtResource("4_fkk1p")
+region = Rect2(126, 432, 16, 16)
+
 [node name="Exhibit2" type="Control" unique_id=124045584]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -232,17 +238,21 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 80
 text = "Exhibit 2"
 
-[node name="LeftButton" type="Button" parent="." unique_id=1669915334]
+[node name="LeftButton" type="TextureButton" parent="." unique_id=152629910]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -59.0
-offset_right = 80.0
-offset_bottom = 59.0
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 120.0
+offset_bottom = 50.0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 80
-text = "<-"
+texture_normal = SubResource("AtlasTexture_fkk1p")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("3_nm046")]
 visible = false
@@ -256,6 +266,7 @@ layout_mode = 1
 layout_mode = 1
 
 [node name="WinMenu" parent="." unique_id=1237677374 instance=ExtResource("6_nm046")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="Top/TopHudMargin/TopHud/PauseButton" to="." method="_on_pause_button_pressed"]

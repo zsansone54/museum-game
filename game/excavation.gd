@@ -6,7 +6,7 @@ extends Control
 @onready var income_label: Label = $Top/TopHudMargin/TopHud/IncomeLabel
 
 @onready var pause_button: Button = $Top/TopHudMargin/TopHud/PauseButton
-@onready var back_button: Button = $BackButton
+@onready var back_button: TextureButton = $RightButton
 @onready var area_1_button: Button = $Area1Button
 @onready var area_2_button: Button = $Area2Button
 @onready var tools_button: Button = $ToolsButton

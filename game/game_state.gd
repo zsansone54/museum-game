@@ -44,6 +44,7 @@ func _ready() -> void:
 	#if has_save_file():
 		#load_game()
 	
+	rep = 400
 	
 
 

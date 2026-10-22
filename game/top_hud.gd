@@ -11,11 +11,16 @@ signal pause_requested
 	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText/IncomeLabel
 )
 
-@onready var rep_label: Label = $TextureRect/HBoxContainer/RepLabel
+@onready var rep_label: Label = (
+	$TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup/RepLabel
+)
+
 @onready var pause_button: TextureButton = $TextureRect/HBoxContainer/PauseButton
 
-# These are optional for now. They will begin working once you add the
-# named labels/progress bar inside TimerGroup later.
+@onready var money_animation: AnimatedSprite2D = (
+	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/MoneyIcon/AnimatedSprite2D
+)
+
 @onready var remaining_time_label := get_node_or_null(
 	"TextureRect/HBoxContainer/TimerGroup/RemainingTimeLabel"
 ) as Label
@@ -30,6 +35,7 @@ signal pause_requested
 
 
 func _ready() -> void:
+	money_animation.play("spin")
 	pause_button.pressed.connect(_on_pause_button_pressed)
 	update_hud()
 
@@ -45,7 +51,7 @@ func update_hud() -> void:
 		GameState.get_total_donation_income_per_second()
 	)
 
-	rep_label.text = "%d Rep" % GameState.rep
+	rep_label.text = "%04d" % GameState.rep
 
 	update_timer()
 

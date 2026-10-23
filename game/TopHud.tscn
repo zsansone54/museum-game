@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ctx1wx6e20rtt"]
 
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_4i2vw"]
-[ext_resource type="Texture2D" uid="uid://8sabfrve8iit" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0017.png" id="2_k3km3"]
 [ext_resource type="Script" uid="uid://dgl7uj18sa7qv" path="res://top_hud.gd" id="2_wne50"]
 [ext_resource type="Texture2D" uid="uid://cn6d4nnx5iah3" path="res://assets/ui/coin/money.png" id="3_wne50"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_m3vwo"]
@@ -10,12 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://bce2u30qsk83w" path="res://assets/ui/modified/bar_yellow_full.png" id="8_ir4w7"]
 [ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="13_cpmn1"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
-texture = ExtResource("2_k3km3")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymigv"]
+bg_color = Color(0.1764706, 0.12941177, 0.09411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7058824, 0.47843137, 0.21176471, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2e1rq"]
 bg_color = Color(0.40560693, 0.2695975, 0.124039, 1)
@@ -152,10 +156,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_gcfin")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ymigv")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect" unique_id=1975566607]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Spacer" type="Control" parent="TextureRect/HBoxContainer" unique_id=1199075990]
 custom_minimum_size = Vector2(20, 0)
@@ -186,7 +191,7 @@ position = Vector2(34, 34)
 scale = Vector2(4.2, 4.2)
 sprite_frames = SubResource("SpriteFrames_s7ls6")
 animation = &"spin"
-frame_progress = 0.060017437
+frame_progress = 0.94997156
 
 [node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=712252902]
 custom_minimum_size = Vector2(10, 0)
@@ -267,16 +272,30 @@ theme_override_fonts/font = ExtResource("5_atkrj")
 theme_override_font_sizes/font_size = 30
 text = "9999"
 
-[node name="Spacer3" type="Control" parent="TextureRect/HBoxContainer" unique_id=1928426545]
+[node name="Spacer3" type="Control" parent="TextureRect/HBoxContainer" unique_id=944630172]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="CountdownBar" type="TextureProgressBar" parent="TextureRect/HBoxContainer" unique_id=785248577]
+[node name="RepPlate2" type="PanelContainer" parent="TextureRect/HBoxContainer" unique_id=952217560]
+custom_minimum_size = Vector2(250, 68)
+custom_maximum_size = Vector2(250, 68)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2e1rq")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/HBoxContainer/RepPlate2" unique_id=102981409]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 2
+
+[node name="CountdownBar" type="TextureProgressBar" parent="TextureRect/HBoxContainer/RepPlate2/MarginContainer" unique_id=785248577]
 texture_filter = 1
 custom_minimum_size = Vector2(260, 40)
 custom_maximum_size = Vector2(260, 40)
 clip_contents = true
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 max_value = 1.0
@@ -286,7 +305,7 @@ stretch_margin_right = 9
 texture_under = ExtResource("7_atkrj")
 texture_progress = ExtResource("8_ir4w7")
 
-[node name="RemainingTimeLabel" type="Label" parent="TextureRect/HBoxContainer/CountdownBar" unique_id=1455253254]
+[node name="RemainingTimeLabel" type="Label" parent="TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar" unique_id=1455253254]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -301,7 +320,7 @@ theme_override_colors/font_color = Color(0.1148968, 0.11489681, 0.1148968, 1)
 theme_override_fonts/font = ExtResource("5_atkrj")
 text = "5.23s"
 
-[node name="TotalTimeLabel" type="Label" parent="TextureRect/HBoxContainer/CountdownBar" unique_id=669851182]
+[node name="TotalTimeLabel" type="Label" parent="TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar" unique_id=669851182]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -320,6 +339,10 @@ theme_override_fonts/font = ExtResource("5_atkrj")
 text = "15.00s"
 horizontal_alignment = 2
 
+[node name="Spacer4" type="Control" parent="TextureRect/HBoxContainer" unique_id=1928426545]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
 [node name="PauseButton" type="TextureButton" parent="TextureRect/HBoxContainer" unique_id=832907117]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -329,6 +352,6 @@ texture_normal = SubResource("AtlasTexture_8w1rx")
 texture_pressed = SubResource("AtlasTexture_x7vi5")
 stretch_mode = 0
 
-[node name="Spacer4" type="Control" parent="TextureRect/HBoxContainer" unique_id=2051695546]
+[node name="Spacer5" type="Control" parent="TextureRect/HBoxContainer" unique_id=2051695546]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2

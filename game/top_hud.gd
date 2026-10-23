@@ -20,15 +20,15 @@ signal pause_requested
 )
 
 @onready var countdown_bar: TextureProgressBar = (
-	$TextureRect/HBoxContainer/CountdownBar
+	$TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar
 )
 
 @onready var remaining_time_label: Label = (
-	$TextureRect/HBoxContainer/CountdownBar/RemainingTimeLabel
+	$TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar/RemainingTimeLabel
 )
 
 @onready var total_time_label: Label = (
-	$TextureRect/HBoxContainer/CountdownBar/TotalTimeLabel
+	$TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar/TotalTimeLabel
 )
 
 @onready var pause_button: TextureButton = (
@@ -42,6 +42,7 @@ func _ready() -> void:
 
 	countdown_bar.min_value = 0.0
 	countdown_bar.max_value = 1.0
+	countdown_bar.step = 0.001
 	countdown_bar.fill_mode = TextureProgressBar.FILL_LEFT_TO_RIGHT
 
 

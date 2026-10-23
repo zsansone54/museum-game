@@ -24,13 +24,13 @@ extends Control
 )
 @onready var site_close_button: TextureButton = $SitePanel/SiteCloseButton
 
-@onready var equipment_panel: Control = $EquipmentPanel2
+@onready var equipment_panel: Control = $EquipmentPanel
 @onready var tool_buttons: Array[Button] = [
-	$EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/Tool1Button,
-	$EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/Tool2Button
+	$EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer/Tool1Button,
+	$EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer/Tool2Button
 ]
 @onready var equipment_close_button: TextureButton = (
-	$EquipmentPanel2/EquipmentClosePanel
+	$EquipmentPanel/EquipmentClosePanel
 )
 
 var current_site_artifacts: Array = []

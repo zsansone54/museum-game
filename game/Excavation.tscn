@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="4_ae8nq"]
 [ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="4_x6ne2"]
+[ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="7_f7803"]
 [ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_216cp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ro8f"]
@@ -29,9 +30,13 @@ texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_t8wqh"]
-atlas = ExtResource("4_3ro8f")
-region = Rect2(108, 414, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7803"]
+atlas = ExtResource("7_f7803")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymigv"]
+atlas = ExtResource("7_f7803")
+region = Rect2(80, 32, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
 texture = ExtResource("3_vxnk4")
@@ -39,6 +44,14 @@ texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atkrj"]
+atlas = ExtResource("7_f7803")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir4w7"]
+atlas = ExtResource("7_f7803")
+region = Rect2(80, 32, 16, 16)
 
 [node name="Excavation" type="Control" unique_id=2032322113]
 layout_mode = 3
@@ -118,7 +131,7 @@ offset_bottom = 478.0
 theme_override_font_sizes/font_size = 40
 text = "area 2"
 
-[node name="EquipmentPanel2" type="Control" parent="." unique_id=781250698]
+[node name="EquipmentPanel" type="Control" parent="." unique_id=781250698]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,7 +145,7 @@ offset_bottom = 147.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OuterPanel" type="PanelContainer" parent="EquipmentPanel2" unique_id=1541608228]
+[node name="OuterPanel" type="PanelContainer" parent="EquipmentPanel" unique_id=1541608228]
 custom_minimum_size = Vector2(430, 230)
 layout_mode = 1
 anchors_preset = 8
@@ -148,50 +161,50 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_s7ls6")
 
-[node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel2/OuterPanel" unique_id=924727289]
+[node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel/OuterPanel" unique_id=924727289]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer" unique_id=1578129418]
+[node name="VBoxContainer" type="VBoxContainer" parent="EquipmentPanel/OuterPanel/MarginContainer" unique_id=1578129418]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="HeaderPanel" type="PanelContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=1602075814]
+[node name="HeaderPanel" type="PanelContainer" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1602075814]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_t8wqh")
 
-[node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel" unique_id=1395763530]
+[node name="MarginContainer" type="MarginContainer" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel" unique_id=1395763530]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="TitleLabel" type="Label" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer" unique_id=464727323]
+[node name="TitleLabel" type="Label" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer/HeaderPanel/MarginContainer" unique_id=464727323]
 layout_mode = 2
 text = "Excavation tools"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=2130280621]
+[node name="HSeparator" type="HSeparator" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=2130280621]
 layout_mode = 2
 
-[node name="Tool1Button" type="Button" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=357386427]
+[node name="Tool1Button" type="Button" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=357386427]
 custom_minimum_size = Vector2(330, 60)
 custom_maximum_size = Vector2(330, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Tool 1"
 
-[node name="Tool2Button" type="Button" parent="EquipmentPanel2/OuterPanel/MarginContainer/VBoxContainer" unique_id=1845087250]
+[node name="Tool2Button" type="Button" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1845087250]
 custom_minimum_size = Vector2(330, 60)
 custom_maximum_size = Vector2(330, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Tool 2"
 
-[node name="EquipmentClosePanel" type="TextureButton" parent="EquipmentPanel2" unique_id=1378171230]
+[node name="EquipmentClosePanel" type="TextureButton" parent="EquipmentPanel" unique_id=1378171230]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -204,7 +217,8 @@ offset_right = 38.329987
 offset_bottom = 46.03
 grow_horizontal = 0
 scale = Vector2(2.3, 2.3)
-texture_normal = SubResource("AtlasTexture_t8wqh")
+texture_normal = SubResource("AtlasTexture_f7803")
+texture_pressed = SubResource("AtlasTexture_ymigv")
 
 [node name="SitePanel" type="Control" parent="." unique_id=661606568]
 visible = false
@@ -317,6 +331,8 @@ offset_right = 42.390015
 offset_bottom = 11.919998
 grow_horizontal = 0
 scale = Vector2(2.3, 2.3)
+texture_normal = SubResource("AtlasTexture_atkrj")
+texture_pressed = SubResource("AtlasTexture_ir4w7")
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("2_x6ne2")]
 visible = false

@@ -5,10 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="2_x6ne2"]
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="3_a50wm"]
 [ext_resource type="Texture2D" uid="uid://c5jghn7dsgkf5" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0018.png" id="3_vxnk4"]
+[ext_resource type="Texture2D" uid="uid://buas62cdvqpjq" path="res://assets/backgrounds/Ancient parchment world map.png" id="3_ymigv"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_3ro8f"]
 [ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="4_ae8nq"]
 [ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
+[ext_resource type="Texture2D" uid="uid://btyl12hcnjt5d" path="res://assets/ui/custom assets/Archaeology brush pixel-art button.png" id="4_ybfmx"]
+[ext_resource type="Texture2D" uid="uid://b2qrlgnyodomb" path="res://assets/ui/custom assets/Brass Shovel Excavation Pin.png" id="7_f5roj"]
 [ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="7_f7803"]
+[ext_resource type="Texture2D" uid="uid://6u8kcpeu47gl" path="res://assets/ui/custom assets/Pixel lock pin with selection ring.png" id="8_uks3v"]
 [ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_216cp"]
 [ext_resource type="PackedScene" uid="uid://0i200idmy7ne" path="res://TutorialPopup.tscn" id="11_f7803"]
 
@@ -63,34 +67,40 @@ grow_vertical = 2
 theme = ExtResource("1_a50wm")
 script = ExtResource("1_rbatp")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1278012946]
+[node name="Background" type="TextureRect" parent="." unique_id=97536007]
+custom_minimum_size = Vector2(1920, 980)
+custom_maximum_size = Vector2(-1, 980)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.113936834, 0.30100793, 0.1795462, 1)
+offset_left = -1672.0
+offset_top = -980.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_ymigv")
 
 [node name="HudBackground" type="ColorRect" parent="." unique_id=1319612334]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 100)
+custom_maximum_size = Vector2(-1, 100)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ToolsButton" type="Button" parent="." unique_id=1104520362]
+[node name="ToolsButton" type="TextureButton" parent="." unique_id=344638319]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -4.0
-offset_right = 8.0
-offset_bottom = 4.0
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 1.0
+anchor_right = 0.465
+anchor_bottom = 1.0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "tools"
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("4_ybfmx")
 
 [node name="RightButton" type="TextureButton" parent="." unique_id=895030818]
 texture_filter = 1
@@ -101,9 +111,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -120.0
+offset_left = -140.0
 offset_top = -50.0
-offset_right = -20.0
+offset_right = -40.0
 offset_bottom = 50.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -113,25 +123,26 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_ae8nq")
 
-[node name="Area1Button" type="Button" parent="." unique_id=275443215]
+[node name="Area1Button" type="TextureButton" parent="." unique_id=1947366201]
 layout_mode = 0
 offset_left = 510.0
-offset_top = 759.0
-offset_right = 638.0
-offset_bottom = 822.0
-theme_override_font_sizes/font_size = 40
-text = "area 1"
+offset_top = 669.77
+offset_right = 1764.0
+offset_bottom = 1923.77
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("7_f5roj")
 
-[node name="Area2Button" type="Button" parent="." unique_id=1140805455]
+[node name="Area2Button" type="TextureButton" parent="." unique_id=1130183312]
 layout_mode = 0
-offset_left = 1452.0
-offset_top = 415.0
-offset_right = 1580.0
-offset_bottom = 478.0
-theme_override_font_sizes/font_size = 40
-text = "area 2"
+offset_left = 1458.69
+offset_top = 398.92
+offset_right = 2712.6902
+offset_bottom = 1652.92
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("8_uks3v")
 
 [node name="EquipmentPanel" type="Control" parent="." unique_id=781250698]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -146,7 +157,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="OuterPanel" type="PanelContainer" parent="EquipmentPanel" unique_id=1541608228]
-custom_minimum_size = Vector2(430, 230)
+custom_minimum_size = Vector2(500, 350)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -191,15 +202,15 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Tool1Button" type="Button" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=357386427]
-custom_minimum_size = Vector2(330, 60)
-custom_maximum_size = Vector2(330, 60)
+custom_minimum_size = Vector2(380, 80)
+custom_maximum_size = Vector2(380, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Tool 1"
 
 [node name="Tool2Button" type="Button" parent="EquipmentPanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1845087250]
-custom_minimum_size = Vector2(330, 60)
-custom_maximum_size = Vector2(330, 60)
+custom_minimum_size = Vector2(380, 80)
+custom_maximum_size = Vector2(380, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Tool 2"
@@ -211,10 +222,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -25.670013
-offset_top = -17.97
-offset_right = 38.329987
-offset_bottom = 46.03
+offset_left = 7.119995
+offset_top = -37.55
+offset_right = 71.119995
+offset_bottom = 26.45
 grow_horizontal = 0
 scale = Vector2(2.3, 2.3)
 texture_normal = SubResource("AtlasTexture_f7803")
@@ -237,8 +248,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="OuterPanel" type="PanelContainer" parent="SitePanel" unique_id=1765479893]
-custom_minimum_size = Vector2(660, 600)
-custom_maximum_size = Vector2(-1, 600)
+custom_minimum_size = Vector2(660, 650)
+custom_maximum_size = Vector2(-1, 650)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,19 +289,19 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="Artifact1Button" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=616408072]
-custom_minimum_size = Vector2(550, 80)
+custom_minimum_size = Vector2(550, 90)
 custom_maximum_size = Vector2(550, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Artifact2Button" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=1149261035]
-custom_minimum_size = Vector2(550, 80)
+custom_minimum_size = Vector2(550, 90)
 custom_maximum_size = Vector2(550, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Artifact3Button" type="Button" parent="SitePanel/OuterPanel/MarginContainer/VBoxContainer" unique_id=525389543]
-custom_minimum_size = Vector2(550, 80)
+custom_minimum_size = Vector2(550, 90)
 custom_maximum_size = Vector2(550, -1)
 layout_mode = 2
 size_flags_horizontal = 4

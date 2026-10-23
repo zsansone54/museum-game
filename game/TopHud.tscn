@@ -340,13 +340,9 @@ theme_override_fonts/font = ExtResource("5_atkrj")
 text = "15.00s"
 horizontal_alignment = 2
 
-[node name="Spacer4" type="Control" parent="TextureRect/HBoxContainer" unique_id=1928426545]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
 [node name="NotificationToast" parent="TextureRect/HBoxContainer" unique_id=1611973884 instance=ExtResource("9_atkrj")]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 10
 size_flags_vertical = 4
 
 [node name="PauseButton" type="TextureButton" parent="TextureRect/HBoxContainer" unique_id=832907117]

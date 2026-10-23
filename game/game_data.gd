@@ -3,6 +3,8 @@ extends Node
 
 func data() -> Dictionary:
 	return {
+		"game_version": "0.6",
+
 		"initial values": {
 			"starting_funds": 0,
 			"starting_rep": 0,
@@ -12,14 +14,14 @@ func data() -> Dictionary:
 		"tools": [
 			{
 				"id": 0,
-				"name": "Tool 1",
+				"name": "Fine Excavation Kit",
 				"cost": 350,
 				"unlock_required_rep": 75,
 				"is_purchased": false
 			},
 			{
 				"id": 1,
-				"name": "Tool 2",
+				"name": "Cliff Tomb Survey Kit",
 				"cost": 6000,
 				"unlock_required_rep": 325,
 				"is_purchased": false
@@ -29,13 +31,13 @@ func data() -> Dictionary:
 		"areas": [
 			{
 				"id": 0,
-				"name": "Zone 1",
+				"name": "Andean Highlands",
 				"unlock_required_rep": 0,
 				"artifacts": [
 					{
 						"id": 0,
 						"area": 0,
-						"name": "Zone 1 art 1",
+						"name": "Terracotta Puma Figure",
 						"total_fragments": 4,
 						"attempt_duration": 12,
 						"required_tool": [],
@@ -48,7 +50,7 @@ func data() -> Dictionary:
 					{
 						"id": 1,
 						"area": 0,
-						"name": "Zone 1 art 2",
+						"name": "Woven Mountain Sash",
 						"total_fragments": 4,
 						"attempt_duration": 20,
 						"required_tool": [],
@@ -61,7 +63,7 @@ func data() -> Dictionary:
 					{
 						"id": 2,
 						"area": 0,
-						"name": "Zone 1 art 3",
+						"name": "Condor Sun Medallion",
 						"total_fragments": 4,
 						"attempt_duration": 40,
 						"required_tool": [0],
@@ -90,13 +92,13 @@ func data() -> Dictionary:
 			},
 			{
 				"id": 1,
-				"name": "Zone 2",
+				"name": "Jade River Basin",
 				"unlock_required_rep": 35,
 				"artifacts": [
 					{
 						"id": 3,
 						"area": 1,
-						"name": "Zone 2 art 1",
+						"name": "Jade Cloud Pendant",
 						"total_fragments": 4,
 						"attempt_duration": 20,
 						"required_tool": [],
@@ -109,7 +111,7 @@ func data() -> Dictionary:
 					{
 						"id": 4,
 						"area": 1,
-						"name": "Zone 2 art 2",
+						"name": "Bronze Tiger Mirror",
 						"total_fragments": 4,
 						"attempt_duration": 50,
 						"required_tool": [0],
@@ -122,7 +124,7 @@ func data() -> Dictionary:
 					{
 						"id": 5,
 						"area": 1,
-						"name": "Zone 2 art 3",
+						"name": "Lacquered Phoenix Casket",
 						"total_fragments": 4,
 						"attempt_duration": 80,
 						"required_tool": [1],

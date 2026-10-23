@@ -4,9 +4,9 @@ extends Control
 @onready var tutorial_popup: Control = $TutorialPopup
 
 @onready var back_button: TextureButton = $RightButton
-@onready var area_1_button: Button = $Area1Button
-@onready var area_2_button: Button = $Area2Button
-@onready var tools_button: Button = $ToolsButton
+@onready var area_1_button: TextureButton = $Area1Button
+@onready var area_2_button: TextureButton = $Area2Button
+@onready var tools_button: TextureButton = $ToolsButton
 
 @onready var site_panel: Control = $SitePanel
 @onready var site_name_label: Label = (
@@ -174,9 +174,7 @@ func refresh_site_panel() -> void:
 		for button in artifact_buttons:
 			button.text = "Locked Artifact"
 			button.disabled = true
-			button.tooltip_text = "Requires %d Reputation" % (
-				current_site_area["unlock_required_rep"]
-			)
+			button.tooltip_text = "Unlock this site first"
 
 		speed_upgrade_button.text = "Speed\nLocked"
 		speed_upgrade_button.disabled = true
@@ -388,32 +386,17 @@ func refresh_tool_buttons() -> void:
 			button.tooltip_text = "Already purchased"
 
 		elif GameState.rep < required_rep:
-			button.text = "%s\nCost: $%d | Requires: %d Rep" % [
-				tool_name,
-				tool_cost,
-				required_rep
-			]
-
+			button.text = "Locked!\nRequires: %d Rep" % required_rep
 			button.disabled = true
 			button.tooltip_text = "Requires %d Reputation" % required_rep
 
 		elif GameState.funds < tool_cost:
-			button.text = "%s\nCost: $%d | Requires: %d Rep" % [
-				tool_name,
-				tool_cost,
-				required_rep
-			]
-
+			button.text = "%s\n$%d" % [tool_name, tool_cost]
 			button.disabled = true
 			button.tooltip_text = "Requires $%d" % tool_cost
 
 		else:
-			button.text = "%s\nCost: $%d | Requires: %d Rep\nPurchase" % [
-				tool_name,
-				tool_cost,
-				required_rep
-			]
-
+			button.text = "%s\n$%d" % [tool_name, tool_cost]
 			button.disabled = false
 			button.tooltip_text = "Purchase " + tool_name
 

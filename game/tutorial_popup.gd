@@ -32,7 +32,7 @@ const PAGES := [
 	},
 	{
 		"title": "Notifications",
-		"message": "Watch the notification area for updates when an excavation starts, a fragment is recovered, an attempt fails, or an artifact is assembled!"
+		"message": "Watch the notification area next to the timer for updates when an excavation starts, a fragment is recovered, an attempt fails, or an artifact is assembled. A chime will play when something happens!"
 	},
 	{
 		"title": "Build the Collection",
@@ -40,7 +40,7 @@ const PAGES := [
 	},
 	{
 		"title": "Tutorial",
-		"message": "Can't remember something? Open this tutorial from the pause menu again at any time!"
+		"message": "Can't remember something? Open this tutorial again from the pause menu at any time!"
 	},
 ]
 

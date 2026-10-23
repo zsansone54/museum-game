@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c7rhah61pgaf" path="res://assets/ui/UIpack_RPG/PNG/barYellow_horizontalLeft.png" id="10_u8kcc"]
 [ext_resource type="Texture2D" uid="uid://w8e1qd6skt56" path="res://assets/ui/UIpack_RPG/PNG/barYellow_horizontalMid.png" id="11_gywx6"]
 [ext_resource type="Texture2D" uid="uid://bsyddc6yhffeq" path="res://assets/ui/UIpack_RPG/PNG/barYellow_horizontalRight.png" id="12_4np2j"]
+[ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="13_cpmn1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
 texture = ExtResource("2_k3km3")
@@ -128,6 +129,14 @@ animations = [{
 atlas = ExtResource("4_m3vwo")
 region = Rect2(54, 180, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w1rx"]
+atlas = ExtResource("13_cpmn1")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7vi5"]
+atlas = ExtResource("13_cpmn1")
+region = Rect2(112, 0, 16, 16)
+
 [node name="TopHud" type="Control" unique_id=1977575653]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 100)
@@ -181,7 +190,7 @@ position = Vector2(34, 34)
 scale = Vector2(4.2, 4.2)
 sprite_frames = SubResource("SpriteFrames_s7ls6")
 animation = &"spin"
-frame_progress = 0.29704535
+frame_progress = 0.66597134
 
 [node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=712252902]
 custom_minimum_size = Vector2(10, 0)
@@ -215,7 +224,7 @@ theme_override_font_sizes/font_size = 20
 text = "+ $0.00 / sec"
 
 [node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer" unique_id=38652299]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="RepPlate" type="PanelContainer" parent="TextureRect/HBoxContainer" unique_id=826723384]
@@ -263,7 +272,7 @@ theme_override_font_sizes/font_size = 30
 text = "9999"
 
 [node name="Spacer3" type="Control" parent="TextureRect/HBoxContainer" unique_id=1928426545]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="CountdownBar" type="Control" parent="TextureRect/HBoxContainer" unique_id=1174964092]
@@ -353,4 +362,14 @@ text = "15.00s"
 horizontal_alignment = 2
 
 [node name="PauseButton" type="TextureButton" parent="TextureRect/HBoxContainer" unique_id=832907117]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 10
+offset_transform_scale = Vector2(4, 4)
+texture_normal = SubResource("AtlasTexture_8w1rx")
+texture_pressed = SubResource("AtlasTexture_x7vi5")
+stretch_mode = 0
+
+[node name="Spacer4" type="Control" parent="TextureRect/HBoxContainer" unique_id=2051695546]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2

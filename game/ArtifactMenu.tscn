@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bcsblyftdjksp" path="res://artifact_menu.gd" id="1_u3t71"]
 [ext_resource type="Texture2D" uid="uid://c5jghn7dsgkf5" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0018.png" id="2_eycya"]
 [ext_resource type="Texture2D" uid="uid://b5ibf23ol2mey" path="res://assets/ui/kenney_pixel-ui-pack/9-Slice/Ancient/brown_inlay.png" id="3_4o6xv"]
-[ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_64qi4"]
+[ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="4_64qi4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
 texture = ExtResource("2_eycya")
@@ -19,9 +19,13 @@ texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2aebv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpmn1"]
 atlas = ExtResource("4_64qi4")
-region = Rect2(108, 414, 16, 16)
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1u4s"]
+atlas = ExtResource("4_64qi4")
+region = Rect2(80, 32, 16, 16)
 
 [node name="ArtifactMenu" type="Control" unique_id=1918927880]
 process_mode = 3
@@ -144,4 +148,5 @@ grow_horizontal = 0
 scale = Vector2(2.2, 2.2)
 size_flags_horizontal = 8
 size_flags_vertical = 0
-texture_normal = SubResource("AtlasTexture_2aebv")
+texture_normal = SubResource("AtlasTexture_cpmn1")
+texture_pressed = SubResource("AtlasTexture_b1u4s")

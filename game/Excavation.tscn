@@ -317,7 +317,6 @@ offset_right = 42.390015
 offset_bottom = 11.919998
 grow_horizontal = 0
 scale = Vector2(2.3, 2.3)
-texture_normal = SubResource("AtlasTexture_t8wqh")
 
 [node name="PauseMenu" parent="." unique_id=463487379 instance=ExtResource("2_x6ne2")]
 visible = false

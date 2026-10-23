@@ -27,6 +27,14 @@ signal pause_requested
 	$TextureRect/HBoxContainer/CountdownBar/YellowBar
 )
 
+@onready var yellow_left: TextureRect = (
+	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowLeft
+)
+
+@onready var yellow_right: TextureRect = (
+	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowRight
+)
+
 @onready var remaining_time_label: Label = (
 	$TextureRect/HBoxContainer/CountdownBar/RemainingTimeLabel
 )
@@ -39,19 +47,18 @@ signal pause_requested
 	$TextureRect/HBoxContainer/PauseButton
 )
 
-@onready var yellow_left: TextureRect = (
-	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowLeft
-)
-
-@onready var yellow_right: TextureRect = (
-	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowRight
-)
 
 func _ready() -> void:
 	money_animation.play("spin")
 	pause_button.pressed.connect(_on_pause_button_pressed)
 
 	await get_tree().process_frame
+
+	yellow_left.pivot_offset = Vector2(
+		0.0,
+		yellow_left.size.y / 2.0
+	)
+
 	update_hud()
 
 
@@ -60,7 +67,7 @@ func _process(_delta: float) -> void:
 
 
 func update_hud() -> void:
-	funds_label.text = "$%d" % int(GameState.funds)
+	funds_label.text = "$%04d" % int(GameState.funds)
 
 	income_label.text = "+ $%.2f / sec" % (
 		GameState.get_total_donation_income_per_second()
@@ -93,6 +100,7 @@ func update_timer() -> void:
 		yellow_bar.hide()
 		return
 
+	# Starts at 0%, then fills as the excavation attempt progresses.
 	var progress_ratio: float = clampf(
 		1.0 - (remaining_time / total_time),
 		0.0,
@@ -102,36 +110,30 @@ func update_timer() -> void:
 	var filled_width: float = countdown_bar.size.x * progress_ratio
 	var has_progress: bool = filled_width > 0.5
 
+	# Once progress begins, use a small visible width instead of a 1-pixel line.
+	var display_width: float = 0.0
+
+	if has_progress:
+		display_width = maxf(filled_width, 12.0)
+
 	yellow_bar.visible = has_progress
 
-	var show_end_caps: bool = filled_width >= 64.0
-	var progress_ratio: float = clampf(
-	1.0 - (remaining_time / total_time),
-	0.0,
-	1.0
-)
+	# The left cap begins immediately.
+	# The right cap appears once there is enough room for both end caps.
+	yellow_left.visible = has_progress
+	yellow_right.visible = display_width >= 64.0
 
-var filled_width: float = countdown_bar.size.x * progress_ratio
-var has_progress: bool = filled_width > 0.5
+	var left_cap_ratio: float = clampf(
+		display_width / 32.0,
+		0.0,
+		1.0
+	)
 
-yellow_bar.visible = has_progress
+	yellow_left.scale = Vector2(left_cap_ratio, 1.0)
 
-# A short fill cannot fit both 32-pixel end caps.
-# Let the yellow middle grow immediately, then add caps once it is wide enough.
-var show_end_caps: bool = filled_width >= 64.0
-yellow_left.visible = show_end_caps
-yellow_right.visible = show_end_caps
-
-yellow_bar.position = Vector2.ZERO
-yellow_bar.size = Vector2(
-	filled_width,
-	countdown_bar.size.y
-)_left.visible = show_end_caps
-	red_right.visible = show_end_caps
-
-	red_bar.position = Vector2.ZERO
-	red_bar.size = Vector2(
-		filled_width,
+	yellow_bar.position = Vector2.ZERO
+	yellow_bar.size = Vector2(
+		display_width,
 		countdown_bar.size.y
 	)
 

@@ -40,6 +40,11 @@ func _ready() -> void:
 	money_animation.play("spin")
 	pause_button.pressed.connect(_on_pause_button_pressed)
 
+	countdown_bar.min_value = 0.0
+	countdown_bar.max_value = 1.0
+	countdown_bar.fill_mode = TextureProgressBar.FILL_LEFT_TO_RIGHT
+
+
 	update_hud()
 
 
@@ -80,7 +85,7 @@ func update_timer() -> void:
 		countdown_bar.value = 0.0
 		return
 
-	# Starts empty, then fills as excavation time passes.
+	# Starts empty and fills continuously as the excavation attempt progresses.
 	var progress_ratio: float = clampf(
 		1.0 - (remaining_time / total_time),
 		0.0,

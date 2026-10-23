@@ -13,7 +13,7 @@ https://toffeecraft.itch.io/ui (UI close and pause buttons) - free for use in pe
 
 https://hypedigi.itch.io/coin-potion-gem-assets (coin animation) - free for use 
 
-https://pixabay.com/sound-effects/film-special-effects-simple-whoosh-382724/ - free for use
+https://pixabay.com/sound-effects/film-special-effects-simple-whoosh-382724/  (transition woosh)- free for use
 
 https://pixabay.com/sound-effects/film-special-effects-retro-cash-register-ka-ching-with-coin-drawer-1-546555/ (purchase sound effect) - free for use
 

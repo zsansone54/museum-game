@@ -30,7 +30,8 @@ const EXCAVATION_FAILURE_SOUND = preload(
 @onready var ui_player: AudioStreamPlayer = $UiPlayer
 @onready var panel_player: AudioStreamPlayer = $PanelPlayer
 @onready var event_player: AudioStreamPlayer = $EventPlayer
-
+@onready var purchase_player: AudioStreamPlayer = $PurchasePlayer
+@onready var transition_player: AudioStreamPlayer = $TransitionPlayer
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -71,7 +72,6 @@ func _connect_buttons_in_node(node: Node) -> void:
 
 func _on_node_added(node: Node) -> void:
 	if node is BaseButton:
-		node.call_deferred("set_process", node.process_mode)
 		call_deferred("_connect_button", node)
 
 
@@ -119,6 +119,12 @@ func _play_sound(player: AudioStreamPlayer, sound: AudioStream) -> void:
 	player.stream = sound
 	player.play()
 
+func play_purchase() -> void:
+	purchase_player.play()
+
+
+func play_scene_transition() -> void:
+	transition_player.play()
 
 func set_music_volume(volume_percent: float) -> void:
 	_set_bus_volume(MUSIC_BUS, volume_percent)

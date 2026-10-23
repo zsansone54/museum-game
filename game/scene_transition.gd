@@ -23,12 +23,15 @@ func _ready() -> void:
 	overlay.position = Vector2(screen_width, 0)
 
 
-func change_scene(scene_path: String) -> void:
+func change_scene(scene_path: String, play_sound := false) -> void:
 	if is_transitioning:
 		return
 
 	is_transitioning = true
 
+	if play_sound:
+		AudioManager.play_scene_transition()
+	
 	var screen_width := get_viewport().get_visible_rect().size.x
 
 	# Start just beyond the right edge of the screen.

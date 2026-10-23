@@ -421,6 +421,7 @@ func purchase_tool(tool_id: int) -> void:
 	GameState.buy_tool(tool_id)
 
 	if not was_purchased and GameState.tools[tool_id]["is_purchased"]:
+		AudioManager.play_purchase()
 		GameState.save_game()
 
 	refresh_tool_buttons()
@@ -436,6 +437,7 @@ func purchase_speed_upgrade() -> void:
 	GameState.buy_speed_upgrade(current_site_area)
 
 	if GameState.area_speed_upgrades[area_id] > old_level:
+		AudioManager.play_purchase()
 		GameState.save_game()
 
 	refresh_site_panel()
@@ -451,6 +453,7 @@ func purchase_chance_upgrade() -> void:
 	GameState.buy_chance_upgrade(current_site_area)
 
 	if GameState.area_chance_upgrades[area_id] > old_level:
+		AudioManager.play_purchase()
 		GameState.save_game()
 
 	refresh_site_panel()
@@ -505,7 +508,7 @@ func _on_equipment_close_button_pressed() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	SceneTransition.change_scene("res://Exhibit1.tscn")
+	SceneTransition.change_scene("res://Exhibit1.tscn", true)
 
 
 func _on_pause_menu_action_selected(action: String) -> void:

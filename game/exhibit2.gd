@@ -60,7 +60,7 @@ func _on_artifact_3_inspect_button_pressed() -> void:
 
 
 func _on_left_button_pressed() -> void:
-	SceneTransition.change_scene("res://Exhibit1.tscn")
+	SceneTransition.change_scene("res://Exhibit1.tscn", true)
 
 
 func _on_pause_menu_action_selected(action: String) -> void:

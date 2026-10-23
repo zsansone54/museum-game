@@ -2,6 +2,8 @@
 
 [ext_resource type="AudioStream" uid="uid://06gdjfcaeckh" path="res://assets/audio/music/8bit Bossa.mp3" id="1_d16gy"]
 [ext_resource type="Script" uid="uid://c58mm88ppuk63" path="res://audio_manager.gd" id="2_er85w"]
+[ext_resource type="AudioStream" uid="uid://7ifcc5ce6f1c" path="res://assets/audio/sfx/purchase/vadim_makes_sound-retro-cash-register-ka-ching-with-coin-drawer-1-546555.mp3" id="3_sxe6l"]
+[ext_resource type="AudioStream" uid="uid://connmubrhjvjv" path="res://assets/audio/sfx/whoosh/dragon-studio-simple-whoosh-382724.mp3" id="4_mh7xs"]
 
 [node name="AudioManager" type="Node" unique_id=1686247683]
 script = ExtResource("2_er85w")
@@ -17,4 +19,12 @@ bus = &"SFX"
 bus = &"SFX"
 
 [node name="EventPlayer" type="AudioStreamPlayer" parent="." unique_id=1818503733]
+bus = &"SFX"
+
+[node name="PurchasePlayer" type="AudioStreamPlayer" parent="." unique_id=209377024]
+stream = ExtResource("3_sxe6l")
+bus = &"SFX"
+
+[node name="TransitionPlayer" type="AudioStreamPlayer" parent="." unique_id=1045665079]
+stream = ExtResource("4_mh7xs")
 bus = &"SFX"

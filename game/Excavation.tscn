@@ -101,6 +101,7 @@ anchor_bottom = 1.0
 grow_vertical = 2
 scale = Vector2(0.1, 0.1)
 texture_normal = ExtResource("4_ybfmx")
+script = ExtResource("4_ae8nq")
 
 [node name="RightButton" type="TextureButton" parent="." unique_id=895030818]
 texture_filter = 1
@@ -131,6 +132,7 @@ offset_right = 1764.0
 offset_bottom = 1923.77
 scale = Vector2(0.1, 0.1)
 texture_normal = ExtResource("7_f5roj")
+script = ExtResource("4_ae8nq")
 
 [node name="Area2Button" type="TextureButton" parent="." unique_id=1130183312]
 layout_mode = 0
@@ -140,6 +142,7 @@ offset_right = 2712.6902
 offset_bottom = 1652.92
 scale = Vector2(0.1, 0.1)
 texture_normal = ExtResource("8_uks3v")
+script = ExtResource("4_ae8nq")
 
 [node name="EquipmentPanel" type="Control" parent="." unique_id=781250698]
 visible = false

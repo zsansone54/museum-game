@@ -1,5 +1,8 @@
 extends Control
 
+@export var unlocked_site_texture: Texture2D
+@export var locked_site_texture: Texture2D
+
 @onready var top_hud: TopHud = $TopHud
 @onready var tutorial_popup: Control = $TutorialPopup
 
@@ -73,6 +76,8 @@ func _ready() -> void:
 	tool_buttons[1].pressed.connect(_on_tool_2_button_pressed)
 	equipment_close_button.pressed.connect(_on_equipment_close_button_pressed)
 
+	tools_button.tooltip_text = "Excavation Tools"
+
 	site_panel.hide()
 	equipment_panel.hide()
 
@@ -92,8 +97,12 @@ func _ready() -> void:
 	)
 	site_panel.position = site_panel_closed_position
 
+	refresh_map_buttons()
+
 
 func _process(_delta: float) -> void:
+	refresh_map_buttons()
+
 	if site_panel.visible and not current_site_area.is_empty():
 		refresh_site_panel()
 
@@ -101,7 +110,37 @@ func _process(_delta: float) -> void:
 		refresh_tool_buttons()
 
 
+func refresh_map_buttons() -> void:
+	var area_1: Dictionary = GameState.get_area_data(0)
+	var area_2: Dictionary = GameState.get_area_data(1)
+
+	update_area_button(area_1_button, area_1)
+	update_area_button(area_2_button, area_2)
+
+
+func update_area_button(button: TextureButton, area: Dictionary) -> void:
+	var is_unlocked: bool = GameState.is_area_unlocked(area)
+
+	if is_unlocked:
+		button.texture_normal = unlocked_site_texture
+		button.tooltip_text = area["name"]
+	else:
+		button.texture_normal = locked_site_texture
+		button.tooltip_text = "%s\nLocked — Requires %d Rep" % [
+			area["name"],
+			area["unlock_required_rep"]
+		]
+
+
 func open_site(area_id: int) -> void:
+	var selected_area: Dictionary = GameState.get_area_data(area_id)
+
+	if selected_area.is_empty():
+		return
+
+	if not GameState.is_area_unlocked(selected_area):
+		return
+
 	if (
 		site_panel.visible
 		and not current_site_area.is_empty()
@@ -112,11 +151,7 @@ func open_site(area_id: int) -> void:
 
 	AudioManager.play_panel_open()
 
-	current_site_area = GameState.get_area_data(area_id)
-
-	if current_site_area.is_empty():
-		return
-
+	current_site_area = selected_area
 	current_site_artifacts = current_site_area["artifacts"]
 
 	refresh_site_panel()

@@ -2,9 +2,13 @@ extends Control
 
 @onready var top_hud: TopHud = $TopHud
 @onready var lock_overlay: Control = $LockOverlay
+@onready var tutorial_popup: Control = $TutorialPopup
+
 @onready var requirement_label: Label = (
 	$LockOverlay/CenterContainer/VBoxContainer/RequirementLabel
 )
+
+var tutorial_opened_from_pause := false
 
 
 func _ready() -> void:
@@ -12,6 +16,7 @@ func _ready() -> void:
 
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
+	tutorial_popup.completed.connect(_on_tutorial_completed)
 
 	$LeftButton.pressed.connect(_on_left_button_pressed)
 
@@ -71,6 +76,10 @@ func _on_pause_menu_action_selected(action: String) -> void:
 		"settings":
 			$SettingsMenu.open()
 
+		"tutorial":
+			tutorial_opened_from_pause = true
+			tutorial_popup.open()
+
 		"exit":
 			GameState.save_game()
 			get_tree().paused = false
@@ -79,6 +88,12 @@ func _on_pause_menu_action_selected(action: String) -> void:
 
 func _on_settings_menu_closed() -> void:
 	$PauseMenu.open()
+
+
+func _on_tutorial_completed() -> void:
+	if tutorial_opened_from_pause:
+		tutorial_opened_from_pause = false
+		$PauseMenu.open()
 
 
 func _on_pause_button_pressed() -> void:

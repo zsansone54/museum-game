@@ -13,24 +13,35 @@ signal completed
 @onready var skip_button: Button = $PanelContainer/PanelMargin/Tutorial/ButtonRow/SkipButton
 @onready var next_button: Button = $PanelContainer/PanelMargin/Tutorial/ButtonRow/NextButton
 
-
 const PAGES := [
 	{
 		"title": "Welcome, Curator!",
-		"message": "Restore the museum by assembling every artifact across both excavation areas. Assemble all six artifacts to complete the collection."
+		"message": "Restore the museum by assembling every artifact across both excavation areas. Assemble all six artifacts to complete the collection!"
 	},
 	{
 		"title": "Excavate for Fragments",
-		"message": "Use the left arrow to visit the excavation map. Select an unlocked site, then choose an artifact. Attempts happen automatically: successes recover fragments, while failures provide funding."
+		"message": "Use the left arrow to visit the excavation map. Select an unlocked site, then choose an artifact. Attempts happen automatically: successes recover fragments, while failures provide funding!"
 	},
 	{
 		"title": "Upgrade Your Team",
-		"message": "Fragments generate donations over time. Spend funds on excavation speed and success chance, and purchase tools to access more difficult artifacts."
+		"message": "Fragments generate donations over time. Spend funds on excavation speed and success chance, and purchase tools to access more difficult artifacts!"
+	},
+	{
+		"title": "The HUD",
+		"message": "The top bar shows your funds, green donation income per second, reputation, and the active excavation timer!"
+	},
+	{
+		"title": "Notifications",
+		"message": "Watch the notification area for updates when an excavation starts, a fragment is recovered, an attempt fails, or an artifact is assembled!"
 	},
 	{
 		"title": "Build the Collection",
-		"message": "Once every fragment is recovered, return to its exhibit and assemble the artifact. Completed displays generate more donations and reputation, unlocking the second excavation area."
-	}
+		"message": "Once every fragment is recovered, return to its exhibit and assemble the artifact. Completed displays generate more donations and reputation, unlocking the second excavation area!"
+	},
+	{
+		"title": "Tutorial",
+		"message": "Can't remember something? Open this tutorial from the pause menu again at any time!"
+	},
 ]
 
 var current_page := 0
@@ -41,6 +52,8 @@ var is_closing := false
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	dimmer.mouse_filter = Control.MOUSE_FILTER_STOP
 	tutorial_panel.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -57,14 +70,24 @@ func _ready() -> void:
 	tutorial_panel.position = closed_position
 
 
+func update_panel_positions() -> void:
+	var viewport_size := get_viewport_rect().size
+
+	open_position = (viewport_size - tutorial_panel.size) * 0.5
+	closed_position = Vector2(
+		open_position.x,
+		viewport_size.y + 40.0
+	)
+
+
 func open() -> void:
 	current_page = 0
 	is_closing = false
 
 	update_page()
 
-	# Let Exhibit 1 appear before the overlay opens.
-	await get_tree().create_timer(0.2).timeout
+	# Let the scene render before opening the overlay.
+	await get_tree().create_timer(0.2, true).timeout
 
 	update_panel_positions()
 	tutorial_panel.position = closed_position
@@ -83,6 +106,7 @@ func open() -> void:
 	).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 
 	panel_tween.tween_property(dimmer, "color:a", 0.3, 0.2)
+
 
 func update_page() -> void:
 	var page: Dictionary = PAGES[current_page]
@@ -144,11 +168,3 @@ func finish_tutorial() -> void:
 		completed.emit()
 	)
 	
-func update_panel_positions() -> void:
-	var viewport_size := get_viewport_rect().size
-
-	open_position = (viewport_size - tutorial_panel.size) * 0.5
-	closed_position = Vector2(
-		open_position.x,
-		viewport_size.y + 40.0
-	)

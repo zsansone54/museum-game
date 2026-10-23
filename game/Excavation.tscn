@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
 [ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="7_f7803"]
 [ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_216cp"]
+[ext_resource type="PackedScene" uid="uid://0i200idmy7ne" path="res://TutorialPopup.tscn" id="11_f7803"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ro8f"]
 atlas = ExtResource("4_3ro8f")
@@ -342,4 +343,8 @@ visible = false
 layout_mode = 1
 
 [node name="TopHud" parent="." unique_id=1977575653 instance=ExtResource("10_216cp")]
+layout_mode = 1
+
+[node name="TutorialPopup" parent="." unique_id=872070702 instance=ExtResource("11_f7803")]
+visible = false
 layout_mode = 1

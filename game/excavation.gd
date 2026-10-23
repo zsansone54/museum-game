@@ -1,6 +1,7 @@
 extends Control
 
 @onready var top_hud: TopHud = $TopHud
+@onready var tutorial_popup: Control = $TutorialPopup
 
 @onready var back_button: TextureButton = $RightButton
 @onready var area_1_button: Button = $Area1Button
@@ -44,12 +45,15 @@ var site_panel_open_position: Vector2
 var site_panel_closed_position: Vector2
 var site_panel_tween: Tween
 
+var tutorial_opened_from_pause := false
+
 
 func _ready() -> void:
 	top_hud.pause_requested.connect(_on_pause_button_pressed)
 
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
+	tutorial_popup.completed.connect(_on_tutorial_completed)
 
 	back_button.pressed.connect(_on_back_button_pressed)
 
@@ -98,7 +102,6 @@ func _process(_delta: float) -> void:
 
 
 func open_site(area_id: int) -> void:
-	AudioManager.play_panel_open()
 	if (
 		site_panel.visible
 		and not current_site_area.is_empty()
@@ -106,6 +109,8 @@ func open_site(area_id: int) -> void:
 	):
 		close_site_panel()
 		return
+
+	AudioManager.play_panel_open()
 
 	current_site_area = GameState.get_area_data(area_id)
 
@@ -136,6 +141,7 @@ func open_site(area_id: int) -> void:
 
 func close_site_panel() -> void:
 	AudioManager.play_panel_close()
+
 	if site_panel_tween and site_panel_tween.is_valid():
 		site_panel_tween.kill()
 
@@ -220,9 +226,7 @@ func refresh_artifact_buttons() -> void:
 
 		elif progress["fragments_found"] >= artifact["total_fragments"]:
 			button.disabled = true
-			button.tooltip_text = (
-				"All fragments found — assemble it in the museum"
-			)
+			button.tooltip_text = "All fragments found — assemble it in the museum"
 
 		else:
 			button.disabled = false
@@ -315,10 +319,11 @@ func select_site_artifact(index: int) -> void:
 
 
 func open_equipment_panel() -> void:
-	AudioManager.play_panel_open()
 	if equipment_panel.visible:
 		close_equipment_panel()
 		return
+
+	AudioManager.play_panel_open()
 
 	refresh_tool_buttons()
 
@@ -342,6 +347,7 @@ func open_equipment_panel() -> void:
 
 func close_equipment_panel() -> void:
 	AudioManager.play_panel_close()
+
 	if equipment_panel_tween and equipment_panel_tween.is_valid():
 		equipment_panel_tween.kill()
 
@@ -519,6 +525,10 @@ func _on_pause_menu_action_selected(action: String) -> void:
 		"settings":
 			$SettingsMenu.open()
 
+		"tutorial":
+			tutorial_opened_from_pause = true
+			tutorial_popup.open()
+
 		"exit":
 			GameState.save_game()
 			get_tree().paused = false
@@ -527,6 +537,12 @@ func _on_pause_menu_action_selected(action: String) -> void:
 
 func _on_settings_menu_closed() -> void:
 	$PauseMenu.open()
+
+
+func _on_tutorial_completed() -> void:
+	if tutorial_opened_from_pause:
+		tutorial_opened_from_pause = false
+		$PauseMenu.open()
 
 
 func _on_pause_button_pressed() -> void:

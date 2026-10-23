@@ -3,12 +3,15 @@ extends Control
 @onready var top_hud: TopHud = $TopHud
 @onready var tutorial_popup: Control = $TutorialPopup
 
+var tutorial_opened_from_pause := false
+
 
 func _ready() -> void:
 	top_hud.pause_requested.connect(_on_pause_button_pressed)
 
 	$PauseMenu.action_selected.connect(_on_pause_menu_action_selected)
 	$SettingsMenu.closed.connect(_on_settings_menu_closed)
+	tutorial_popup.completed.connect(_on_tutorial_completed)
 
 	$LeftButton.pressed.connect(_on_left_button_pressed)
 	$RightButton.pressed.connect(_on_right_button_pressed)
@@ -29,7 +32,7 @@ func _ready() -> void:
 		GameState.get_artifact_data(1)["name"]
 	$ArtifactMargin/Gallery/Artifact3/Display/ArtifactName.text = \
 		GameState.get_artifact_data(2)["name"]
-		
+
 	if !GameState.tutorial_completed:
 		tutorial_popup.open()
 
@@ -62,6 +65,10 @@ func _on_pause_menu_action_selected(action: String) -> void:
 		"settings":
 			$SettingsMenu.open()
 
+		"tutorial":
+			tutorial_opened_from_pause = true
+			tutorial_popup.open()
+
 		"exit":
 			GameState.save_game()
 			get_tree().paused = false
@@ -70,6 +77,12 @@ func _on_pause_menu_action_selected(action: String) -> void:
 
 func _on_settings_menu_closed() -> void:
 	$PauseMenu.open()
+
+
+func _on_tutorial_completed() -> void:
+	if tutorial_opened_from_pause:
+		tutorial_opened_from_pause = false
+		$PauseMenu.open()
 
 
 func _on_pause_button_pressed() -> void:

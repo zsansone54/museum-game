@@ -35,6 +35,10 @@ signal pause_requested
 	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowRight
 )
 
+@onready var yellow_middle: TextureRect = (
+	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowMiddle
+)
+
 @onready var remaining_time_label: Label = (
 	$TextureRect/HBoxContainer/CountdownBar/RemainingTimeLabel
 )
@@ -122,6 +126,7 @@ func update_timer() -> void:
 	# The right cap appears once there is enough room for both end caps.
 	yellow_left.visible = has_progress
 	yellow_right.visible = display_width >= 64.0
+	yellow_middle.visible = display_width >= 32.0
 
 	var left_cap_ratio: float = clampf(
 		display_width / 32.0,

@@ -1,7 +1,13 @@
 extends Control
 
-@export var unlocked_site_texture: Texture2D
-@export var locked_site_texture: Texture2D
+const UNLOCKED_SITE_TEXTURE: Texture2D = preload(
+	"res://assets/ui/custom assets/Brass Shovel Excavation Pin.png"
+)
+
+const LOCKED_SITE_TEXTURE: Texture2D = preload(
+	"res://assets/ui/custom assets/Pixel lock pin with selection ring.png"
+	
+)
 
 @onready var top_hud: TopHud = $TopHud
 @onready var tutorial_popup: Control = $TutorialPopup
@@ -122,10 +128,10 @@ func update_area_button(button: TextureButton, area: Dictionary) -> void:
 	var is_unlocked: bool = GameState.is_area_unlocked(area)
 
 	if is_unlocked:
-		button.texture_normal = unlocked_site_texture
+		button.texture_normal = UNLOCKED_SITE_TEXTURE
 		button.tooltip_text = area["name"]
 	else:
-		button.texture_normal = locked_site_texture
+		button.texture_normal = LOCKED_SITE_TEXTURE
 		button.tooltip_text = "%s\nLocked — Requires %d Rep" % [
 			area["name"],
 			area["unlock_required_rep"]
@@ -549,7 +555,7 @@ func _on_pause_menu_action_selected(action: String) -> void:
 
 		"exit":
 			GameState.save_game()
-			get_tree().paused = false
+			get_tree().paused = true
 			get_tree().change_scene_to_file("res://MainMenu.tscn")
 
 

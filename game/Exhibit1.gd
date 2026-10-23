@@ -71,7 +71,7 @@ func _on_pause_menu_action_selected(action: String) -> void:
 
 		"exit":
 			GameState.save_game()
-			get_tree().paused = false
+			get_tree().paused = true
 			get_tree().change_scene_to_file("res://MainMenu.tscn")
 
 
@@ -86,4 +86,4 @@ func _on_tutorial_completed() -> void:
 
 
 func _on_pause_button_pressed() -> void:
-	$PauseMenu.open()
+	$PauseMenu.open() 

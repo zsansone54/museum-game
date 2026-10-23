@@ -92,15 +92,16 @@ grow_horizontal = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ToolsButton" type="TextureButton" parent="." unique_id=344638319]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.03
-anchor_top = 1.0
-anchor_right = 0.465
-anchor_bottom = 1.0
-grow_vertical = 2
-scale = Vector2(0.1, 0.1)
+offset_left = 91.11
+offset_top = 456.255
+offset_right = 171.11
+offset_bottom = 536.255
 texture_normal = ExtResource("4_ybfmx")
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("4_ae8nq")
 
 [node name="RightButton" type="TextureButton" parent="." unique_id=895030818]
@@ -125,23 +126,29 @@ stretch_mode = 0
 script = ExtResource("4_ae8nq")
 
 [node name="Area1Button" type="TextureButton" parent="." unique_id=1947366201]
-layout_mode = 0
-offset_left = 510.0
-offset_top = 669.77
-offset_right = 1764.0
-offset_bottom = 1923.77
-scale = Vector2(0.1, 0.1)
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 1
+offset_left = 517.885
+offset_top = 719.99
+offset_right = 597.885
+offset_bottom = 799.99
 texture_normal = ExtResource("7_f5roj")
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("4_ae8nq")
 
 [node name="Area2Button" type="TextureButton" parent="." unique_id=1130183312]
-layout_mode = 0
-offset_left = 1458.69
-offset_top = 398.92
-offset_right = 2712.6902
-offset_bottom = 1652.92
-scale = Vector2(0.1, 0.1)
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 1
+offset_left = 1487.575
+offset_top = 431.485
+offset_right = 1567.575
+offset_bottom = 511.485
 texture_normal = ExtResource("8_uks3v")
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("4_ae8nq")
 
 [node name="EquipmentPanel" type="Control" parent="." unique_id=781250698]
@@ -235,7 +242,6 @@ texture_normal = SubResource("AtlasTexture_f7803")
 texture_pressed = SubResource("AtlasTexture_ymigv")
 
 [node name="SitePanel" type="Control" parent="." unique_id=661606568]
-visible = false
 custom_minimum_size = Vector2(725, 520)
 layout_mode = 1
 anchors_preset = 8
@@ -340,9 +346,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -21.609985
-offset_top = -52.08
+offset_top = -77.05
 offset_right = 42.390015
-offset_bottom = 11.919998
+offset_bottom = -13.050003
 grow_horizontal = 0
 scale = Vector2(2.3, 2.3)
 texture_normal = SubResource("AtlasTexture_atkrj")

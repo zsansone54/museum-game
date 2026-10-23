@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_4i2vw"]
 [ext_resource type="Script" uid="uid://dgl7uj18sa7qv" path="res://top_hud.gd" id="2_wne50"]
+[ext_resource type="Texture2D" uid="uid://cq31g4it7nl8t" path="res://assets/backgrounds/Antique gold archaeology HUD frame.png" id="3_ir4w7"]
 [ext_resource type="Texture2D" uid="uid://cn6d4nnx5iah3" path="res://assets/ui/coin/money.png" id="3_wne50"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_m3vwo"]
 [ext_resource type="FontFile" uid="uid://bmu8x7xtkrbma" path="res://assets/fonts/karma/Karma Suture.otf" id="5_atkrj"]
@@ -145,50 +146,51 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_ir4w7")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect" unique_id=1975566607]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1975566607]
 layout_mode = 0
 offset_top = 26.0
 offset_right = 1920.0
 offset_bottom = 94.0
 size_flags_vertical = 4
 
-[node name="Spacer" type="Control" parent="TextureRect/HBoxContainer" unique_id=1199075990]
+[node name="Spacer" type="Control" parent="HBoxContainer" unique_id=1199075990]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="FundsPlate" type="PanelContainer" parent="TextureRect/HBoxContainer" unique_id=174806767]
+[node name="FundsPlate" type="PanelContainer" parent="HBoxContainer" unique_id=174806767]
 custom_minimum_size = Vector2(280, 68)
 custom_maximum_size = Vector2(280, 68)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2e1rq")
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/HBoxContainer/FundsPlate" unique_id=637434359]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/FundsPlate" unique_id=637434359]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 2
 
-[node name="FundsGroup" type="HBoxContainer" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer" unique_id=807389454]
+[node name="FundsGroup" type="HBoxContainer" parent="HBoxContainer/FundsPlate/MarginContainer" unique_id=807389454]
 layout_mode = 2
 
-[node name="MoneyIcon" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=771829247]
+[node name="MoneyIcon" type="Control" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=771829247]
 custom_minimum_size = Vector2(68, 68)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/MoneyIcon" unique_id=1010498850]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup/MoneyIcon" unique_id=1010498850]
 position = Vector2(34, 34)
 scale = Vector2(4.2, 4.2)
 sprite_frames = SubResource("SpriteFrames_s7ls6")
 animation = &"spin"
 frame_progress = 0.015519695
 
-[node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=712252902]
+[node name="Spacer2" type="Control" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=712252902]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="Divider" type="TextureRect" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=791356299]
+[node name="Divider" type="TextureRect" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=791356299]
 custom_minimum_size = Vector2(0, 60)
 custom_maximum_size = Vector2(-1, 60)
 layout_mode = 2
@@ -196,56 +198,56 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_gcfin")
 
-[node name="Spacer" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=1046286042]
+[node name="Spacer" type="Control" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=1046286042]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="FundsText" type="VBoxContainer" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=1131721461]
+[node name="FundsText" type="VBoxContainer" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=1131721461]
 layout_mode = 2
 
-[node name="FundsLabel" type="Label" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=540151196]
+[node name="FundsLabel" type="Label" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=540151196]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_atkrj")
 text = "$999,999"
 
-[node name="IncomeLabel" type="Label" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=1653888703]
+[node name="IncomeLabel" type="Label" parent="HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText" unique_id=1653888703]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.50980395, 0.76862746, 0.35686275, 1)
 theme_override_fonts/font = ExtResource("5_atkrj")
 theme_override_font_sizes/font_size = 20
 text = "+ $0.00 / sec"
 
-[node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer" unique_id=38652299]
+[node name="Spacer2" type="Control" parent="HBoxContainer" unique_id=38652299]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="RepPlate" type="PanelContainer" parent="TextureRect/HBoxContainer" unique_id=826723384]
+[node name="RepPlate" type="PanelContainer" parent="HBoxContainer" unique_id=826723384]
 custom_minimum_size = Vector2(250, 68)
 custom_maximum_size = Vector2(250, 68)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2e1rq")
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/HBoxContainer/RepPlate" unique_id=2115127401]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/RepPlate" unique_id=2115127401]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 2
 
-[node name="RepGroup" type="HBoxContainer" parent="TextureRect/HBoxContainer/RepPlate/MarginContainer" unique_id=1449720506]
+[node name="RepGroup" type="HBoxContainer" parent="HBoxContainer/RepPlate/MarginContainer" unique_id=1449720506]
 layout_mode = 2
 
-[node name="RepIconLabel" type="Label" parent="TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=1889717767]
+[node name="RepIconLabel" type="Label" parent="HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=1889717767]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8392157, 0.68235296, 0.33333334, 1)
 theme_override_font_sizes/font_size = 40
 text = "Rep"
 
-[node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=249642148]
+[node name="Spacer2" type="Control" parent="HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=249642148]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="Divider" type="TextureRect" parent="TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=500687077]
+[node name="Divider" type="TextureRect" parent="HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=500687077]
 custom_minimum_size = Vector2(0, 60)
 custom_maximum_size = Vector2(-1, 60)
 layout_mode = 2
@@ -253,34 +255,34 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_gcfin")
 
-[node name="Spacer" type="Control" parent="TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=538799493]
+[node name="Spacer" type="Control" parent="HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=538799493]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="RepLabel" type="Label" parent="TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=1613998333]
+[node name="RepLabel" type="Label" parent="HBoxContainer/RepPlate/MarginContainer/RepGroup" unique_id=1613998333]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_atkrj")
 theme_override_font_sizes/font_size = 30
 text = "9999"
 
-[node name="Spacer3" type="Control" parent="TextureRect/HBoxContainer" unique_id=944630172]
+[node name="Spacer3" type="Control" parent="HBoxContainer" unique_id=944630172]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="TimerPlate" type="PanelContainer" parent="TextureRect/HBoxContainer" unique_id=952217560]
+[node name="TimerPlate" type="PanelContainer" parent="HBoxContainer" unique_id=952217560]
 custom_minimum_size = Vector2(250, 68)
 custom_maximum_size = Vector2(250, 68)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2e1rq")
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect/HBoxContainer/TimerPlate" unique_id=102981409]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/TimerPlate" unique_id=102981409]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 2
 
-[node name="CountdownBar" type="TextureProgressBar" parent="TextureRect/HBoxContainer/TimerPlate/MarginContainer" unique_id=785248577]
+[node name="CountdownBar" type="TextureProgressBar" parent="HBoxContainer/TimerPlate/MarginContainer" unique_id=785248577]
 texture_filter = 1
 custom_minimum_size = Vector2(260, 40)
 custom_maximum_size = Vector2(260, 40)
@@ -296,7 +298,7 @@ stretch_margin_right = 9
 texture_under = ExtResource("7_atkrj")
 texture_progress = ExtResource("8_ir4w7")
 
-[node name="RemainingTimeLabel" type="Label" parent="TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar" unique_id=1455253254]
+[node name="RemainingTimeLabel" type="Label" parent="HBoxContainer/TimerPlate/MarginContainer/CountdownBar" unique_id=1455253254]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 1
 anchors_preset = 4
@@ -311,7 +313,7 @@ theme_override_colors/font_color = Color(0.1148968, 0.11489681, 0.1148968, 1)
 theme_override_fonts/font = ExtResource("5_atkrj")
 text = "5.23s"
 
-[node name="TotalTimeLabel" type="Label" parent="TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar" unique_id=669851182]
+[node name="TotalTimeLabel" type="Label" parent="HBoxContainer/TimerPlate/MarginContainer/CountdownBar" unique_id=669851182]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -330,12 +332,12 @@ theme_override_fonts/font = ExtResource("5_atkrj")
 text = "15.00s"
 horizontal_alignment = 2
 
-[node name="NotificationToast" parent="TextureRect/HBoxContainer" unique_id=1611973884 instance=ExtResource("9_atkrj")]
+[node name="NotificationToast" parent="HBoxContainer" unique_id=1611973884 instance=ExtResource("9_atkrj")]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 
-[node name="PauseButton" type="TextureButton" parent="TextureRect/HBoxContainer" unique_id=832907117]
+[node name="PauseButton" type="TextureButton" parent="HBoxContainer" unique_id=832907117]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -344,6 +346,6 @@ texture_normal = SubResource("AtlasTexture_8w1rx")
 texture_pressed = SubResource("AtlasTexture_x7vi5")
 stretch_mode = 0
 
-[node name="Spacer5" type="Control" parent="TextureRect/HBoxContainer" unique_id=2051695546]
+[node name="Spacer5" type="Control" parent="HBoxContainer" unique_id=2051695546]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2

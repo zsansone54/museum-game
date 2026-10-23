@@ -4,35 +4,35 @@ extends Control
 signal pause_requested
 
 @onready var money_animation: AnimatedSprite2D = (
-	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/MoneyIcon/AnimatedSprite2D
+	$HBoxContainer/FundsPlate/MarginContainer/FundsGroup/MoneyIcon/AnimatedSprite2D
 )
 
 @onready var funds_label: Label = (
-	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText/FundsLabel
+	$HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText/FundsLabel
 )
 
 @onready var income_label: Label = (
-	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText/IncomeLabel
+	$HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText/IncomeLabel
 )
 
 @onready var rep_label: Label = (
-	$TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup/RepLabel
+	$HBoxContainer/RepPlate/MarginContainer/RepGroup/RepLabel
 )
 
 @onready var countdown_bar: TextureProgressBar = (
-	$TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar
+	$HBoxContainer/TimerPlate/MarginContainer/CountdownBar
 )
 
 @onready var remaining_time_label: Label = (
-	$TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar/RemainingTimeLabel
+	$HBoxContainer/TimerPlate/MarginContainer/CountdownBar/RemainingTimeLabel
 )
 
 @onready var total_time_label: Label = (
-	$TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar/TotalTimeLabel
+	$HBoxContainer/TimerPlate/MarginContainer/CountdownBar/TotalTimeLabel
 )
 
 @onready var pause_button: TextureButton = (
-	$TextureRect/HBoxContainer/PauseButton
+	$HBoxContainer/PauseButton
 )
 
 

@@ -20,15 +20,15 @@ signal pause_requested
 )
 
 @onready var countdown_bar: TextureProgressBar = (
-	$TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar
+	$TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar
 )
 
 @onready var remaining_time_label: Label = (
-	$TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar/RemainingTimeLabel
+	$TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar/RemainingTimeLabel
 )
 
 @onready var total_time_label: Label = (
-	$TextureRect/HBoxContainer/RepPlate2/MarginContainer/CountdownBar/TotalTimeLabel
+	$TextureRect/HBoxContainer/TimerPlate/MarginContainer/CountdownBar/TotalTimeLabel
 )
 
 @onready var pause_button: TextureButton = (

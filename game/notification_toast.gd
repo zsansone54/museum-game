@@ -1,6 +1,9 @@
 extends Control
 
-@onready var message_label: Label = $MessageLabel
+@onready var toast_panel: PanelContainer = $NotificationPanel
+@onready var message_label: Label = (
+	$NotificationPanel/MarginContainer/MessageLabel
+)
 
 var notification_tween: Tween
 
@@ -11,7 +14,8 @@ func _ready() -> void:
 	GameState.excavation_failed.connect(_on_excavation_failed)
 	GameState.artifact_assembled.connect(_on_artifact_assembled)
 
-	message_label.modulate.a = 0.0
+	toast_panel.modulate.a = 0.0
+	toast_panel.hide()
 
 
 func show_notification(message: String, color: Color) -> void:
@@ -19,12 +23,30 @@ func show_notification(message: String, color: Color) -> void:
 		notification_tween.kill()
 
 	message_label.text = message
-	message_label.modulate = Color(color.r, color.g, color.b, 0.0)
+	message_label.modulate = Color(color.r, color.g, color.b, 1.0)
+
+	toast_panel.show()
+	toast_panel.modulate = Color(1.0, 1.0, 1.0, 0.0)
 
 	notification_tween = create_tween()
-	notification_tween.tween_property(message_label, "modulate:a", 1.0, 0.15)
+
+	notification_tween.tween_property(
+		toast_panel,
+		"modulate:a",
+		1.0,
+		0.15
+	)
+
 	notification_tween.tween_interval(2.0)
-	notification_tween.tween_property(message_label, "modulate:a", 0.0, 0.35)
+
+	notification_tween.tween_property(
+		toast_panel,
+		"modulate:a",
+		0.0,
+		0.35
+	)
+
+	notification_tween.tween_callback(toast_panel.hide)
 
 
 func _on_excavation_started(artifact_name: String) -> void:
@@ -56,8 +78,14 @@ func _on_excavation_failed(reward: float) -> void:
 	)
 
 
-func _on_artifact_assembled(artifact_name: String, rep_reward: int) -> void:
+func _on_artifact_assembled(
+	artifact_name: String,
+	rep_reward: int
+) -> void:
 	show_notification(
-		"%s assembled! +%d Reputation" % [artifact_name, rep_reward],
+		"%s assembled! +%d Reputation" % [
+			artifact_name,
+			rep_reward
+		],
 		Color("#72c9e8")
 	)

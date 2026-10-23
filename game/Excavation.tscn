@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_3ro8f"]
 [ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="4_ae8nq"]
 [ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="4_t8wqh"]
-[ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="4_x6ne2"]
 [ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="7_f7803"]
 [ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_216cp"]
 
@@ -340,9 +339,6 @@ layout_mode = 1
 
 [node name="SettingsMenu" parent="." unique_id=1430616981 instance=ExtResource("3_a50wm")]
 visible = false
-layout_mode = 1
-
-[node name="NotificationToast" parent="." unique_id=1611973884 instance=ExtResource("4_x6ne2")]
 layout_mode = 1
 
 [node name="TopHud" parent="." unique_id=1977575653 instance=ExtResource("10_216cp")]

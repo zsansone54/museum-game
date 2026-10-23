@@ -5,6 +5,7 @@ const SFX_BUS: StringName = &"SFX"
 
 const DEFAULT_MUSIC_VOLUME := 60.0
 const DEFAULT_SFX_VOLUME := 75.0
+const MUSIC_LOOP_FADE_TIME := 0.6
 
 const BUTTON_CLICK_SOUND = preload(
 	"res://assets/audio/sfx/kenney_interface-sounds/Audio/click_005.ogg"
@@ -33,6 +34,10 @@ const EXCAVATION_FAILURE_SOUND = preload(
 @onready var purchase_player: AudioStreamPlayer = $PurchasePlayer
 @onready var transition_player: AudioStreamPlayer = $TransitionPlayer
 
+var music_loop_timer: SceneTreeTimer
+var music_fade_tween: Tween
+
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -41,11 +46,7 @@ func _ready() -> void:
 	set_sfx_volume(DEFAULT_SFX_VOLUME)
 	set_sfx_muted(false)
 
-	if music_player.stream == null:
-		push_warning("MusicPlayer does not have a music stream assigned.")
-	else:
-		music_player.finished.connect(_on_music_finished)
-		music_player.play()
+	start_music()
 
 	get_tree().node_added.connect(_on_node_added)
 	call_deferred("_connect_existing_buttons")
@@ -54,8 +55,59 @@ func _ready() -> void:
 	GameState.excavation_failed.connect(_on_excavation_failed)
 
 
-func _on_music_finished() -> void:
+func start_music() -> void:
+	if music_player.stream == null:
+		push_warning("MusicPlayer does not have a music stream assigned.")
+		return
+
+	if !music_player.finished.is_connected(_on_music_finished):
+		music_player.finished.connect(_on_music_finished)
+
+	music_player.volume_db = 0.0
 	music_player.play()
+	schedule_music_loop_fade()
+
+
+func schedule_music_loop_fade() -> void:
+	if music_player.stream == null:
+		return
+
+	var stream_length := music_player.stream.get_length()
+	var fade_start_time := maxf(0.1, stream_length - MUSIC_LOOP_FADE_TIME)
+
+	music_loop_timer = get_tree().create_timer(fade_start_time)
+	music_loop_timer.timeout.connect(fade_music_out)
+
+
+func fade_music_out() -> void:
+	if music_fade_tween and music_fade_tween.is_valid():
+		music_fade_tween.kill()
+
+	music_fade_tween = create_tween()
+	music_fade_tween.tween_property(
+		music_player,
+		"volume_db",
+		-60.0,
+		MUSIC_LOOP_FADE_TIME
+	)
+
+
+func _on_music_finished() -> void:
+	music_player.volume_db = -60.0
+	music_player.play()
+
+	if music_fade_tween and music_fade_tween.is_valid():
+		music_fade_tween.kill()
+
+	music_fade_tween = create_tween()
+	music_fade_tween.tween_property(
+		music_player,
+		"volume_db",
+		0.0,
+		MUSIC_LOOP_FADE_TIME
+	)
+
+	schedule_music_loop_fade()
 
 
 func _connect_existing_buttons() -> void:
@@ -115,16 +167,18 @@ func play_excavation_failure() -> void:
 	_play_sound(event_player, EXCAVATION_FAILURE_SOUND)
 
 
-func _play_sound(player: AudioStreamPlayer, sound: AudioStream) -> void:
-	player.stream = sound
-	player.play()
-
 func play_purchase() -> void:
 	purchase_player.play()
 
 
 func play_scene_transition() -> void:
 	transition_player.play()
+
+
+func _play_sound(player: AudioStreamPlayer, sound: AudioStream) -> void:
+	player.stream = sound
+	player.play()
+
 
 func set_music_volume(volume_percent: float) -> void:
 	_set_bus_volume(MUSIC_BUS, volume_percent)

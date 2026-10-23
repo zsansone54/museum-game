@@ -98,6 +98,7 @@ func _process(_delta: float) -> void:
 
 
 func open_site(area_id: int) -> void:
+	AudioManager.play_panel_open()
 	if (
 		site_panel.visible
 		and not current_site_area.is_empty()
@@ -134,6 +135,7 @@ func open_site(area_id: int) -> void:
 
 
 func close_site_panel() -> void:
+	AudioManager.play_panel_close()
 	if site_panel_tween and site_panel_tween.is_valid():
 		site_panel_tween.kill()
 
@@ -313,6 +315,7 @@ func select_site_artifact(index: int) -> void:
 
 
 func open_equipment_panel() -> void:
+	AudioManager.play_panel_open()
 	if equipment_panel.visible:
 		close_equipment_panel()
 		return
@@ -338,6 +341,7 @@ func open_equipment_panel() -> void:
 
 
 func close_equipment_panel() -> void:
+	AudioManager.play_panel_close()
 	if equipment_panel_tween and equipment_panel_tween.is_valid():
 		equipment_panel_tween.kill()
 

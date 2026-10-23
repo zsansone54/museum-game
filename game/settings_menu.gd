@@ -60,6 +60,7 @@ func _ready() -> void:
 
 
 func open() -> void:
+	AudioManager.play_panel_open()
 	show()
 	settings_panel.position = closed_position
 	dimmer.color.a = 0.0
@@ -71,6 +72,7 @@ func open() -> void:
 
 
 func close() -> void:
+	AudioManager.play_panel_close()
 	var tween := create_tween().set_parallel(true)
 	tween.tween_property(settings_panel, "position", closed_position, 0.3) \
 		.set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)

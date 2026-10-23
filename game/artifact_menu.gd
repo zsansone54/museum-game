@@ -51,6 +51,7 @@ func _process(_delta: float) -> void:
 
 
 func open_menu(artifact_id: int) -> void:
+	AudioManager.play_panel_open()
 	current_artifact_id = artifact_id
 	is_closing = false
 	refresh()
@@ -72,6 +73,7 @@ func open_menu(artifact_id: int) -> void:
 
 
 func close_menu() -> void:
+	AudioManager.play_panel_close()
 	if is_closing:
 		return
 

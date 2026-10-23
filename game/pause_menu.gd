@@ -19,6 +19,7 @@ func _ready() -> void:
 	hide()
 
 func open() -> void:
+	AudioManager.play_panel_open()
 	is_closing = false
 	get_tree().paused = true
 
@@ -32,6 +33,7 @@ func open() -> void:
 	tween.tween_property(dimmer, "color:a", 0.3, 0.2)
 
 func close_with_action(action: String) -> void:
+	AudioManager.play_panel_close()
 	if is_closing:
 		return
 

@@ -13,6 +13,7 @@ signal completed
 @onready var skip_button: Button = $PanelContainer/PanelMargin/Tutorial/ButtonRow/SkipButton
 @onready var next_button: Button = $PanelContainer/PanelMargin/Tutorial/ButtonRow/NextButton
 
+
 const PAGES := [
 	{
 		"title": "Welcome, Curator!",
@@ -40,6 +41,10 @@ var is_closing := false
 
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	dimmer.mouse_filter = Control.MOUSE_FILTER_STOP
+	tutorial_panel.mouse_filter = Control.MOUSE_FILTER_STOP
+
 	hide()
 
 	back_button.pressed.connect(_on_back_button_pressed)
@@ -48,8 +53,7 @@ func _ready() -> void:
 
 	await get_tree().process_frame
 
-	open_position = tutorial_panel.position
-	closed_position = open_position + Vector2(0, tutorial_panel.size.y + 40)
+	update_panel_positions()
 	tutorial_panel.position = closed_position
 
 
@@ -59,11 +63,12 @@ func open() -> void:
 
 	update_page()
 
+	# Let Exhibit 1 appear before the overlay opens.
+	await get_tree().create_timer(0.2).timeout
+
+	update_panel_positions()
 	tutorial_panel.position = closed_position
 	dimmer.color.a = 0.0
-
-	# Let the exhibit scene render before the tutorial appears.
-	await get_tree().create_timer(0.2).timeout
 
 	show()
 	AudioManager.play_panel_open()
@@ -139,3 +144,11 @@ func finish_tutorial() -> void:
 		completed.emit()
 	)
 	
+func update_panel_positions() -> void:
+	var viewport_size := get_viewport_rect().size
+
+	open_position = (viewport_size - tutorial_panel.size) * 0.5
+	closed_position = Vector2(
+		open_position.x,
+		viewport_size.y + 40.0
+	)

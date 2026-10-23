@@ -80,6 +80,15 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Settings"
 
+[node name="TutorialButton" type="Button" parent="PausePanel/MarginContainer/VBoxContainer" unique_id=673903467]
+custom_minimum_size = Vector2(350, 70)
+custom_maximum_size = Vector2(350, 70)
+layout_mode = 2
+theme = ExtResource("4_qg8xq")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Open Tutorial"
+
 [node name="ExitButton" type="Button" parent="PausePanel/MarginContainer/VBoxContainer" unique_id=1998420829]
 custom_minimum_size = Vector2(350, 70)
 custom_maximum_size = Vector2(350, 70)
@@ -91,4 +100,5 @@ text = "Exit"
 
 [connection signal="pressed" from="PausePanel/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PausePanel/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PausePanel/MarginContainer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="PausePanel/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

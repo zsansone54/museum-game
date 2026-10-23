@@ -57,3 +57,6 @@ func _on_settings_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	close_with_action("exit")
+
+func _on_tutorial_button_pressed() -> void:
+	close_with_action("tutorial")

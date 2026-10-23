@@ -195,8 +195,3 @@ offset_bottom = 100.0
 [node name="TutorialPopup" parent="." unique_id=872070702 instance=ExtResource("10_gvu8o")]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5

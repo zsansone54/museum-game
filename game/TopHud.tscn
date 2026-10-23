@@ -6,6 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://cn6d4nnx5iah3" path="res://assets/ui/coin/money.png" id="3_wne50"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_m3vwo"]
 [ext_resource type="FontFile" uid="uid://bmu8x7xtkrbma" path="res://assets/fonts/karma/Karma Suture.otf" id="5_atkrj"]
+[ext_resource type="Texture2D" uid="uid://clbsqvkopdmmv" path="res://assets/ui/UIpack_RPG/PNG/barBack_horizontalLeft.png" id="7_i0pyl"]
+[ext_resource type="Texture2D" uid="uid://bn3v3qsayqvh1" path="res://assets/ui/UIpack_RPG/PNG/barBack_horizontalMid.png" id="8_cpmn1"]
+[ext_resource type="Texture2D" uid="uid://brpdc02vg6o1o" path="res://assets/ui/UIpack_RPG/PNG/barBack_horizontalRight.png" id="9_b1u4s"]
+[ext_resource type="Texture2D" uid="uid://c7rhah61pgaf" path="res://assets/ui/UIpack_RPG/PNG/barYellow_horizontalLeft.png" id="10_u8kcc"]
+[ext_resource type="Texture2D" uid="uid://w8e1qd6skt56" path="res://assets/ui/UIpack_RPG/PNG/barYellow_horizontalMid.png" id="11_gywx6"]
+[ext_resource type="Texture2D" uid="uid://bsyddc6yhffeq" path="res://assets/ui/UIpack_RPG/PNG/barYellow_horizontalRight.png" id="12_4np2j"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcfin"]
 texture = ExtResource("2_k3km3")
@@ -175,7 +181,7 @@ position = Vector2(34, 34)
 scale = Vector2(4.2, 4.2)
 sprite_frames = SubResource("SpriteFrames_s7ls6")
 animation = &"spin"
-frame_progress = 0.25982353
+frame_progress = 0.73861784
 
 [node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=712252902]
 custom_minimum_size = Vector2(10, 0)
@@ -257,10 +263,94 @@ theme_override_font_sizes/font_size = 30
 text = "9999"
 
 [node name="Spacer3" type="Control" parent="TextureRect/HBoxContainer" unique_id=1928426545]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="TimerGroup" type="VBoxContainer" parent="TextureRect/HBoxContainer" unique_id=1123855070]
+[node name="CountdownBar" type="Control" parent="TextureRect/HBoxContainer" unique_id=1174964092]
+custom_minimum_size = Vector2(260, 40)
+custom_maximum_size = Vector2(260, 40)
+clip_contents = true
 layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="BackBar" type="HBoxContainer" parent="TextureRect/HBoxContainer/CountdownBar" unique_id=1623371282]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="BackLeft" type="TextureRect" parent="TextureRect/HBoxContainer/CountdownBar/BackBar" unique_id=1136490364]
+layout_mode = 2
+texture = ExtResource("7_i0pyl")
+
+[node name="BackMiddle" type="TextureRect" parent="TextureRect/HBoxContainer/CountdownBar/BackBar" unique_id=1929742982]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("8_cpmn1")
+
+[node name="BackRight" type="TextureRect" parent="TextureRect/HBoxContainer/CountdownBar/BackBar" unique_id=1682409106]
+layout_mode = 2
+texture = ExtResource("9_b1u4s")
+
+[node name="YellowBar" type="HBoxContainer" parent="TextureRect/HBoxContainer/CountdownBar" unique_id=668085644]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="YellowLeft" type="TextureRect" parent="TextureRect/HBoxContainer/CountdownBar/YellowBar" unique_id=2135436587]
+layout_mode = 2
+texture = ExtResource("10_u8kcc")
+
+[node name="YellowMiddle" type="TextureRect" parent="TextureRect/HBoxContainer/CountdownBar/YellowBar" unique_id=22958959]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("11_gywx6")
+
+[node name="YellowRight" type="TextureRect" parent="TextureRect/HBoxContainer/CountdownBar/YellowBar" unique_id=2061877777]
+layout_mode = 2
+texture = ExtResource("12_4np2j")
+
+[node name="RemainingTimeLabel" type="Label" parent="TextureRect/HBoxContainer/CountdownBar" unique_id=1455253254]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -14.5
+offset_right = 11.0
+offset_bottom = 14.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.1148968, 0.11489681, 0.1148968, 1)
+theme_override_fonts/font = ExtResource("5_atkrj")
+text = "5.23s"
+
+[node name="TotalTimeLabel" type="Label" parent="TextureRect/HBoxContainer/CountdownBar" unique_id=669851182]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -14.5
+offset_right = -10.0
+offset_bottom = 14.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.11372549, 0.11372549, 0.11372549, 1)
+theme_override_fonts/font = ExtResource("5_atkrj")
+text = "15.00s"
+horizontal_alignment = 2
 
 [node name="PauseButton" type="TextureButton" parent="TextureRect/HBoxContainer" unique_id=832907117]
 layout_mode = 2

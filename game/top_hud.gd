@@ -3,6 +3,10 @@ extends Control
 
 signal pause_requested
 
+@onready var money_animation: AnimatedSprite2D = (
+	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/MoneyIcon/AnimatedSprite2D
+)
+
 @onready var funds_label: Label = (
 	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/FundsText/FundsLabel
 )
@@ -15,28 +19,32 @@ signal pause_requested
 	$TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup/RepLabel
 )
 
-@onready var pause_button: TextureButton = $TextureRect/HBoxContainer/PauseButton
-
-@onready var money_animation: AnimatedSprite2D = (
-	$TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup/MoneyIcon/AnimatedSprite2D
+@onready var countdown_bar: Control = (
+	$TextureRect/HBoxContainer/CountdownBar
 )
 
-@onready var remaining_time_label := get_node_or_null(
-	"TextureRect/HBoxContainer/TimerGroup/RemainingTimeLabel"
-) as Label
+@onready var red_bar: HBoxContainer = (
+	$TextureRect/HBoxContainer/CountdownBar/RedBar
+)
 
-@onready var total_time_label := get_node_or_null(
-	"TextureRect/HBoxContainer/TimerGroup/TotalTimeLabel"
-) as Label
+@onready var remaining_time_label: Label = (
+	$TextureRect/HBoxContainer/CountdownBar/RemainingTimeLabel
+)
 
-@onready var countdown_bar := get_node_or_null(
-	"TextureRect/HBoxContainer/TimerGroup/CountdownBar"
-) as TextureProgressBar
+@onready var total_time_label: Label = (
+	$TextureRect/HBoxContainer/CountdownBar/TotalTimeLabel
+)
+
+@onready var pause_button: TextureButton = (
+	$TextureRect/HBoxContainer/PauseButton
+)
 
 
 func _ready() -> void:
 	money_animation.play("spin")
 	pause_button.pressed.connect(_on_pause_button_pressed)
+
+	await get_tree().process_frame
 	update_hud()
 
 
@@ -45,7 +53,7 @@ func _process(_delta: float) -> void:
 
 
 func update_hud() -> void:
-	funds_label.text = "$%d" % int(GameState.funds)
+	funds_label.text = "$%04d" % int(GameState.funds)
 
 	income_label.text = "+ $%.2f / sec" % (
 		GameState.get_total_donation_income_per_second()
@@ -58,15 +66,11 @@ func update_hud() -> void:
 
 func update_timer() -> void:
 	if GameState.active_artifact_id == -1:
-		if remaining_time_label != null:
-			remaining_time_label.text = "--.-- s"
+		remaining_time_label.text = "--.-- s"
+		total_time_label.text = "--.-- s"
 
-		if total_time_label != null:
-			total_time_label.text = "--.-- s"
-
-		if countdown_bar != null:
-			countdown_bar.value = 0.0
-
+		red_bar.position = Vector2.ZERO
+		red_bar.size = Vector2(0.0, countdown_bar.size.y)
 		return
 
 	var artifact: Dictionary = GameState.get_artifact_data(
@@ -76,15 +80,23 @@ func update_timer() -> void:
 	var total_time: float = GameState.get_effective_attempt_duration(artifact)
 	var remaining_time: float = max(GameState.excavation_countdown, 0.0)
 
-	if remaining_time_label != null:
-		remaining_time_label.text = "%.2f s" % remaining_time
+	remaining_time_label.text = "%.2f s" % remaining_time
+	total_time_label.text = "%.2f s" % total_time
 
-	if total_time_label != null:
-		total_time_label.text = "%.2f s" % total_time
+	if total_time <= 0.0:
+		return
 
-	if countdown_bar != null:
-		countdown_bar.max_value = total_time
-		countdown_bar.value = remaining_time
+	var progress_ratio: float = clampf(
+		remaining_time / total_time,
+		0.0,
+		1.0
+	)
+
+	red_bar.position = Vector2.ZERO
+	red_bar.size = Vector2(
+		countdown_bar.size.x * progress_ratio,
+		countdown_bar.size.y
+	)
 
 
 func _on_pause_button_pressed() -> void:

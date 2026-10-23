@@ -28,6 +28,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("1_wgpua")
 script = ExtResource("2_p8abh")
 
@@ -41,8 +43,8 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1510997249]
-custom_minimum_size = Vector2(660, 500)
-custom_maximum_size = Vector2(-1, 500)
+custom_minimum_size = Vector2(720, 550)
+custom_maximum_size = Vector2(720, 550)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -62,6 +64,7 @@ layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="Tutorial" type="VBoxContainer" parent="PanelContainer/PanelMargin" unique_id=664996133]
 layout_mode = 2
@@ -71,7 +74,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.41960785, 0.2901961, 0.1764706, 1)
 theme_override_fonts/font = ExtResource("4_txf4q")
 theme_override_font_sizes/font_size = 60
-text = "Tutorial"
+text = "Excavate for Fragments"
 horizontal_alignment = 1
 
 [node name="Divider" type="HSeparator" parent="PanelContainer/PanelMargin/Tutorial" unique_id=459699777]
@@ -79,7 +82,8 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="MessageContainer" type="PanelContainer" parent="PanelContainer/PanelMargin/Tutorial" unique_id=324593405]
-custom_maximum_size = Vector2(-1, 250)
+custom_minimum_size = Vector2(630, 230)
+custom_maximum_size = Vector2(630, 230)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ocngp")
 
@@ -90,7 +94,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(540, 0)
 custom_maximum_size = Vector2(540, -1)
 layout_mode = 2
-text = "Use the left arrow to visit the excavation map. Select an unlocked site, then choose an artifact. Attempts happen automatically: successes recover fragments, while failures provide funding."
 autowrap_mode = 3
 
 [node name="Spacer" type="Control" parent="PanelContainer/PanelMargin/Tutorial/MessageContainer/MessageBox" unique_id=1764885790]
@@ -98,6 +101,7 @@ layout_mode = 2
 
 [node name="PageLabel" type="Label" parent="PanelContainer/PanelMargin/Tutorial/MessageContainer/MessageBox" unique_id=1804304192]
 layout_mode = 2
+size_flags_vertical = 10
 text = "Page 1 of 4"
 
 [node name="Spacer" type="Control" parent="PanelContainer/PanelMargin/Tutorial" unique_id=1809946522]
@@ -107,21 +111,26 @@ layout_mode = 2
 
 [node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/PanelMargin/Tutorial" unique_id=645255630]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_constants/separation = 20
+theme_override_constants/separation = 50
 
 [node name="BackButton" type="Button" parent="PanelContainer/PanelMargin/Tutorial/ButtonRow" unique_id=1012275934]
-custom_minimum_size = Vector2(200, 120)
+custom_minimum_size = Vector2(160, 120)
 custom_maximum_size = Vector2(160, 120)
 layout_mode = 2
 text = "Back"
 
 [node name="SkipButton" type="Button" parent="PanelContainer/PanelMargin/Tutorial/ButtonRow" unique_id=2037073916]
-custom_minimum_size = Vector2(200, 120)
+custom_minimum_size = Vector2(160, 120)
 custom_maximum_size = Vector2(160, 120)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Skip"
 
 [node name="NextButton" type="Button" parent="PanelContainer/PanelMargin/Tutorial/ButtonRow" unique_id=1894007044]
 custom_minimum_size = Vector2(160, 120)
+custom_maximum_size = Vector2(160, 120)
 layout_mode = 2
+size_flags_horizontal = 10
+text = "Begin!"

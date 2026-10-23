@@ -2,9 +2,13 @@ extends Control
 
 signal completed
 
+@onready var dimmer: ColorRect = $ColorRect
+@onready var tutorial_panel: PanelContainer = $PanelContainer
+
 @onready var title_label: Label = $PanelContainer/PanelMargin/Tutorial/TitleLabel
 @onready var message_label: Label = $PanelContainer/PanelMargin/Tutorial/MessageContainer/MessageBox/MessageLabel
 @onready var page_label: Label = $PanelContainer/PanelMargin/Tutorial/MessageContainer/MessageBox/PageLabel
+
 @onready var back_button: Button = $PanelContainer/PanelMargin/Tutorial/ButtonRow/BackButton
 @onready var skip_button: Button = $PanelContainer/PanelMargin/Tutorial/ButtonRow/SkipButton
 @onready var next_button: Button = $PanelContainer/PanelMargin/Tutorial/ButtonRow/NextButton
@@ -29,6 +33,10 @@ const PAGES := [
 ]
 
 var current_page := 0
+var open_position: Vector2
+var closed_position: Vector2
+var panel_tween: Tween
+var is_closing := false
 
 
 func _ready() -> void:
@@ -38,12 +46,38 @@ func _ready() -> void:
 	skip_button.pressed.connect(finish_tutorial)
 	next_button.pressed.connect(_on_next_button_pressed)
 
+	await get_tree().process_frame
+
+	open_position = tutorial_panel.position
+	closed_position = open_position + Vector2(0, tutorial_panel.size.y + 40)
+	tutorial_panel.position = closed_position
+
 
 func open() -> void:
 	current_page = 0
-	show()
+	is_closing = false
+
 	update_page()
 
+	tutorial_panel.position = closed_position
+	dimmer.color.a = 0.0
+
+	# Let the exhibit scene render before the tutorial appears.
+	await get_tree().create_timer(0.2).timeout
+
+	show()
+	AudioManager.play_panel_open()
+
+	panel_tween = create_tween().set_parallel(true)
+
+	panel_tween.tween_property(
+		tutorial_panel,
+		"position",
+		open_position,
+		0.25
+	).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+
+	panel_tween.tween_property(dimmer, "color:a", 0.3, 0.2)
 
 func update_page() -> void:
 	var page: Dictionary = PAGES[current_page]
@@ -55,7 +89,7 @@ func update_page() -> void:
 	back_button.disabled = current_page == 0
 
 	if current_page == PAGES.size() - 1:
-		next_button.text = "Begin Curating"
+		next_button.text = "Begin!"
 	else:
 		next_button.text = "Next"
 
@@ -78,6 +112,30 @@ func _on_next_button_pressed() -> void:
 
 
 func finish_tutorial() -> void:
+	if is_closing:
+		return
+
+	is_closing = true
 	GameState.complete_tutorial()
-	hide()
-	completed.emit()
+
+	AudioManager.play_panel_close()
+
+	if panel_tween and panel_tween.is_valid():
+		panel_tween.kill()
+
+	panel_tween = create_tween().set_parallel(true)
+
+	panel_tween.tween_property(
+		tutorial_panel,
+		"position",
+		closed_position,
+		0.2
+	).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN)
+
+	panel_tween.tween_property(dimmer, "color:a", 0.0, 0.2)
+
+	panel_tween.finished.connect(func() -> void:
+		hide()
+		completed.emit()
+	)
+	

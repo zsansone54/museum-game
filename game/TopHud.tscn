@@ -10,18 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://7xym3ilf0iv6" path="res://NotificationToast.tscn" id="9_atkrj"]
 [ext_resource type="Texture2D" uid="uid://cbgwvfcqulfrs" path="res://assets/ui/button/freebuttons2.png" id="13_cpmn1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymigv"]
-bg_color = Color(0.1764706, 0.12941177, 0.09411765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.7058824, 0.47843137, 0.21176471, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2e1rq"]
 bg_color = Color(0.40560693, 0.2695975, 0.124039, 1)
 corner_radius_top_left = 16
@@ -140,7 +128,7 @@ region = Rect2(112, 0, 16, 16)
 
 [node name="TopHud" type="Control" unique_id=1977575653]
 texture_filter = 1
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -148,19 +136,21 @@ grow_horizontal = 2
 theme = ExtResource("1_4i2vw")
 script = ExtResource("2_wne50")
 
-[node name="TextureRect" type="PanelContainer" parent="." unique_id=1546591004]
-custom_minimum_size = Vector2(1920, 100)
-custom_maximum_size = Vector2(1920, 100)
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1470930945]
+custom_minimum_size = Vector2(1920, 120)
+custom_maximum_size = Vector2(1920, 120)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ymigv")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect" unique_id=1975566607]
-layout_mode = 2
+layout_mode = 0
+offset_top = 26.0
+offset_right = 1920.0
+offset_bottom = 94.0
 size_flags_vertical = 4
 
 [node name="Spacer" type="Control" parent="TextureRect/HBoxContainer" unique_id=1199075990]

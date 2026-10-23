@@ -4,7 +4,7 @@ extends Control
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	version_label.text = "v%s" % GameData.data().get("game_version", "0.0.0")
 
 

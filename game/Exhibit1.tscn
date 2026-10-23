@@ -5,15 +5,13 @@
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_u2ur0"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="3_5bj8y"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_bsrcs"]
+[ext_resource type="Texture2D" uid="uid://5pcykr6pooi1" path="res://assets/backgrounds/Andean Gallery with Three Empty Displays.png" id="3_gvu8o"]
+[ext_resource type="Texture2D" uid="uid://bwh5arat3ektk" path="res://assets/ui/custom assets/Antique Walnut Left Arrow Button.png" id="4_fblap"]
 [ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="4_lgltx"]
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_seecs"]
 [ext_resource type="PackedScene" uid="uid://330qm08acygp" path="res://WinMenu.tscn" id="6_64dqa"]
 [ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_27pqb"]
 [ext_resource type="PackedScene" uid="uid://0i200idmy7ne" path="res://TutorialPopup.tscn" id="10_gvu8o"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gcfin"]
-atlas = ExtResource("3_5bj8y")
-region = Rect2(126, 432, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s7ls6"]
 atlas = ExtResource("3_5bj8y")
@@ -30,14 +28,15 @@ grow_vertical = 2
 theme = ExtResource("1_u2ur0")
 script = ExtResource("1_gwv2w")
 
-[node name="Background" type="ColorRect" parent="." unique_id=2015553693]
+[node name="Background" type="TextureRect" parent="." unique_id=7047420]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -16.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3157873, 0.24210715, 0.12733114, 1)
+texture = ExtResource("3_gvu8o")
 
 [node name="HudBackground" type="ColorRect" parent="." unique_id=1704515455]
 custom_minimum_size = Vector2(0, 80)
@@ -49,17 +48,16 @@ color = Color(0, 0, 0, 1)
 
 [node name="LeftButton" type="TextureButton" parent="." unique_id=1508538183]
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 20.0
 offset_top = -50.0
-offset_right = 120.0
+offset_right = 150.0
 offset_bottom = 50.0
 grow_vertical = 2
-texture_normal = SubResource("AtlasTexture_gcfin")
+texture_normal = ExtResource("4_fblap")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_lgltx")

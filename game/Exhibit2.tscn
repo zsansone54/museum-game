@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_2u0ix"]
 [ext_resource type="Script" uid="uid://bv8j6sqyjgk1p" path="res://exhibit2.gd" id="1_o8ey3"]
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="2_irlb0"]
+[ext_resource type="Texture2D" uid="uid://ctlgp8x85e8jn" path="res://assets/backgrounds/Jade River Gallery Empty Display Cases.png" id="3_luq57"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_nm046"]
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_2u0ix"]
 [ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="4_fkk1p"]
@@ -26,14 +27,14 @@ grow_vertical = 2
 theme = ExtResource("1_2u0ix")
 script = ExtResource("1_o8ey3")
 
-[node name="Background" type="ColorRect" parent="." unique_id=2015553693]
+[node name="Background" type="TextureRect" parent="." unique_id=1237897471]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.3157873, 0.24210715, 0.12733114, 1)
+texture = ExtResource("3_luq57")
 
 [node name="HudBackground" type="ColorRect" parent="." unique_id=1704515455]
 custom_minimum_size = Vector2(0, 80)

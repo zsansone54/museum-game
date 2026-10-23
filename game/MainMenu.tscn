@@ -34,7 +34,7 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 32.0
 grow_vertical = 0
-text = "v0.2"
+text = "v0.3"
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1826669197]
 layout_mode = 1

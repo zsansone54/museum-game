@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://0i200idmy7ne"]
+
+[ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_wgpua"]
+[ext_resource type="Script" uid="uid://dtlbymlk582ph" path="res://tutorial_popup.gd" id="2_p8abh"]
+[ext_resource type="Texture2D" uid="uid://c5jghn7dsgkf5" path="res://assets/ui/kenney_ui-pack-pixel-adventure/Tiles/Large tiles/Thick outline/tile_0018.png" id="3_p8abh"]
+[ext_resource type="FontFile" uid="uid://bmu8x7xtkrbma" path="res://assets/fonts/karma/Karma Suture.otf" id="4_txf4q"]
+[ext_resource type="Texture2D" uid="uid://b8n0mjio5hvrt" path="res://assets/ui/UIpack_RPG/PNG/panelInset_brown.png" id="5_46rr7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kl7n0"]
+texture = ExtResource("3_p8abh")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ocngp"]
+texture = ExtResource("5_46rr7")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[node name="TutorialPopup" type="Control" unique_id=872070702]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wgpua")
+script = ExtResource("2_p8abh")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=467744498]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1510997249]
+custom_minimum_size = Vector2(660, 500)
+custom_maximum_size = Vector2(-1, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -78.5
+offset_right = 22.0
+offset_bottom = 78.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_kl7n0")
+
+[node name="PanelMargin" type="MarginContainer" parent="PanelContainer" unique_id=1358901238]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+
+[node name="Tutorial" type="VBoxContainer" parent="PanelContainer/PanelMargin" unique_id=664996133]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/PanelMargin/Tutorial" unique_id=178100273]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.41960785, 0.2901961, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("4_txf4q")
+theme_override_font_sizes/font_size = 60
+text = "Tutorial"
+horizontal_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="PanelContainer/PanelMargin/Tutorial" unique_id=459699777]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="MessageContainer" type="PanelContainer" parent="PanelContainer/PanelMargin/Tutorial" unique_id=324593405]
+custom_maximum_size = Vector2(-1, 250)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ocngp")
+
+[node name="MessageBox" type="VBoxContainer" parent="PanelContainer/PanelMargin/Tutorial/MessageContainer" unique_id=800881610]
+layout_mode = 2
+
+[node name="MessageLabel" type="Label" parent="PanelContainer/PanelMargin/Tutorial/MessageContainer/MessageBox" unique_id=810040172]
+custom_minimum_size = Vector2(540, 0)
+custom_maximum_size = Vector2(540, -1)
+layout_mode = 2
+text = "Use the left arrow to visit the excavation map. Select an unlocked site, then choose an artifact. Attempts happen automatically: successes recover fragments, while failures provide funding."
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="PanelContainer/PanelMargin/Tutorial/MessageContainer/MessageBox" unique_id=1764885790]
+layout_mode = 2
+
+[node name="PageLabel" type="Label" parent="PanelContainer/PanelMargin/Tutorial/MessageContainer/MessageBox" unique_id=1804304192]
+layout_mode = 2
+text = "Page 1 of 4"
+
+[node name="Spacer" type="Control" parent="PanelContainer/PanelMargin/Tutorial" unique_id=1809946522]
+custom_minimum_size = Vector2(0, 50)
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/PanelMargin/Tutorial" unique_id=645255630]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+
+[node name="BackButton" type="Button" parent="PanelContainer/PanelMargin/Tutorial/ButtonRow" unique_id=1012275934]
+custom_minimum_size = Vector2(200, 120)
+custom_maximum_size = Vector2(160, 120)
+layout_mode = 2
+text = "Back"
+
+[node name="SkipButton" type="Button" parent="PanelContainer/PanelMargin/Tutorial/ButtonRow" unique_id=2037073916]
+custom_minimum_size = Vector2(200, 120)
+custom_maximum_size = Vector2(160, 120)
+layout_mode = 2
+text = "Skip"
+
+[node name="NextButton" type="Button" parent="PanelContainer/PanelMargin/Tutorial/ButtonRow" unique_id=1894007044]
+custom_minimum_size = Vector2(160, 120)
+layout_mode = 2

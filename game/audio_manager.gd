@@ -5,7 +5,7 @@ const SFX_BUS: StringName = &"SFX"
 
 const DEFAULT_MUSIC_VOLUME := 60.0
 const DEFAULT_SFX_VOLUME := 75.0
-const MUSIC_LOOP_FADE_TIME := 0.6
+const MUSIC_CROSSFADE_TIME := 0.4
 
 const BUTTON_CLICK_SOUND = preload(
 	"res://assets/audio/sfx/kenney_interface-sounds/Audio/click_005.ogg"
@@ -28,12 +28,15 @@ const EXCAVATION_FAILURE_SOUND = preload(
 )
 
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var music_player_b: AudioStreamPlayer = $MusicPlayerB
 @onready var ui_player: AudioStreamPlayer = $UiPlayer
 @onready var panel_player: AudioStreamPlayer = $PanelPlayer
 @onready var event_player: AudioStreamPlayer = $EventPlayer
 @onready var purchase_player: AudioStreamPlayer = $PurchasePlayer
 @onready var transition_player: AudioStreamPlayer = $TransitionPlayer
 
+var active_music_player: AudioStreamPlayer
+var inactive_music_player: AudioStreamPlayer
 var music_loop_timer: SceneTreeTimer
 var music_fade_tween: Tween
 
@@ -46,7 +49,7 @@ func _ready() -> void:
 	set_sfx_volume(DEFAULT_SFX_VOLUME)
 	set_sfx_muted(false)
 
-	start_music()
+	start_music_crossfade_loop()
 
 	get_tree().node_added.connect(_on_node_added)
 	call_deferred("_connect_existing_buttons")
@@ -55,59 +58,73 @@ func _ready() -> void:
 	GameState.excavation_failed.connect(_on_excavation_failed)
 
 
-func start_music() -> void:
+func start_music_crossfade_loop() -> void:
 	if music_player.stream == null:
 		push_warning("MusicPlayer does not have a music stream assigned.")
 		return
 
-	if !music_player.finished.is_connected(_on_music_finished):
-		music_player.finished.connect(_on_music_finished)
+	music_player.bus = MUSIC_BUS
+	music_player_b.bus = MUSIC_BUS
+	music_player_b.stream = music_player.stream
 
 	music_player.volume_db = 0.0
-	music_player.play()
-	schedule_music_loop_fade()
+	music_player_b.volume_db = -60.0
+
+	active_music_player = music_player
+	inactive_music_player = music_player_b
+
+	active_music_player.play()
+	schedule_music_crossfade()
 
 
-func schedule_music_loop_fade() -> void:
-	if music_player.stream == null:
+func schedule_music_crossfade() -> void:
+	var stream_length := active_music_player.stream.get_length()
+
+	if stream_length <= MUSIC_CROSSFADE_TIME:
+		push_warning("Music track is too short for the selected crossfade time.")
 		return
 
-	var stream_length := music_player.stream.get_length()
-	var fade_start_time := maxf(0.1, stream_length - MUSIC_LOOP_FADE_TIME)
+	var crossfade_start_time := stream_length - MUSIC_CROSSFADE_TIME
 
-	music_loop_timer = get_tree().create_timer(fade_start_time)
-	music_loop_timer.timeout.connect(fade_music_out)
+	music_loop_timer = get_tree().create_timer(crossfade_start_time)
+	music_loop_timer.timeout.connect(crossfade_music)
 
 
-func fade_music_out() -> void:
+func crossfade_music() -> void:
 	if music_fade_tween and music_fade_tween.is_valid():
 		music_fade_tween.kill()
 
-	music_fade_tween = create_tween()
+	inactive_music_player.stop()
+	inactive_music_player.volume_db = -60.0
+	inactive_music_player.play()
+
+	music_fade_tween = create_tween().set_parallel(true)
+
 	music_fade_tween.tween_property(
-		music_player,
+		active_music_player,
 		"volume_db",
 		-60.0,
-		MUSIC_LOOP_FADE_TIME
+		MUSIC_CROSSFADE_TIME
 	)
 
-
-func _on_music_finished() -> void:
-	music_player.volume_db = -60.0
-	music_player.play()
-
-	if music_fade_tween and music_fade_tween.is_valid():
-		music_fade_tween.kill()
-
-	music_fade_tween = create_tween()
 	music_fade_tween.tween_property(
-		music_player,
+		inactive_music_player,
 		"volume_db",
 		0.0,
-		MUSIC_LOOP_FADE_TIME
+		MUSIC_CROSSFADE_TIME
 	)
 
-	schedule_music_loop_fade()
+	music_fade_tween.finished.connect(finish_music_crossfade)
+
+
+func finish_music_crossfade() -> void:
+	active_music_player.stop()
+
+	var previous_active := active_music_player
+	active_music_player = inactive_music_player
+	inactive_music_player = previous_active
+
+	schedule_music_crossfade()
 
 
 func _connect_existing_buttons() -> void:

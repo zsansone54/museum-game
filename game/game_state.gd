@@ -27,7 +27,10 @@ var area_chance_upgrades: Array[int] = [0, 0]
 
 var rng := RandomNumberGenerator.new()
 
+var tutorial_completed := false
+
 const SAVE_PATH := "user://museum_game_save.json"
+
 
 
 func _ready() -> void:
@@ -43,8 +46,6 @@ func _ready() -> void:
 	
 	#if has_save_file():
 		#load_game()
-	
-
 
 
 
@@ -341,7 +342,8 @@ func create_save_data() -> Dictionary:
 		"chance_upgrades": area_chance_upgrades,
 		"active_area_id": active_area_id,
 		"active_artifact_id": active_artifact_id,
-		"excavation_countdown": excavation_countdown
+		"excavation_countdown": excavation_countdown,
+		"tutorial_completed": tutorial_completed
 	}
 
 
@@ -422,9 +424,12 @@ func load_game() -> bool:
 	active_area_id = int(save_data.get("active_area_id", -1))
 	active_artifact_id = int(save_data.get("active_artifact_id", -1))
 	excavation_countdown = float(save_data.get("excavation_countdown", -1.0))
-
+	tutorial_completed = bool(save_data.get("tutorial_completed", false))
 	return true
 
+func complete_tutorial() -> void:
+	tutorial_completed = true
+	save_game()
 
 func has_save_file() -> bool:
 	return FileAccess.file_exists(SAVE_PATH)

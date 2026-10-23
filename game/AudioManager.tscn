@@ -12,6 +12,10 @@ script = ExtResource("2_er85w")
 stream = ExtResource("1_d16gy")
 bus = &"Music"
 
+[node name="MusicPlayerB" type="AudioStreamPlayer" parent="." unique_id=1494123611]
+stream = ExtResource("1_d16gy")
+bus = &"Music"
+
 [node name="UiPlayer" type="AudioStreamPlayer" parent="." unique_id=2086413302]
 bus = &"SFX"
 

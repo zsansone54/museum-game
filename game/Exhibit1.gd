@@ -1,6 +1,7 @@
 extends Control
 
 @onready var top_hud: TopHud = $TopHud
+@onready var tutorial_popup: Control = $TutorialPopup
 
 
 func _ready() -> void:
@@ -28,6 +29,9 @@ func _ready() -> void:
 		GameState.get_artifact_data(1)["name"]
 	$ArtifactMargin/Gallery/Artifact3/Display/ArtifactName.text = \
 		GameState.get_artifact_data(2)["name"]
+		
+	if !GameState.tutorial_completed:
+		tutorial_popup.open()
 
 
 func _on_artifact_1_inspect_button_pressed() -> void:

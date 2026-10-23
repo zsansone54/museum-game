@@ -19,24 +19,8 @@ signal pause_requested
 	$TextureRect/HBoxContainer/RepPlate/MarginContainer/RepGroup/RepLabel
 )
 
-@onready var countdown_bar: Control = (
+@onready var countdown_bar: TextureProgressBar = (
 	$TextureRect/HBoxContainer/CountdownBar
-)
-
-@onready var yellow_bar: HBoxContainer = (
-	$TextureRect/HBoxContainer/CountdownBar/YellowBar
-)
-
-@onready var yellow_left: TextureRect = (
-	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowLeft
-)
-
-@onready var yellow_right: TextureRect = (
-	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowRight
-)
-
-@onready var yellow_middle: TextureRect = (
-	$TextureRect/HBoxContainer/CountdownBar/YellowBar/YellowMiddle
 )
 
 @onready var remaining_time_label: Label = (
@@ -55,13 +39,6 @@ signal pause_requested
 func _ready() -> void:
 	money_animation.play("spin")
 	pause_button.pressed.connect(_on_pause_button_pressed)
-
-	await get_tree().process_frame
-
-	yellow_left.pivot_offset = Vector2(
-		0.0,
-		yellow_left.size.y / 2.0
-	)
 
 	update_hud()
 
@@ -86,8 +63,7 @@ func update_timer() -> void:
 	if GameState.active_artifact_id == -1:
 		remaining_time_label.text = "--.-- s"
 		total_time_label.text = "--.-- s"
-
-		yellow_bar.hide()
+		countdown_bar.value = 0.0
 		return
 
 	var artifact: Dictionary = GameState.get_artifact_data(
@@ -101,46 +77,17 @@ func update_timer() -> void:
 	total_time_label.text = "%.2f s" % total_time
 
 	if total_time <= 0.0:
-		yellow_bar.hide()
+		countdown_bar.value = 0.0
 		return
 
-	# Starts at 0%, then fills as the excavation attempt progresses.
+	# Starts empty, then fills as excavation time passes.
 	var progress_ratio: float = clampf(
 		1.0 - (remaining_time / total_time),
 		0.0,
 		1.0
 	)
 
-	var filled_width: float = countdown_bar.size.x * progress_ratio
-	var has_progress: bool = filled_width > 0.5
-
-	# Once progress begins, use a small visible width instead of a 1-pixel line.
-	var display_width: float = 0.0
-
-	if has_progress:
-		display_width = maxf(filled_width, 12.0)
-
-	yellow_bar.visible = has_progress
-
-	# The left cap begins immediately.
-	# The right cap appears once there is enough room for both end caps.
-	yellow_left.visible = has_progress
-	yellow_right.visible = display_width >= 64.0
-	yellow_middle.visible = display_width >= 32.0
-
-	var left_cap_ratio: float = clampf(
-		display_width / 32.0,
-		0.0,
-		1.0
-	)
-
-	yellow_left.scale = Vector2(left_cap_ratio, 1.0)
-
-	yellow_bar.position = Vector2.ZERO
-	yellow_bar.size = Vector2(
-		display_width,
-		countdown_bar.size.y
-	)
+	countdown_bar.value = progress_ratio
 
 
 func _on_pause_button_pressed() -> void:

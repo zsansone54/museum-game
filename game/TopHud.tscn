@@ -186,7 +186,7 @@ position = Vector2(34, 34)
 scale = Vector2(4.2, 4.2)
 sprite_frames = SubResource("SpriteFrames_s7ls6")
 animation = &"spin"
-frame_progress = 0.89715064
+frame_progress = 0.060017437
 
 [node name="Spacer2" type="Control" parent="TextureRect/HBoxContainer/FundsPlate/MarginContainer/FundsGroup" unique_id=712252902]
 custom_minimum_size = Vector2(10, 0)
@@ -279,6 +279,7 @@ clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
+max_value = 1.0
 nine_patch_stretch = true
 stretch_margin_left = 9
 stretch_margin_right = 9

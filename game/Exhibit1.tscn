@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://mo46s1jtehjy"]
 
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="1_d825m"]
-[ext_resource type="Script" uid="uid://c0rghn3j0vrym" path="res://Exhibit1.gd" id="1_gwv2w"]
+[ext_resource type="Script" uid="uid://qcdskg4ouud0" path="res://Exhibit1.gd" id="1_gwv2w"]
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_u2ur0"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_bsrcs"]
 [ext_resource type="Texture2D" uid="uid://5pcykr6pooi1" path="res://assets/backgrounds/Andean Gallery with Three Empty Displays.png" id="3_gvu8o"]
+[ext_resource type="Texture2D" uid="uid://4ca5jo2sqfjv" path="res://assets/backgrounds/Andean gallery_ puma, sash, and condor-1.png" id="4_4tecv"]
 [ext_resource type="Texture2D" uid="uid://bwh5arat3ektk" path="res://assets/ui/custom assets/Antique Walnut Left Arrow Button.png" id="4_fblap"]
 [ext_resource type="Script" uid="uid://db1qg83pkgrpa" path="res://nav_arrow.gd" id="4_lgltx"]
 [ext_resource type="PackedScene" uid="uid://b6ddt174lqybw" path="res://ArtifactMenu.tscn" id="4_seecs"]
@@ -33,6 +34,32 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_gvu8o")
 
+[node name="ArtifactPatches" type="Node2D" parent="." unique_id=107154446]
+
+[node name="Artifact1Patch" type="Sprite2D" parent="ArtifactPatches" unique_id=247026329]
+visible = false
+position = Vector2(285.375, 741.74994)
+scale = Vector2(1.1485074, 1.1578314)
+texture = ExtResource("4_4tecv")
+region_enabled = true
+region_rect = Rect2(79.9144, 442.4102, 335.98294, 415.3522)
+
+[node name="Artifact2Patch" type="Sprite2D" parent="ArtifactPatches" unique_id=1176483838]
+visible = false
+position = Vector2(985.49994, 823)
+scale = Vector2(1.1614172, 1.1586716)
+texture = ExtResource("4_4tecv")
+region_enabled = true
+region_rect = Rect2(476.53632, 585.932, 762.7376, 271.2937)
+
+[node name="Artifact3Patch" type="Sprite2D" parent="ArtifactPatches" unique_id=992296728]
+visible = false
+position = Vector2(1688.75, 773.00006)
+scale = Vector2(1.1613641, 1.1629214)
+texture = ExtResource("4_4tecv")
+region_enabled = true
+region_rect = Rect2(1360.8535, 500.34155, 220.41357, 356.77625)
+
 [node name="HudBackground" type="ColorRect" parent="." unique_id=1704515455]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
@@ -57,108 +84,58 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_lgltx")
 
-[node name="RightButton" type="TextureButton" parent="." unique_id=941269693]
+[node name="RightButton" type="TextureButton" parent="." unique_id=2030724827]
 texture_filter = 1
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 1920.0
-offset_top = 48.88501
-offset_right = 2070.0
-offset_bottom = 148.88501
+offset_left = -160.29004
+offset_top = -50.0
+offset_right = -10.289795
+offset_bottom = 49.999878
+grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(-1, -1)
+scale = Vector2(-1, -0.914)
 texture_normal = ExtResource("4_fblap")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_lgltx")
 
-[node name="ArtifactMargin" type="MarginContainer" parent="." unique_id=1526326832]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 200
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 150
-
-[node name="Gallery" type="HBoxContainer" parent="ArtifactMargin" unique_id=773864599]
-layout_mode = 2
-theme_override_constants/separation = 220
-
-[node name="Artifact1" type="PanelContainer" parent="ArtifactMargin/Gallery" unique_id=1095740730]
-custom_minimum_size = Vector2(250, 300)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Display" type="VBoxContainer" parent="ArtifactMargin/Gallery/Artifact1" unique_id=1463114686]
-layout_mode = 2
-
-[node name="ArtifactName" type="Label" parent="ArtifactMargin/Gallery/Artifact1/Display" unique_id=1589460650]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
-text = "Art 1"
-
-[node name="DisplayCase" type="TextureRect" parent="ArtifactMargin/Gallery/Artifact1/Display" unique_id=448968607]
-layout_mode = 2
-
-[node name="InspectButton" type="Button" parent="ArtifactMargin/Gallery/Artifact1/Display" unique_id=1869970795]
-layout_mode = 2
+[node name="InspectButton" type="Button" parent="." unique_id=1869970795]
+custom_minimum_size = Vector2(160, 60)
+custom_maximum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 181.0
+offset_top = 986.01
+offset_right = 341.0
+offset_bottom = 1046.01
 theme_override_font_sizes/font_size = 30
 text = "Inspect"
 
-[node name="Artifact2" type="PanelContainer" parent="ArtifactMargin/Gallery" unique_id=360686727]
-custom_minimum_size = Vector2(250, 300)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Display" type="VBoxContainer" parent="ArtifactMargin/Gallery/Artifact2" unique_id=969050391]
-layout_mode = 2
-
-[node name="ArtifactName" type="Label" parent="ArtifactMargin/Gallery/Artifact2/Display" unique_id=1177991013]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
-text = "Art 2"
-
-[node name="DisplayCase" type="TextureRect" parent="ArtifactMargin/Gallery/Artifact2/Display" unique_id=1210014034]
-layout_mode = 2
-
-[node name="InspectButton" type="Button" parent="ArtifactMargin/Gallery/Artifact2/Display" unique_id=44273176]
-layout_mode = 2
+[node name="InspectButton2" type="Button" parent="." unique_id=44273176]
+custom_minimum_size = Vector2(160, 60)
+custom_maximum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 880.36
+offset_top = 986.01
+offset_right = 1040.36
+offset_bottom = 1046.01
 theme_override_font_sizes/font_size = 30
 text = "Inspect"
 
-[node name="Artifact3" type="PanelContainer" parent="ArtifactMargin/Gallery" unique_id=1123587416]
-custom_minimum_size = Vector2(250, 300)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Display" type="VBoxContainer" parent="ArtifactMargin/Gallery/Artifact3" unique_id=718127963]
-layout_mode = 2
-
-[node name="ArtifactName" type="Label" parent="ArtifactMargin/Gallery/Artifact3/Display" unique_id=1613981892]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
-text = "Art 3"
-
-[node name="DisplayCase" type="TextureRect" parent="ArtifactMargin/Gallery/Artifact3/Display" unique_id=901363634]
-layout_mode = 2
-
-[node name="InspectButton" type="Button" parent="ArtifactMargin/Gallery/Artifact3/Display" unique_id=1540139997]
-layout_mode = 2
+[node name="InspectButton3" type="Button" parent="." unique_id=1540139997]
+custom_minimum_size = Vector2(160, 60)
+custom_maximum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 1629.865
+offset_top = 986.01
+offset_right = 1789.865
+offset_bottom = 1046.01
+size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 30
 text = "Inspect"
 

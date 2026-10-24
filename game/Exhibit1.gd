@@ -1,5 +1,13 @@
 extends Control
 
+const ARTIFACT_IDS: Array[int] = [0, 1, 2]
+
+@onready var artifact_patches: Array[Sprite2D] = [
+	$ArtifactPatches/Artifact1Patch,
+	$ArtifactPatches/Artifact2Patch,
+	$ArtifactPatches/Artifact3Patch
+]
+
 @onready var top_hud: TopHud = $TopHud
 @onready var tutorial_popup: Control = $TutorialPopup
 
@@ -16,25 +24,38 @@ func _ready() -> void:
 	$LeftButton.pressed.connect(_on_left_button_pressed)
 	$RightButton.pressed.connect(_on_right_button_pressed)
 
-	$ArtifactMargin/Gallery/Artifact1/Display/InspectButton.pressed.connect(
+	$InspectButton.pressed.connect(
 		_on_artifact_1_inspect_button_pressed
 	)
-	$ArtifactMargin/Gallery/Artifact2/Display/InspectButton.pressed.connect(
+	$InspectButton2.pressed.connect(
 		_on_artifact_2_inspect_button_pressed
 	)
-	$ArtifactMargin/Gallery/Artifact3/Display/InspectButton.pressed.connect(
+	$InspectButton3.pressed.connect(
 		_on_artifact_3_inspect_button_pressed
 	)
 
-	$ArtifactMargin/Gallery/Artifact1/Display/ArtifactName.text = \
-		GameState.get_artifact_data(0)["name"]
-	$ArtifactMargin/Gallery/Artifact2/Display/ArtifactName.text = \
-		GameState.get_artifact_data(1)["name"]
-	$ArtifactMargin/Gallery/Artifact3/Display/ArtifactName.text = \
-		GameState.get_artifact_data(2)["name"]
+	GameState.artifact_assembled.connect(_on_artifact_assembled)
+
+	update_artifact_patches()
 
 	if !GameState.tutorial_completed:
 		tutorial_popup.open()
+
+
+func update_artifact_patches() -> void:
+	for index in range(artifact_patches.size()):
+		var progress: Dictionary = GameState.get_artifact_progress(
+			ARTIFACT_IDS[index]
+		)
+
+		artifact_patches[index].visible = progress["is_assembled"]
+
+
+func _on_artifact_assembled(
+	_artifact_name: String,
+	_rep_reward: int
+) -> void:
+	update_artifact_patches()
 
 
 func _on_artifact_1_inspect_button_pressed() -> void:
@@ -86,4 +107,4 @@ func _on_tutorial_completed() -> void:
 
 
 func _on_pause_button_pressed() -> void:
-	$PauseMenu.open() 
+	$PauseMenu.open()

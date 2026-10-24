@@ -9,6 +9,7 @@ signal excavation_succeeded(
 signal excavation_failed(reward: float)
 signal artifact_assembled(artifact_name: String, rep_reward: int)
 signal game_completed
+signal unlock_available(message: String)
 
 var game_data: Dictionary
 var funds: float
@@ -183,6 +184,8 @@ func assemble_artifact(artifact: Dictionary) -> void:
 		!progress["is_assembled"]
 		&& progress["fragments_found"] >= artifact["total_fragments"]
 	):
+		var previous_rep: int = rep
+
 		progress["is_assembled"] = true
 		rep += artifact["rep_reward"]
 
@@ -191,12 +194,35 @@ func assemble_artifact(artifact: Dictionary) -> void:
 			artifact["rep_reward"]
 		)
 
+		announce_new_unlocks(previous_rep)
+
 		save_game()
 
 		if check_win_condition():
 			game_completed.emit()
 
+func announce_new_unlocks(previous_rep: int) -> void:
+	var unlock_messages: PackedStringArray = []
 
+	for tool in tools:
+		var required_rep: int = tool["unlock_required_rep"]
+
+		if previous_rep < required_rep && rep >= required_rep:
+			unlock_messages.append(
+				"New excavation tool unlocked: " + tool["name"]
+			)
+
+	for area in areas:
+		var required_rep: int = area["unlock_required_rep"]
+
+		if previous_rep < required_rep && rep >= required_rep:
+			unlock_messages.append(
+				"New area unlocked: " + area["name"]
+			)
+
+	if !unlock_messages.is_empty():
+		unlock_available.emit("\n".join(unlock_messages))
+		
 func select_excavation_target(artifact: Dictionary) -> void:
 	var progress: Dictionary = get_artifact_progress(artifact["id"])
 

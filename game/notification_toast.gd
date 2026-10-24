@@ -13,6 +13,7 @@ func _ready() -> void:
 	GameState.excavation_succeeded.connect(_on_excavation_succeeded)
 	GameState.excavation_failed.connect(_on_excavation_failed)
 	GameState.artifact_assembled.connect(_on_artifact_assembled)
+	GameState.unlock_available.connect(_on_unlock_available)
 
 	toast_panel.modulate.a = 0.0
 	toast_panel.hide()
@@ -22,13 +23,19 @@ func show_notification(message: String, color: Color) -> void:
 	if notification_tween and notification_tween.is_valid():
 		notification_tween.kill()
 
-	message_label.text = message
-	message_label.modulate = Color(color.r, color.g, color.b, 1.0)
-
-	toast_panel.show()
-	toast_panel.modulate = Color(1.0, 1.0, 1.0, 0.0)
-
 	notification_tween = create_tween()
+
+	if toast_panel.visible and toast_panel.modulate.a > 0.0:
+		notification_tween.tween_property(
+			toast_panel,
+			"modulate:a",
+			0.0,
+			0.12
+		)
+
+	notification_tween.tween_callback(
+		_apply_notification.bind(message, color)
+	)
 
 	notification_tween.tween_property(
 		toast_panel,
@@ -37,16 +44,13 @@ func show_notification(message: String, color: Color) -> void:
 		0.15
 	)
 
-	notification_tween.tween_interval(2.0)
 
-	notification_tween.tween_property(
-		toast_panel,
-		"modulate:a",
-		0.0,
-		0.35
-	)
+func _apply_notification(message: String, color: Color) -> void:
+	message_label.text = message
+	message_label.modulate = Color(color.r, color.g, color.b, 1.0)
 
-	notification_tween.tween_callback(toast_panel.hide)
+	toast_panel.modulate.a = 0.0
+	toast_panel.show()
 
 
 func _on_excavation_started(artifact_name: String) -> void:
@@ -89,3 +93,7 @@ func _on_artifact_assembled(
 		],
 		Color("#72c9e8")
 	)
+
+
+func _on_unlock_available(message: String) -> void:
+	show_notification(message, Color("#8fd16a"))

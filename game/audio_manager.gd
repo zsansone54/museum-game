@@ -42,6 +42,7 @@ var music_fade_tween: Tween
 
 
 func _ready() -> void:
+	GameState.unlock_available.connect(_on_unlock_available)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	set_music_volume(DEFAULT_MUSIC_VOLUME)
@@ -232,3 +233,6 @@ func _set_bus_muted(bus_name: StringName, is_muted: bool) -> void:
 		return
 
 	AudioServer.set_bus_mute(bus_index, is_muted)
+
+func _on_unlock_available(_message: String) -> void:
+	play_excavation_success()

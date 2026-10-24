@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bu1af3cp8soep" path="res://SettingsMenu.tscn" id="1_d825m"]
 [ext_resource type="Script" uid="uid://c0rghn3j0vrym" path="res://Exhibit1.gd" id="1_gwv2w"]
 [ext_resource type="Theme" uid="uid://bvelnbej037ho" path="res://assets/ui/game_theme.tres" id="1_u2ur0"]
-[ext_resource type="Texture2D" uid="uid://bce45cgs137jr" path="res://assets/ui/kenney_pixel-ui-pack/Spritesheet/UIpackSheet_transparent.png" id="3_5bj8y"]
 [ext_resource type="PackedScene" uid="uid://coh5nxkprs0sc" path="res://PauseMenu.tscn" id="3_bsrcs"]
 [ext_resource type="Texture2D" uid="uid://5pcykr6pooi1" path="res://assets/backgrounds/Andean Gallery with Three Empty Displays.png" id="3_gvu8o"]
 [ext_resource type="Texture2D" uid="uid://bwh5arat3ektk" path="res://assets/ui/custom assets/Antique Walnut Left Arrow Button.png" id="4_fblap"]
@@ -12,10 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://330qm08acygp" path="res://WinMenu.tscn" id="6_64dqa"]
 [ext_resource type="PackedScene" uid="uid://ctx1wx6e20rtt" path="res://TopHud.tscn" id="10_27pqb"]
 [ext_resource type="PackedScene" uid="uid://0i200idmy7ne" path="res://TutorialPopup.tscn" id="10_gvu8o"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s7ls6"]
-atlas = ExtResource("3_5bj8y")
-region = Rect2(144, 432, 16, 16)
 
 [node name="Exhibit1" type="Control" unique_id=124045584]
 texture_filter = 1
@@ -62,23 +57,20 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_lgltx")
 
-[node name="RightButton" type="TextureButton" parent="." unique_id=2030724827]
+[node name="RightButton" type="TextureButton" parent="." unique_id=941269693]
 texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -50.0
-offset_right = -20.0
-offset_bottom = 50.0
-grow_horizontal = 0
+offset_left = 1920.0
+offset_top = 48.88501
+offset_right = 2070.0
+offset_bottom = 148.88501
 grow_vertical = 2
-scale = Vector2(1.1103836, 1.0138812)
-texture_normal = SubResource("AtlasTexture_s7ls6")
+scale = Vector2(-1, -1)
+texture_normal = ExtResource("4_fblap")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_lgltx")

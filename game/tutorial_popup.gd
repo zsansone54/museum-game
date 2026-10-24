@@ -16,31 +16,31 @@ signal completed
 const PAGES := [
 	{
 		"title": "Welcome, Curator!",
-		"message": "Restore the museum by assembling every artifact across both excavation areas. Assemble all six artifacts to complete the collection!"
+		"message": "Restore the museum by assembling all six artifacts from the Andean Highlands and Jade River Basin. Complete every display to finish the collection!"
+	},
+	{
+		"title": "Explore the Museum",
+		"message": "Use the arrows to move between exhibits. The left arrow in Exhibit 1 opens the excavation map, while the right arrow leads to Exhibit 2 once you have enough Reputation. Use Inspect beneath a display to view its details."
 	},
 	{
 		"title": "Excavate for Fragments",
-		"message": "Use the left arrow to visit the excavation map. Select an unlocked site, then choose an artifact. Attempts happen automatically: successes recover fragments, while failures provide funding!"
+		"message": "On the map, select an unlocked site and choose an available artifact. Excavation attempts run automatically: success recovers a fragment, while failure awards funds. Only one artifact can be excavated at a time."
 	},
 	{
-		"title": "Upgrade Your Team",
-		"message": "Fragments generate donations over time. Spend funds on excavation speed and success chance, and purchase tools to access more difficult artifacts!"
+		"title": "Funds, Tools, and Upgrades",
+		"message": "Recovered fragments generate donations each second, and completed artifacts generate much more. Spend funds on site-specific Speed and Chance upgrades. Buy Excavation Tools when you meet their Reputation and fund requirements to access harder artifacts."
 	},
 	{
 		"title": "The HUD",
-		"message": "The top bar shows your funds, green donation income per second, reputation, and the active excavation timer!"
+		"message": "The top bar shows your funds, green donation income per second, Reputation, and active excavation timer. The yellow bar fills as an attempt progresses. Notifications appear beside the timer with updates about excavation results and unlocks."
 	},
 	{
-		"title": "Notifications",
-		"message": "Watch the notification area next to the timer for updates when an excavation starts, a fragment is recovered, an attempt fails, or an artifact is assembled. A chime will play when something happens!"
+		"title": "Assemble Artifacts",
+		"message": "When an artifact reaches 4 of 4 fragments, return to its exhibit and Inspect it to assemble the display. Assembly grants Reputation, increases donation income, and may unlock a new area or Excavation Tool."
 	},
 	{
-		"title": "Build the Collection",
-		"message": "Once every fragment is recovered, return to its exhibit and assemble the artifact. Completed displays generate more donations and reputation, unlocking the second excavation area!"
-	},
-	{
-		"title": "Tutorial",
-		"message": "Can't remember something? Open this tutorial again from the pause menu at any time!"
+		"title": "Pause and Complete",
+		"message": "Use the pause button to resume, open Settings, replay this tutorial, or return to the main menu. Your progress and settings save automatically. Assemble all six artifacts to complete the museum!"
 	},
 ]
 

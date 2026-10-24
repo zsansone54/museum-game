@@ -3,7 +3,7 @@ extends Node
 
 func data() -> Dictionary:
 	return {
-		"game_version": "0.6",
+		"game_version": "1",
 
 		"initial values": {
 			"starting_funds": 0,
@@ -16,14 +16,14 @@ func data() -> Dictionary:
 				"id": 0,
 				"name": "Fine Excavation Kit",
 				"cost": 350,
-				"unlock_required_rep": 75,
+				"unlock_required_rep": 750,
 				"is_purchased": false
 			},
 			{
 				"id": 1,
 				"name": "Cliff Tomb Survey Kit",
 				"cost": 6000,
-				"unlock_required_rep": 325,
+				"unlock_required_rep": 3250,
 				"is_purchased": false
 			}
 		],
@@ -39,12 +39,12 @@ func data() -> Dictionary:
 						"area": 0,
 						"name": "Terracotta Puma Figure",
 						"total_fragments": 4,
-						"attempt_duration": 1,
+						"attempt_duration": 12,
 						"required_tool": [],
-						"rep_reward": 10,
+						"rep_reward": 100,
 						"fragment_funds_ps": 1.5,
 						"completed_funds": 10.0,
-						"success_chance": 100,
+						"success_chance": 40,
 						"failure_reward": 10
 					},
 					{
@@ -52,12 +52,12 @@ func data() -> Dictionary:
 						"area": 0,
 						"name": "Woven Mountain Sash",
 						"total_fragments": 4,
-						"attempt_duration": 1,
+						"attempt_duration": 20,
 						"required_tool": [],
-						"rep_reward": 25,
+						"rep_reward": 250,
 						"fragment_funds_ps": 2.5,
 						"completed_funds": 20.0,
-						"success_chance": 100,
+						"success_chance": 25,
 						"failure_reward": 20
 					},
 					{
@@ -65,12 +65,12 @@ func data() -> Dictionary:
 						"area": 0,
 						"name": "Condor Sun Medallion",
 						"total_fragments": 4,
-						"attempt_duration": 1,
+						"attempt_duration": 40,
 						"required_tool": [0],
-						"rep_reward": 100,
+						"rep_reward": 1000,
 						"fragment_funds_ps": 5.0,
 						"completed_funds": 40.0,
-						"success_chance": 100,
+						"success_chance": 20,
 						"failure_reward": 45
 					}
 				],
@@ -93,19 +93,19 @@ func data() -> Dictionary:
 			{
 				"id": 1,
 				"name": "Jade River Basin",
-				"unlock_required_rep": 35,
+				"unlock_required_rep": 350,
 				"artifacts": [
 					{
 						"id": 3,
 						"area": 1,
 						"name": "Jade Cloud Pendant",
 						"total_fragments": 4,
-						"attempt_duration": 1,
+						"attempt_duration": 16,
 						"required_tool": [],
-						"rep_reward": 40,
-						"fragment_funds_ps": 3.0,
-						"completed_funds": 35.0,
-						"success_chance": 100,
+						"rep_reward": 400,
+						"fragment_funds_ps": 4.0,
+						"completed_funds": 50.0,
+						"success_chance": 30,
 						"failure_reward": 40
 					},
 					{
@@ -113,25 +113,25 @@ func data() -> Dictionary:
 						"area": 1,
 						"name": "Bronze Tiger Mirror",
 						"total_fragments": 4,
-						"attempt_duration": 1,
+						"attempt_duration": 38,
 						"required_tool": [0],
-						"rep_reward": 150,
-						"fragment_funds_ps": 5.0,
-						"completed_funds": 70.0,
-						"success_chance": 100,
+						"rep_reward": 1500,
+						"fragment_funds_ps": 7.0,
+						"completed_funds": 100.0,
+						"success_chance": 20,
 						"failure_reward": 80
 					},
 					{
 						"id": 5,
 						"area": 1,
-						"name": "Lacquered Phoenix Casket",
+						"name": "Phoenix Casket",
 						"total_fragments": 4,
-						"attempt_duration": 1,
+						"attempt_duration": 60,
 						"required_tool": [1],
-						"rep_reward": 300,
-						"fragment_funds_ps": 8.0,
-						"completed_funds": 150.0,
-						"success_chance": 100,
+						"rep_reward": 3000,
+						"fragment_funds_ps": 11.0,
+						"completed_funds": 200.0,
+						"success_chance": 10,
 						"failure_reward": 160
 					}
 				],

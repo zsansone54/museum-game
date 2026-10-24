@@ -11,7 +11,7 @@ All assets were either made by someone else and free for use or, in the case of 
 I also used my USC chat gpt account to generate some of the source code later on when I started to run out of time and to debug when I couldn't figure out certain issues. 
 I also used it during the beginning of the project to teach me what everything in Godot does since I hadn't used it before the project.
 
-
+If you want to reset your game data, on the windows file directory you can go to %appdata%/Godot/app_userdata/Museum game/ and delete museum_game_save
 Credits
 
 https://kenney.nl (most UI assets + UI Sounds) - cc0 

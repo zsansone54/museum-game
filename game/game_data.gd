@@ -3,7 +3,7 @@ extends Node
 
 func data() -> Dictionary:
 	return {
-		"game_version": "1",
+		"game_version": "1.0",
 
 		"initial values": {
 			"starting_funds": 0,
